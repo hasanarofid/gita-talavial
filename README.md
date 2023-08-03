@@ -1,7 +1,7 @@
 # Sistem
-project Sistem Teknisi Komputer
+project Gita Talavial
 
-## Sistem Teknisi Komputer
+## Sistem  Gita Talavial
 
 ### Features Role User
 
@@ -39,11 +39,9 @@ $ git push -u origin master
 ### Progress fitur 26/7/2023
 
 ## login 5 role
-* HRD (done)
-* Teknisi (done)
-* Marketing (done)
 * Admin (done)
-* User/Pelanggan (done)
+* Supervisor (done)
+
 
 ## halaman depan
 
@@ -52,19 +50,3 @@ $ git push -u origin master
 ![login](public/gambardemo/login.png)
 ![daftar](public/gambardemo/daftar.png)
 
-## Planing Hasil Diskusi
-* Master Servis
-* Master Produk
-* Blog
-* Daftar with Code Promo (Pelanggan Baru)
-* Pelanggan baru dapat diskon
-* Pelanggan lama dapat point setelah servis lebih dari 1 kali
-* Booking servis
-
-
-## progres 28/7/23
-* memperbaiki route dashboard berdasarkan role login
-* halaman produk marketing
-
-* demo
-![demo](public/gambardemo/halamanproduk.png)
