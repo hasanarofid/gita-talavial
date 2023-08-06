@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProfilesTableSeeder extends Seeder
+class GuruMSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,32 +12,29 @@ class ProfilesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('profiles')->insert([
+        DB::table('guru_m')->insert([
             [
                 'id'=>1,
-                'user_id'=>1,
+                'nama'=>'Siti Badriah S.P.D',
+                'sekolah_id'=>1,
                 'no_telp'=>'0812133313131',
                 'kota'=>'Yogjakarta',
                 'alamat_lengkap'=>'Desa Magelang RT 10 210',
-                'kode_area'=>42132
+                'kode_area'=>42132,
+                                'jabatan'=>'Guru'
+
             ],
             [
                 'id'=>2,
-                'user_id'=>2,
+                'nama'=>'Prof Abdullah S.P.D',
+                'sekolah_id'=>1,
                 'no_telp'=>'087262626262',
                 'kota'=>'Yogjakarta',
                 'alamat_lengkap'=>'Desa Kulon RT 20 RW 10',
-                'kode_area'=>35433
+                'kode_area'=>35433,
+                                'jabatan'=>'Guru'
             ],
-            [
-                'id'=>3,
-                'user_id'=>3,
-                'no_telp'=>'085234423',
-                'kota'=>'Yogjakarta',
-                'alamat_lengkap'=>'Desa Wetan RT 20 RW 10',
-                'kode_area'=>35433
-            ],
-       
+          
         ]);
     }
 }

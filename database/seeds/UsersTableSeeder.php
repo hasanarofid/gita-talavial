@@ -23,17 +23,18 @@ class UsersTableSeeder extends Seeder
             [
                 'id'=>2,
                 'name'=>'Hasan',
-                'email'=>'hasan@gitatalavial.com',
+                'email'=>'hasan@gmail.com',
                 'password'=>Hash::make('hasan12345'),
-                'role'=>'Supervisor'
+                'role'=>'Pengawas'
             ],
             [
                 'id'=>3,
                 'name'=>'Akbar',
-                'email'=>'akbar@gitatalavial.com',
+                'email'=>'akbar@gmail.com',
                 'password'=>Hash::make('akbar12345'),
-                'role'=>'Supervisor'
+                'role'=>'Stakeholder'
             ],
+          
             
             
         ]);

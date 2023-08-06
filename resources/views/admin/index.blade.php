@@ -14,14 +14,11 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total <br> Sekolah</p>
                     <h5 class="font-weight-bolder">
-                      $53,000
+                      {{  $total_sekolah  }}
                     </h5>
-                    <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+55%</span>
-                      since yesterday
-                    </p>
+                   
                   </div>
                 </div>
                 <div class="col-4 text-end">
@@ -39,14 +36,11 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total <br> Guru</p>
                     <h5 class="font-weight-bolder">
-                      2,300
+                      {{  $total_guru  }}
                     </h5>
-                    <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+3%</span>
-                      since last week
-                    </p>
+               
                   </div>
                 </div>
                 <div class="col-4 text-end">
@@ -64,16 +58,13 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Pengawas</p>
                     <h5 class="font-weight-bolder">
-                      +3,462
+                      {{  $total_pengawas }}
                     </h5>
-                    <p class="mb-0">
-                      <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                      since last quarter
-                    </p>
                   </div>
                 </div>
+                
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
                     <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
@@ -89,13 +80,11 @@
               <div class="row">
                 <div class="col-8">
                   <div class="numbers">
-                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Stackholder</p>
                     <h5 class="font-weight-bolder">
-                      $103,430
+                      {{ $total_stockholder  }}
                     </h5>
-                    <p class="mb-0">
-                      <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                    </p>
+                  
                   </div>
                 </div>
                 <div class="col-4 text-end">
@@ -114,7 +103,7 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">Categories</h6>
+              <h6 class="mb-0">Rencana Kerja</h6>
             </div>
             <div class="card-body p-3">
               <ul class="list-group">

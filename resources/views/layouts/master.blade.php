@@ -27,162 +27,64 @@
   <link href="{{ asset('paneladmin/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('paneladmin/assets/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
-
+  
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body class="g-sidenav-show   bg-gray-100">
 
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
     <div class="card card-profile">
-      <img src="{{ asset('logogita.jpeg') }}" alt="Image placeholder" class="card-img-top">
-      <div class="row justify-content-center">
-        <div class="col-4 col-lg-4 order-lg-2">
-          <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
-            <a href="javascript:;">
-              <img src="{{ asset('userdefault.jpg') }}" class="rounded-circle img-fluid border border-2 border-white">
-            </a>
-          </div>
-        </div>
-      </div>
+      <img src="{{ asset('logogita.jpeg') }}" height="200px" alt="Image placeholder" class="card-img-top">
+      
    
     </div>
 
 
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" {{ route('admin.index') }} " target="_blank">
-        <img src="{{ asset('logogita.jpeg') }}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">{{ Auth::user()->role }}</span>
-      </a>
-    </div>
 
     <hr class="horizontal dark mt-0">
      <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="{{ route('admin.index') }}">
+          <a class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }} " href="{{ route('admin.index') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+              <i class="ni ni-tv-2 text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        @if (Auth::user()->role == 'Marketing')
+        @if (Auth::user()->role == 'Admin')
           <li class="nav-item">
-            <a class="nav-link " href="{{ route('produk.index') }}">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Produk</span>
+            <a class="nav-link {{ (request()->is('pengawas')) ? 'active' : '' }}" href="{{ route('pengawas.index') }}">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
+            </div>
+              <span class="nav-link-text ms-1">Pengawas</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link " href="{{ route('penjualan.index') }}">
+            <a class="nav-link {{ (request()->is('sekolah')) ? 'active' : '' }}" href="{{ route('sekolah.index') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                <i class="ni ni-istanbul text-warning text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Penjualan</span>
+              <span class="nav-link-text ms-1">Sekolah</span>
             </a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link " href="{{ route('pelanggan.index') }}">
+            <a class="nav-link {{ (request()->is('guru')) ? 'active' : '' }}" href="{{ route('guru.index') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
+                <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
               </div>
-              <span class="nav-link-text ms-1">Pelanggan</span>
+              <span class="nav-link-text ms-1">Guru / Kepala Sekolah</span>
             </a>
           </li>
-          <li class="nav-item">   
-            <a class="nav-link " href="./pages/rtl.html">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-app text-danger text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Laporan</span>
-            </a>
-          </li>
+        
         @endif
 
-        @if (Auth::user()->role == 'HRD')
-          <li class="nav-item">
-            <a class="nav-link " href="./pages/tables.html">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Pengaturan</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./pages/virtual-reality.html">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Pengguna</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="./pages/billing.html">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Report</span>
-            </a>
-          </li>   
-          <li class="nav-item">   
-            <a class="nav-link " href="./pages/rtl.html">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-app text-danger text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Laporan</span>
-            </a>
-          </li>
-        @endif
-
-        @if (Auth::user()->role == 'User')
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/tables.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Booking Servis</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/virtual-reality.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Lihat History</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="./pages/billing.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Contact Us</span>
-          </a>
-        </li>   
-      @endif
-
-      @if (Auth::user()->role == 'Teknisi')
-      <li class="nav-item">
-        <a class="nav-link " href="./pages/tables.html">
-          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-          </div>
-          <span class="nav-link-text ms-1">Servis</span>
-        </a>
-      </li>
-      <li class="nav-item">   
-        <a class="nav-link " href="./pages/rtl.html">
-          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="ni ni-app text-danger text-sm opacity-10"></i>
-          </div>
-          <span class="nav-link-text ms-1">Laporan</span>
-        </a>
-      </li>
-    
-    @endif
+       
 
       </ul>
     </div>
@@ -231,6 +133,15 @@
                 <span class="d-sm-inline d-none"> {{ Auth::user()->name }}</span>
               </a>
             </li>
+               <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                  <i class="sidenav-toggler-line bg-white"></i>
+                </div>
+              </a>
+            </li>
             
            
           </ul>
@@ -248,8 +159,40 @@
   <script src="{{ asset('paneladmin/assets/js/plugins/perfect-scrollbar.min.js') }} "></script>
   <script src="{{ asset('paneladmin/assets/js/plugins/smooth-scrollbar.min.js') }} "></script>
   <script src="{{ asset('paneladmin/assets/js/plugins/chartjs.min.js') }} "></script>
- 
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+       <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+       
+
+<script>
+  $.noConflict();
+  // Your jQuery code using jQuery directly with "jQuery" instead of "$"
+  jQuery(document).ready(function($) {
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+    
+    var table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('pengawas.getdata') }}",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'title', name: 'title'},
+            {data: 'description', name: 'description'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+     
+  });
+</script>
+
   <script>
+  
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
@@ -261,9 +204,9 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('paneladmin//assets/js/argon-dashboard.min.js?v=2.0.4') }} "></script>
+  <script src="{{ asset('paneladmin/assets/js/argon-dashboard.min.js?v=2.0.4') }} "></script>
 
-
+    @yield('js')
 
 </body>
 

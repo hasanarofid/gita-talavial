@@ -14,12 +14,10 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 UsersTableSeeder::class,
-            ProfilesTableSeeder::class,
-            ProductsTableSeeder::class,
-            StocksTableSeeder::class,
-            RemindersTableSeeder::class,
-            MarketplaceTableSeeder::class,
-            RekeningTableSeeder::class
+                ProfilesTableSeeder::class,
+                MarketplaceTableSeeder::class,
+                SekolahMSeeder::class,
+                GuruMSeeder::class,
             ]);
     }
 }
