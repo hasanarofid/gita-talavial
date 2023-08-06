@@ -21,10 +21,34 @@
        <div class="row">
         <div class="col-12">
           <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Tabel Pengawas</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
+          <div class="card-header pb-0 p-3">
+                  <div class="row">
+                    <div class="col-6 d-flex align-items-center">
+                      <h6 class="mb-0">Tabel Pengawas </h6>
+                    </div>
+                    <div class="col-6 text-end">
+
+
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('pengawas.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
+                      <a  class="btn btn-sm bg-info text-white" href="{{  route('pengawas.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
+                      <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('pengawas.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
+                   </div>
+                   
+
+
+                    
+
+                    </div>
+                  </div>
+                </div>
+            <div class="card-body ">
+             @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+    {{ Session::forget('success') }}
+@endif
               <div class="table-responsive p-0">
                 <table class="table table-bordered" id="data-table">
                   <thead>
@@ -51,7 +75,15 @@
 @endsection
        @section('js')
        <script >
- 
+ // resources/js/app.js
+
+jQuery(document).ready(function () {
+  jQuery('#myModal').on('show.bs.modal', function (event) {
+    // Additional actions to perform when the modal is shown
+    alert(1);
+  });
+});
+
    jQuery(function () {
     
     

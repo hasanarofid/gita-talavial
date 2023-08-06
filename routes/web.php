@@ -22,8 +22,21 @@ Route::get('/', function(){
 // route panel dashboard admin
 Route::get('/', 'AdminController@index')->name('admin.index')->middleware(['auth']);
 Route::get('/dashboard', 'AdminController@index')->name('admin.index')->middleware(['auth']);
+
 Route::get('/pengawas', 'PegawasMController@index')->name('pengawas.index')->middleware(['auth']);
 Route::get('/get-pengawas', 'PegawasMController@getdata')->name('pengawas.getdata')->middleware(['auth']);
+Route::get('/add-pengawas', 'PegawasMController@add')->name('pengawas.add')->middleware(['auth']);
+Route::get('/edit-pengawas/{id}', 'PegawasMController@edit')->name('pengawas.edit')->middleware(['auth']);
+Route::post('/update-pengawas', 'PegawasMController@update')->name('pengawas.update')->middleware(['auth']);
+Route::get('/import-pengawas', 'PegawasMController@import')->name('pengawas.import')->middleware(['auth']);
+Route::post('/importfile-pengawas', 'PegawasMController@importfile')->name('pengawas.importfile')->middleware(['auth']);
+Route::post('/store-pengawas', 'PegawasMController@store')->name('pengawas.store')->middleware(['auth']);
+Route::get('/hapus-pengawas/{id}', 'PegawasMController@hapus')->name('pengawas.hapus')->middleware(['auth']);
+
+
+Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('pengawas.excelcontoh')->middleware(['auth']);
+
+
 Route::get('/sekolah', 'SekolahMController@index')->name('sekolah.index')->middleware(['auth']);
 Route::get('/get-sekolah', 'SekolahMController@getdata')->name('sekolah.getdata')->middleware(['auth']);
 Route::get('/guru', 'GuruMController@index')->name('guru.index')->middleware(['auth']);
