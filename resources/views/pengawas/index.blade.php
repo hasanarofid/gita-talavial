@@ -26,8 +26,8 @@
                     <div class="col-6 d-flex align-items-center">
                       <h6 class="mb-0">Tabel Pengawas </h6>
                     </div>
-                    <div class="col-6 text-end">
-
+                    <div class="col-6 d-flex justify-content-end">
+     
 
                   <div class="btn-group" role="group" aria-label="Basic example">
                       <a  class="btn btn-sm bg-primary text-white " href="{{  route('pengawas.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
@@ -50,7 +50,7 @@
     {{ Session::forget('success') }}
 @endif
               <div class="table-responsive p-0">
-                <table class="table table-bordered" id="data-table">
+                <table class=" align-items-center mb-0 table-primary table-hover table-bordered" id="data-table">
                   <thead>
                     <tr>
                       <th class="text-sm font-weight mb-1 ">No</th>
