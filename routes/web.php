@@ -32,7 +32,9 @@ Route::get('/', function(){
 // route panel dashboard admin
 Route::get('/', 'AdminController@index')->name('admin.index')->middleware(['auth']);
 Route::get('/dashboard', 'AdminController@index')->name('admin.index')->middleware(['auth']);
+// end panel dashboard admin
 
+// route panel menu pengawas
 Route::get('/pengawas', 'PegawasMController@index')->name('pengawas.index')->middleware(['auth']);
 Route::get('/get-pengawas', 'PegawasMController@getdata')->name('pengawas.getdata')->middleware(['auth']);
 Route::get('/add-pengawas', 'PegawasMController@add')->name('pengawas.add')->middleware(['auth']);
@@ -42,25 +44,33 @@ Route::get('/import-pengawas', 'PegawasMController@import')->name('pengawas.impo
 Route::post('/importfile-pengawas', 'PegawasMController@importfile')->name('pengawas.importfile')->middleware(['auth']);
 Route::post('/store-pengawas', 'PegawasMController@store')->name('pengawas.store')->middleware(['auth']);
 Route::get('/hapus-pengawas/{id}', 'PegawasMController@hapus')->name('pengawas.hapus')->middleware(['auth']);
-
-
 Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('pengawas.excelcontoh')->middleware(['auth']);
+// end route panel menu pengawas
 
 
+// route panel menu sekolah
 Route::get('/sekolah', 'SekolahMController@index')->name('sekolah.index')->middleware(['auth']);
 Route::get('/get-sekolah', 'SekolahMController@getdata')->name('sekolah.getdata')->middleware(['auth']);
+Route::get('/add-sekolah', 'SekolahMController@add')->name('sekolah.add')->middleware(['auth']);
+Route::get('/edit-sekolah/{id}', 'SekolahMController@edit')->name('sekolah.edit')->middleware(['auth']);
+Route::post('/update-sekolah', 'SekolahMController@update')->name('sekolah.update')->middleware(['auth']);
+Route::get('/import-sekolah', 'SekolahMController@import')->name('sekolah.import')->middleware(['auth']);
+Route::post('/importfile-sekolah', 'SekolahMController@importfile')->name('sekolah.importfile')->middleware(['auth']);
+Route::post('/store-sekolah', 'SekolahMController@store')->name('sekolah.store')->middleware(['auth']);
+Route::get('/hapus-sekolah/{id}', 'SekolahMController@hapus')->name('sekolah.hapus')->middleware(['auth']);
+Route::get('/excelcontoh-sekolah', 'SekolahMController@excelcontoh')->name('sekolah.excelcontoh')->middleware(['auth']);
+// end route panel menu sekolah
+
+
 Route::get('/guru', 'GuruMController@index')->name('guru.index')->middleware(['auth']);
 Route::get('/get-guru', 'GuruMController@getdata')->name('guru.getdata')->middleware(['auth']);
 
 
 
 // end
-
 Auth::routes();
-
 Route::get('logo/{filename?}', function ($filename) {
     $path = storage_path('app/public/profile/' . $filename);
-
     $file = File::get($path);
     $type = File::mimeType($path);
     $response = Response::make($file, 200);
@@ -70,7 +80,6 @@ Route::get('logo/{filename?}', function ($filename) {
 
 Route::get('favicon/{filename?}', function ($filename) {
     $path = storage_path('app/public/favicon/' . $filename);
-
     $file = File::get($path);
     $type = File::mimeType($path);
     $response = Response::make($file, 200);

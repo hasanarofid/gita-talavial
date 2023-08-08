@@ -68,7 +68,7 @@
                      </div>
                       <div class="form-group">
                               <label for="kota">Kota</label>
-                              <input type="text" value="{{ $models->profile->kota  }}" class="form-control" name="kota" id="kota" placeholder="Nama Pengawas">
+                              <input type="text" value="{{ $models->profile->kota  }}" class="form-control" name="kota" id="kota" placeholder="Kota">
                      </div>
                      <div class="form-group">
                               <label for="kode_area">Kode Area</label>

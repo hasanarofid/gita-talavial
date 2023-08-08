@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','Pengawas')
-@section('subjudul','add Pengawas')
+@section('title','Sekolah')
+@section('subjudul','Edit Sekolah')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">add Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Edit Sekolah</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -26,7 +26,7 @@
             <div class="card-header pb-0 p-3">
                      <div class="row">
                      <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Form Add Pengawas </h6>
+                        <h6 class="mb-0">Form Edit Sekolah </h6>
                      </div>
                      
                      </div>
@@ -49,51 +49,39 @@
     </div>
 @endif
 
-                     <form action="{{ route('pengawas.store') }}"
+                     <form action="{{ route('sekolah.update',array('id'=>$models->id)) }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf
                      <div class="form-group">
-                              <label for="name">Nama Pengawas</label>
-                              <input type="text" class="form-control" name="name" id="name" placeholder="Nama Pengawas" required>
+                              <label for="name">Nama Sekolah</label>
+                              <input type="text" class="form-control" name="nama_sekolah" id="nama_sekolah" placeholder="Nama Sekolah" value="{{ $models->nama_sekolah }}"  required>
                      </div>
-
+                     <div class="form-group">
+                        <label for="kode_area">NPSN</label>
+                        <input type="number" class="form-control" name="npsn" id="npsn" placeholder="NPSN" value="{{ $models->npsn }}" readonly required>
+               </div>
                      
                        <div class="form-group">
                               <label for="no_telp">No Telpon</label>
-                              <input type="number" class="form-control" name="no_telp" id="no_telp" placeholder="No Telp/Wa" required> 
+                              <input type="number" class="form-control" value="{{$models->npsn }}" name="no_telp" id="no_telp" placeholder="No Telp/Wa" required> 
                      </div>
                          <div class="form-group">
                               <label for="alamat_lengkap">Alamat</label>
-                              <textarea class="form-control" name="alamat_lengkap" id="alamat_lengkap" cols="10" rows="5" required></textarea>
+                              <textarea class="form-control" name="alamat_lengkap" id="alamat_lengkap" cols="10" rows="5" required>
+                                 {{$models->alamat_lengkap }}
+                              </textarea>
                      </div>
                       <div class="form-group">
                               <label for="kota">Kota</label>
-                              <input type="text" class="form-control" name="kota" id="kota" placeholder="Kota">
+                              <input type="text" class="form-control" name="kota" id="kota" value="{{$models->kota }}"  placeholder="kota">
                      </div>
                      <div class="form-group">
                               <label for="kode_area">Kode Area</label>
-                              <input type="number" class="form-control" name="kode_area" id="kode_area" placeholder="Kode Area">
+                              <input type="number" class="form-control" value="{{$models->kode_area }}" name="kode_area" id="kode_area" placeholder="Kode Area">
                      </div>
                      <hr>
-                     <p>Info Login</p>
-                    <div class="form-group">
-                              <label for="email">Email</label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                     </div>
-
-                       <div class="form-group">
-                              <label for="password">Password</label>
-                              <input type="password" class="form-control" name="password"  id="password" placeholder="Password" required>
-                           </div>
-
-                                                  <div class="form-group">
-                              <label for="repeatpassword">Ulangi Password</label>
-                              <input type="password" class="form-control" name="repeatpassword"  id="repeatpassword" placeholder="Ulangi Password" required>
-                           </div>
-
-
-
+                     
                      <button type="submit" class="btn btn-sm btn-success">
                         <i class="fa fa-save"></i>   Save
                         </button>
