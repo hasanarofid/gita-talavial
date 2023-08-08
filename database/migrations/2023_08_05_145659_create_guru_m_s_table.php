@@ -17,7 +17,7 @@ class CreateGuruMSTable extends Migration
             $table->id();
             $table->unsignedBigInteger('sekolah_id');
             $table->string('nama')->nullable();
-            $table->bigInteger('no_telp')->nullable();
+            $table->string('no_telp')->nullable();
             $table->string('kota')->nullable();
             $table->text('alamat_lengkap')->nullable();
             $table->integer('kode_area')->nullable();
