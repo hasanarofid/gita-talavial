@@ -14,6 +14,7 @@ class SekolahMSeeder extends Seeder
         DB::table('sekolah_m')->insert([
             [
                 'id'=>1,
+                'npsn'=>59955823,
                  'nama_sekolah'=>'SMK Negri 1 Yogjakarta',
                 'no_telp'=>'031244233',
                 'kota'=>'Yogjakarta',

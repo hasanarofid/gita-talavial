@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// route halaman awal
+// clear view
+Route::get('/clear-view', function(){
+    Artisan::call('view:clear');
+    return 'View Cache cleared!';
+});
+
+// call migrate
+Route::get('/migrate-fresh', 'MigrationController@migrateFresh');
+Route::get('/seed', 'SeedController@seed');
+
+
 Route::get('/', function(){
     return redirect('/login');
 });
