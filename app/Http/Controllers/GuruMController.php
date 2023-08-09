@@ -6,6 +6,11 @@ use App\GuruM;
 use App\SekolahM;
 use Illuminate\Http\Request;
 use DataTables;
+use App\Imports\GuruImport;
+use App\Exports\GuruExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class GuruMController extends Controller
 {
@@ -30,11 +35,11 @@ class GuruMController extends Controller
                     })
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editPost">Edit</a>';
-                           $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
-    
-                            return $btn;
-                    })
+                        $btn = '<a href="'.route('guru.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
+                        $btn = $btn.' <a href="'.route('guru.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
+ 
+                         return $btn;
+                 })
                     ->rawColumns(['nama_sekolah','action'])
                     ->make(true);
         }
@@ -42,69 +47,77 @@ class GuruMController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function importfile(Request $request){
+        Excel::import(new GuruImport,
+                      $request->file('file')->store('files'));
+        return redirect()->back()->with('success', 'Guru Import successfully');
+       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function excelcontoh(Request $request){
+         $models = GuruM::with('sekolah')->where('is_aktif',true)->limit(1)->get();
+         $judul = 'Contoh Data Guru';
+        return Excel::download(new GuruExport($models), $judul.'.xlsx');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\GuruM  $guruM
-     * @return \Illuminate\Http\Response
-     */
-    public function show(GuruM $guruM)
-    {
-        //
+    /** add data Guru */
+    public function add(){
+        $listsekolah = SekolahM::where('is_aktif',true)->get();
+        return view('guru.add',compact('listsekolah'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\GuruM  $guruM
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GuruM $guruM)
-    {
-        //
+     /** add data Guru */
+    public function import(){
+        
+        return view('guru.import');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GuruM  $guruM
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, GuruM $guruM)
-    {
-        //
+    /** save data Guru */
+    public function store(Request $request){
+        dd($request->post());die;
+        // $request->validate([
+        //         'nama' => 'required|string|max:255'
+        //                 ]);
+            $guru = new GuruM();
+            $guru->nama = $request->nama;
+            $guru->no_telp = $request->no_telp;
+            $guru->jabatan = $request->jabatan;
+            $guru->kota = $request->kota;
+            $guru->alamat_lengkap = $request->alamat_lengkap;
+            $guru->kode_area = $request->kode_area;
+            $guru->sekolah_id = $request->sekolah_id;
+            $guru->is_aktif = true;
+            $guru->save();
+
+            return redirect()->route('guru.add')->with('success', 'Guru created successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\GuruM  $guruM
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(GuruM $guruM)
-    {
-        //
+    public function edit($id){
+        $models = GuruM::where('id',$id)->first();
+        $listsekolah = SekolahM::find($models->sekolah_id);
+
+        return view('guru.edit',compact('models','listsekolah'));
+    }
+
+     public function hapus($id){
+         $user = GuruM::where('id',$id)->delete();
+        return redirect()->back()->with('success', 'Guru Delete successfully');
+    }
+
+    public function update(Request $request){
+         $guru = GuruM::where('id',$request->id)->first();
+
+         $guru->nama = $request->nama;
+         $guru->no_telp = $request->no_telp;
+         $guru->jabatan = $request->jabatan;
+         $guru->kota = $request->kota;
+         $guru->alamat_lengkap = $request->alamat_lengkap;
+         $guru->kode_area = $request->kode_area;
+         $guru->is_aktif = true;
+         $guru->save();
+           
+
+
+        return redirect()->route('guru.edit',$request->id)->with('success', 'Guru update successfully');
     }
 }

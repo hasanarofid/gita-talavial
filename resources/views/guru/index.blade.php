@@ -17,21 +17,45 @@
 </style>
 @endsection
 @section ('content')
- <div class="container-fluid py-4">
-       <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Tabel Guru / Kepala Sekolah</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
+<div class="container-fluid py-4">
+  <div class="row">
+   <div class="col-12">
+     <div class="card mb-4">
+     <div class="card-header pb-0 p-3">
+             <div class="row">
+               <div class="col-6 d-flex align-items-center">
+                 <h6 class="mb-0">Tabel Guru/Kepalah Sekolah </h6>
+               </div>
+               <div class="col-6 d-flex justify-content-end">
+
+
+             <div class="btn-group" role="group" aria-label="Basic example">
+                 <a  class="btn btn-sm bg-primary text-white " href="{{  route('guru.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
+                 <a  class="btn btn-sm bg-info text-white" href="{{  route('guru.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
+                 <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('guru.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
+              </div>
+              
+
+
+               
+
+               </div>
+             </div>
+           </div>
+       <div class="card-body ">
+        @if(Session::has('success'))
+<div class="alert alert-success">
+   {{ Session::get('success') }}
+</div>
+{{ Session::forget('success') }}
+@endif
               <div class="table-responsive p-0">
-                <table class="table table-bordered" id="data-table">
+                <table class="align-items-center mb-0 table-primary table-hover table-bordered" id="data-table">
                   <thead>
                     <tr>
                       <th class="text-sm font-weight mb-1 ">No</th>
                       <th class="text-sm font-weight mb-1 ">Nama Sekolah</th>
-                      <th class="text-sm font-weight mb-1 ">Nama</th>
+                      <th class="text-sm font-weight mb-1 ">Nama Guru</th>
                       <th class="text-sm font-weight mb-1 ">Jabatan</th>
                       <th class="text-sm font-weight mb-1">No Telpon</th>
                       <th class="text-sm font-weight mb-1">Alamat</th>

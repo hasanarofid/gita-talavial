@@ -2,8 +2,8 @@
 
 namespace App\Imports;
 
-use App\User;
-use App\Profile;
+
+use App\SekolahM;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\ToArray;
 use Illuminate\Support\Facades\Hash;

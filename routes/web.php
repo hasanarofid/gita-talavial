@@ -28,7 +28,6 @@ Route::get('/', function(){
     return redirect('/login');
 });
 
-
 // route panel dashboard admin
 Route::get('/', 'AdminController@index')->name('admin.index')->middleware(['auth']);
 Route::get('/dashboard', 'AdminController@index')->name('admin.index')->middleware(['auth']);
@@ -47,7 +46,6 @@ Route::get('/hapus-pengawas/{id}', 'PegawasMController@hapus')->name('pengawas.h
 Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('pengawas.excelcontoh')->middleware(['auth']);
 // end route panel menu pengawas
 
-
 // route panel menu sekolah
 Route::get('/sekolah', 'SekolahMController@index')->name('sekolah.index')->middleware(['auth']);
 Route::get('/get-sekolah', 'SekolahMController@getdata')->name('sekolah.getdata')->middleware(['auth']);
@@ -61,11 +59,18 @@ Route::get('/hapus-sekolah/{id}', 'SekolahMController@hapus')->name('sekolah.hap
 Route::get('/excelcontoh-sekolah', 'SekolahMController@excelcontoh')->name('sekolah.excelcontoh')->middleware(['auth']);
 // end route panel menu sekolah
 
-
+// route panel menu guru
 Route::get('/guru', 'GuruMController@index')->name('guru.index')->middleware(['auth']);
 Route::get('/get-guru', 'GuruMController@getdata')->name('guru.getdata')->middleware(['auth']);
-
-
+Route::get('/add-guru', 'GuruMController@add')->name('guru.add')->middleware(['auth']);
+Route::get('/edit-guru/{id}', 'GuruMController@edit')->name('guru.edit')->middleware(['auth']);
+Route::post('/update-guru', 'GuruMController@update')->name('guru.update')->middleware(['auth']);
+Route::get('/import-guru', 'GuruMController@import')->name('guru.import')->middleware(['auth']);
+Route::post('/importfile-guru', 'GuruMController@importfile')->name('guru.importfile')->middleware(['auth']);
+Route::post('/store-guru', 'GuruMController@store')->name('guru.store')->middleware(['auth']);
+Route::get('/hapus-guru/{id}', 'GuruMController@hapus')->name('guru.hapus')->middleware(['auth']);
+Route::get('/excelcontoh-guru', 'GuruMController@excelcontoh')->name('guru.excelcontoh')->middleware(['auth']);
+// end route panel menu guru
 
 // end
 Auth::routes();
