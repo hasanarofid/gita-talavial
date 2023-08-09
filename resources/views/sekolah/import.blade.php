@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','Pengawas')
-@section('subjudul','import Pengawas')
+@section('title','Sekolah')
+@section('subjudul','import Sekolah')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">import Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">import Sekolah</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -24,7 +24,7 @@
             <div class="card-header pb-0 p-3">
                      <div class="row">
                      <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Import Pengawas </h6>
+                        <h6 class="mb-0">Import Sekolah </h6>
                      </div>
                      
                      </div>
@@ -47,7 +47,7 @@
 @endif
 
 
-                     <form action="{{ route('pengawas.importfile') }}"
+                     <form action="{{ route('sekolah.importfile') }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf
