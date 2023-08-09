@@ -54,9 +54,13 @@
                   <thead>
                     <tr>
                       <th class="text-sm font-weight mb-1 ">No</th>
+                      <th class="text-sm font-weight mb-1 ">Foto Profile</th>
                       <th class="text-sm font-weight mb-1 ">Nama Pengawas</th>
-
-                      <th class="text-sm font-weight mb-1">No Telpon</th>
+                      <th class="text-sm font-weight mb-1 ">NIP</th>
+                      <th class="text-sm font-weight mb-1 ">Jenjang Jabatan</th>
+                      <th class="text-sm font-weight mb-1 ">Pangkat</th>
+                      <th class="text-sm font-weight mb-1 ">Gol. Ruang</th>
+                      <th class="text-sm font-weight mb-1">No Whatsapp</th>
                       <th class="text-sm font-weight mb-1">Alamat</th>
                       <th class="text-sm font-weight mb-1">Action</th>
 
@@ -100,7 +104,12 @@ jQuery(document).ready(function () {
         ajax: "{{ route('pengawas.getdata') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'foto', name: 'foto'},
             {data: 'name', name: 'name'},
+            {data: 'nip', name: 'nip'},
+            {data: 'jenjang_jabatan', name: 'jenjang_jabatan'},
+            {data: 'pangkat', name: 'pangkat'},
+            {data: 'gol_ruang', name: 'gol_ruang'},
             {data: 'no_telp', name: 'no_telp'},
             {data: 'alamat', name: 'alamat'},
 

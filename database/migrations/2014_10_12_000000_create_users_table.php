@@ -20,6 +20,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role')->default('Admin');
+            $table->string('nip',18)->nullable();
+            $table->string('foto_profile')->nullable();
+            $table->string('jenjang_jabatan')->nullable();
+            $table->string('pangkat')->nullable();
+            $table->string('gol_ruang')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

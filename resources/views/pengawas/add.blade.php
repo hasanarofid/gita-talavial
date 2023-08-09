@@ -58,11 +58,37 @@
                               <input type="text" class="form-control" name="name" id="name" placeholder="Nama Pengawas" required>
                      </div>
 
+                     <div class="form-group">
+                        <label for="nip">NIP</label>
+                        <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP">
+                     </div>
+                     <div class="form-group">
+                        <label for="name">Jenjang Jabatan </label>
+                        <select name="jenjang_jabatan" id="jenjang_jabatan" class="form-control" required>
+                           <option value="">.: Pilih Jenjang Jabatan :. </option>
+                           <option value="Pengawas Sekolah Utama"> Pengawas Sekolah Utama </option>
+                           <option value="Pengawas Sekolah Ahli Madya"> Pengawas Sekolah Ahli Madya </option>
+                           <option value="Pengawas Sekolah Ahli Muda"> Pengawas Sekolah Ahli Muda </option>
+                        </select>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="pangkat">Pangkat</label>
+                        <input type="text" class="form-control" name="pangkat" id="pangkat" placeholder="Pangkat">
+                     </div>
+
+                     <div class="form-group">
+                        <label for="gol_ruang">Gol. Ruang</label>
+                        <input type="text" class="form-control" name="gol_ruang" id="gol_ruang" placeholder="Gol. Ruang">
+                     </div>
                      
-                       <div class="form-group">
-                              <label for="no_telp">No Telpon</label>
+                     <div class="form-group">
+                              <label for="no_telp">No WA</label>
                               <input type="number" class="form-control" name="no_telp" id="no_telp" placeholder="No Telp/Wa" required> 
                      </div>
+
+
+
                          <div class="form-group">
                               <label for="alamat_lengkap">Alamat</label>
                               <textarea class="form-control" name="alamat_lengkap" id="alamat_lengkap" cols="10" rows="5" required></textarea>

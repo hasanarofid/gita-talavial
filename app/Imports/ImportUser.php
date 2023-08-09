@@ -22,18 +22,23 @@ class ImportUser implements ToArray
               
                 $user = new User;
                 $user->name = $row[0];
-                $user->email = $row[1];
+                $user->nip = $row[1];
+                $user->jenjang_jabatan = $row[2];
+                $user->pangkat = $row[3];
+                $user->gol_ruang = $row[4];
+                $user->email = $row[5];
+                $user->foto_profile = 'userdefault.jpg';
                 $user->role = 'Pengawas';
-                $user->password = Hash::make($row[2]);
+                $user->password = Hash::make($row[6]);
                 
                 $user->save();
                 $userId = $user->id;
                 $profile = new Profile;
                 
-                $profile->no_telp = $row[3];
-                $profile->alamat_lengkap = $row[4];
-                $profile->kota = $row[5];
-                $profile->kode_area = $row[6];
+                $profile->no_telp = $row[7];
+                $profile->alamat_lengkap = $row[8];
+                $profile->kota = $row[9];
+                $profile->kode_area = $row[10];
                 $profile->user_id = $userId;
                 $profile->save();
                 

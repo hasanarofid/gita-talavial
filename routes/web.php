@@ -74,14 +74,14 @@ Route::get('/excelcontoh-guru', 'GuruMController@excelcontoh')->name('guru.excel
 
 // end
 Auth::routes();
-Route::get('logo/{filename?}', function ($filename) {
-    $path = storage_path('app/public/profile/' . $filename);
+Route::get('fotopengawas/{filename?}', function ($filename) {
+    $path = storage_path('app/public/pengawas/' . $filename);
     $file = File::get($path);
     $type = File::mimeType($path);
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
     return $response;
-})->name('logo');
+})->name('fotopengawas');
 
 Route::get('favicon/{filename?}', function ($filename) {
     $path = storage_path('app/public/favicon/' . $filename);

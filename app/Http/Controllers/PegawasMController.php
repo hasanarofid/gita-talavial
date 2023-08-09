@@ -32,9 +32,17 @@ class PegawasMController extends Controller
             // dd($post);
             return Datatables::of($post)
                     ->addIndexColumn()
-                     ->addColumn('no_telp', function($row){
-                               return !empty($row->profile->no_telp) ? $row->profile->no_telp: '-';
-                    })
+                     ->addColumn('foto', function($row){
+                        if($row->foto_profile == 'userdefault.jpg'){
+                            $foto = asset('userdefault.jpg');
+                        }else{
+                            $foto =  route('pengawas',$row->foto_profile );
+                        }
+
+                     return  ' <div class="card card-profile"><img src="'.$foto.'" height="100px" alt="Image placeholder" class="card-img-top"></div>';
+                    })->addColumn('no_telp', function($row){
+                        return !empty($row->profile->no_telp) ? $row->profile->no_telp: '-';
+             })
                       ->addColumn('alamat', function($row){
                                return !empty($row->profile->alamat_lengkap) ? $row->profile->alamat_lengkap: '-';
                     })
@@ -45,7 +53,7 @@ class PegawasMController extends Controller
     
                             return $btn;
                     })
-                    ->rawColumns(['no_telp','alamat','action'])
+                    ->rawColumns(['no_telp','alamat','action','foto'])
                     ->make(true);
         }
         return view('pengawas.index');
@@ -85,6 +93,12 @@ class PegawasMController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->nip = $request->nip;
+            $user->jenjang_jabatan = $request->jenjang_jabatan;
+            $user->pangkat = $request->pangkat;
+            $user->gol_ruang = $request->gol_ruang;
+            $user->foto_profile = 'userdefault.jpg';
+
             $user->password = Hash::make($request->password);
             $user->role = 'Pengawas';
             $user->save();
@@ -114,6 +128,10 @@ class PegawasMController extends Controller
 
     public function update(Request $request){
          $user = User::where('id',$request->id)->first();
+         $user->jenjang_jabatan = $request->jenjang_jabatan;
+         $user->pangkat = $request->pangkat;
+         $user->gol_ruang = $request->gol_ruang;
+         $user->save();
          $profile = Profile::where('user_id',$request->id)->first();
 
                $profile->no_telp = $request->no_telp;

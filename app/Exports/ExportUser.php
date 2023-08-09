@@ -36,6 +36,10 @@ class ExportUser implements FromCollection, WithMapping, WithColumnWidths, WithH
             'E1' => ['font' => ['bold' => true]],
             'F1' => ['font' => ['bold' => true]],
             'G1' => ['font' => ['bold' => true]],
+            'H1' => ['font' => ['bold' => true]],
+            'I1' => ['font' => ['bold' => true]],
+            'J1' => ['font' => ['bold' => true]],
+            'K1' => ['font' => ['bold' => true]],
 
 
                     ];
@@ -50,6 +54,12 @@ class ExportUser implements FromCollection, WithMapping, WithColumnWidths, WithH
             'E' => 15,
             'F' => 15,
             'G' => 15,
+            'H' => 15,
+            'I' => 15,
+            'J' => 15,
+            'K' => 15,
+
+
 
 
         ];
@@ -60,7 +70,7 @@ class ExportUser implements FromCollection, WithMapping, WithColumnWidths, WithH
      */
     public function headings(): array {
         return [
-            'Nama Pengawas',  'Email', 'Password','No Telpon', 'Alamat','Kota','Kode Area',
+            'Nama Pengawas', 'NIP','Jenjang Jabatan','Pangkat','Gol Ruang', 'Email', 'Password','No Telpon', 'Alamat','Kota','Kode Area',
 
 
 
@@ -73,6 +83,10 @@ class ExportUser implements FromCollection, WithMapping, WithColumnWidths, WithH
     public function map($row): array {
         return [
             (!empty($row->name) ? $row->name : '-'),
+            ('set nip '),
+            ('set jenjang jabatan'),
+            ('set pangkat'),
+            ('set gol ruang'),
             (!empty($row->email) ? $row->email : '-'),
               ('setpasswordsinini'),
             (!empty($row->profile->no_telp) ? $row->profile->no_telp : '-'),

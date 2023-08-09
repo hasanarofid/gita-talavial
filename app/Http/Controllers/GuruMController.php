@@ -27,7 +27,6 @@ class GuruMController extends Controller
     public function getdata(Request $request){
         if ($request->ajax()) {
             $post = GuruM::with('sekolah')->where('is_aktif',true)->latest()->get();
-            // dd($post);
             return Datatables::of($post)
                     ->addIndexColumn()
                      ->addColumn('nama_sekolah', function($row){
@@ -74,7 +73,6 @@ class GuruMController extends Controller
 
     /** save data Guru */
     public function store(Request $request){
-        dd($request->post());die;
         // $request->validate([
         //         'nama' => 'required|string|max:255'
         //                 ]);
