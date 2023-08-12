@@ -32,10 +32,8 @@ class SekolahImport implements ToArray
                     
 
                 } catch (QueryException $e) {
-                    // Handle the exception here
-                    // For example, log the error or continue with the next iteration
-                    Log::error('Error inserting data: ' . $e->getMessage());
-                    continue; // Skip this iteration and proceed with the next one
+                      return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+     
                 }
 
 
@@ -45,9 +43,8 @@ class SekolahImport implements ToArray
                 }
     
         } catch (Exception $e) {
-            // Handle any other exceptions that might occur outside the loop
-            // For example, log the error or handle it gracefully
-            Log::error('Unexpected error: ' . $e->getMessage());
+                 return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+     
         }
 
              

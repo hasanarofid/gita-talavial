@@ -41,9 +41,9 @@ class GuruImport implements ToArray
         }
     
 } catch (Exception $e) {
-    // Handle any other exceptions that might occur outside the loop
-    // For example, log the error or handle it gracefully
-    Log::error('Unexpected error: ' . $e->getMessage());
+             return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+     
+
 }
 
              

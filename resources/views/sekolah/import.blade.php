@@ -36,16 +36,11 @@
     </div>
     {{ Session::forget('success') }}
 @endif
-               @if ($errors->any())
+  @if(session('error'))
     <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+        {{ session('error') }}
     </div>
 @endif
-
 
                      <form action="{{ route('sekolah.importfile') }}"
                         method="POST"
