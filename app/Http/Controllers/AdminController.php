@@ -9,6 +9,8 @@ use App\Kabupaten;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use Illuminate\Support\Facades\Hash;
+
 class AdminController extends Controller
 {
     public function index()
@@ -69,11 +71,82 @@ class AdminController extends Controller
     
 
     public function add(){
-        $wilayah = Kabupaten::select('kelompok_kabupaten', DB::raw('MAX(id) as max_id'), DB::raw('COUNT(*) as total'))
+        $wilayah = Kabupaten::select('kelompok_kabupaten', DB::raw('MAX(id) as id'), DB::raw('COUNT(*) as total'))
              ->groupBy('kelompok_kabupaten')
              ->get();
     
         // dd($wilayah);
          return view('admin.add',compact('wilayah'));
     }
+
+    public function edit($id){
+        $model = User::find($id);
+        $wilayah = Kabupaten::select('kelompok_kabupaten', DB::raw('MAX(id) as id'), DB::raw('COUNT(*) as total'))
+             ->groupBy('kelompok_kabupaten')
+             ->get();
+    
+        // dd($wilayah);
+         return view('admin.edit',compact('model','wilayah'));
+    }
+
+     /** save data admin */
+    public function store(Request $request){
+        // dd($request->post());die;
+             $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6',
+            ]);
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->nip = $request->nip;
+            $user->jenjang_jabatan = $request->jenjang_jabatan;
+            $user->pangkat = $request->pangkat;
+            $user->gol_ruang = $request->gol_ruang;
+            $user->foto_profile = 'userdefault.jpg';
+            $user->role = 'Admin';
+            $user->kabupaten_id =  $request->kabupaten_id;
+            $user->password = Hash::make($request->password);
+            $user->no_telp = $request->no_telp;
+            $user->kota = $request->kota;
+            $user->alamat_lengkap = $request->alamat_lengkap;
+            $user->kode_area = $request->kode_area;
+            $user->save();
+
+            return redirect()->route('admin.data')->with('success', 'admin created successfully');
+    }
+
+    /** save data admin */
+    public function update($id,Request $request){
+        // dd($request->post());die;
+            //  $request->validate([
+            //     'name' => 'required|string|max:255',
+            //     'email' => 'required|email|unique:users',
+            //     'password' => 'required|string|min:6',
+            // ]);
+            $user = User::find($id);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->kabupaten_id =  $request->kabupaten_id;
+         
+            $user->no_telp = $request->no_telp;
+            $user->kota = $request->kota;
+            $user->alamat_lengkap = $request->alamat_lengkap;
+            $user->kode_area = $request->kode_area;
+            $user->save();
+
+             if(isset($request->password)){
+            $user->password = Hash::make($request->password);
+            $user->update();
+        }
+
+            return redirect()->route('admin.data')->with('success', 'admin updated successfully');
+    }
+
+    public function hapus($id){
+         $user = User::where('id',$id)->delete();
+        return redirect()->back()->with('success', 'admin Delete successfully');
+    }
+
 }
