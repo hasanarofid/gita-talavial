@@ -62,7 +62,7 @@ $ git push -u origin master
 ## Akses Stakeholder
 * Melihat Laporan / infografis tiap wilayah yang sudah dimappingkan
 
-Akses Supervisor:
+## Akses Supervisor:
 1. update profile
 2. membuat Program kerja ( tupoksi apa (ada 7 list tupoksi), sekolah mana, guru siapa semua bentuk pilihan supaya mudah)
 3. Membuat laporan aktifitas ( tanggal berapa, tupoksi apa, di sekolah mana, nama guru/kepsek sasaran yang dilayani, deskripsi aktifitas dan foto 3 biji)
