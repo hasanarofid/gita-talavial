@@ -1,6 +1,10 @@
 @extends('layouts.master')
+
+@php
+    $kelompok_kabupaten = App\Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+@endphp
+@section('subjudul','Admin '.$kelompok_kabupaten)
 @section('title','Sekolah')
-@section('subjudul','list Sekolah')
 @section('breadcrumbs')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list Sekolah</a></li>
 <style>

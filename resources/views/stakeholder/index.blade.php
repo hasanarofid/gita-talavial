@@ -1,11 +1,12 @@
 @extends('layouts.master')
+
 @php
     $kelompok_kabupaten = App\Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
 @endphp
 @section('subjudul','Admin '.$kelompok_kabupaten)
-@section('title','Pengawas')
+@section('title','stakeholder')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list stakeholder</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -20,8 +21,6 @@
 </style>
 @endsection
 @section ('content')
-
-
  <div class="container-fluid py-4">
        <div class="row">
         <div class="col-12">
@@ -29,15 +28,15 @@
           <div class="card-header pb-0 p-3">
                   <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                      <h6 class="mb-0">Tabel Pengawas </h6>
+                      <h6 class="mb-0">Tabel stakeholder </h6>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
      
 
                   <div class="btn-group" role="group" aria-label="Basic example">
-                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('pengawas.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
-                      <a  class="btn btn-sm bg-info text-white" href="{{  route('pengawas.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
-                      <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('pengawas.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
+                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('stakeholder.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
+                      <a  class="btn btn-sm bg-info text-white" href="{{  route('stakeholder.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
+                      <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('stakeholder.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
                    </div>
                    
 
@@ -62,11 +61,7 @@
                       <th class="text-sm font-weight mb-1 ">Foto Profile</th>
                       <th class="text-sm font-weight mb-1 ">Kabupten</th>
 
-                      <th class="text-sm font-weight mb-1 ">Nama Pengawas</th>
-                      <th class="text-sm font-weight mb-1 ">NIP</th>
-                      <th class="text-sm font-weight mb-1 ">Jenjang Jabatan</th>
-                      <th class="text-sm font-weight mb-1 ">Pangkat</th>
-                      <th class="text-sm font-weight mb-1 ">Gol. Ruang</th>
+                      <th class="text-sm font-weight mb-1 ">Nama</th>
                       <th class="text-sm font-weight mb-1">No Whatsapp</th>
                       <th class="text-sm font-weight mb-1">Alamat</th>
                       <th class="text-sm font-weight mb-1">Action</th>
@@ -115,10 +110,6 @@ jQuery(document).ready(function () {
             {data: 'kabupaten', name: 'kabupaten'},
 
             {data: 'name', name: 'name'},
-            {data: 'nip', name: 'nip'},
-            {data: 'jenjang_jabatan', name: 'jenjang_jabatan'},
-            {data: 'pangkat', name: 'pangkat'},
-            {data: 'gol_ruang', name: 'gol_ruang'},
             {data: 'no_telp', name: 'no_telp'},
             {data: 'alamat', name: 'alamat'},
 

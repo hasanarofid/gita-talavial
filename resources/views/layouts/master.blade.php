@@ -70,7 +70,7 @@
         @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Super Admin')
         
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('pengawas')) ? 'active' : '' }}" href="{{ route('pengawas.index') }}">
+            <a class="nav-link {{ (request()->is('admin/pengawas*')) ? 'active' : '' }}" href="{{ route('pengawas.index') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
             </div>
@@ -79,7 +79,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('sekolah')) ? 'active' : '' }}" href="{{ route('sekolah.index') }}">
+            <a class="nav-link {{ (request()->is('admin/sekolah*')) ? 'active' : '' }}" href="{{ route('sekolah.index') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-istanbul text-warning text-sm opacity-10"></i>
               </div>
@@ -88,11 +88,20 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('guru')) ? 'active' : '' }}" href="{{ route('guru.index') }}">
+            <a class="nav-link {{ (request()->is('admin/guru*')) ? 'active' : '' }}" href="{{ route('guru.index') }}">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
               </div>
               <span class="nav-link-text ms-1">Guru / Kepala Sekolah</span>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link {{ (request()->is('admin/stakeholder*')) ? 'active' : '' }}" href="{{ route('stakeholder.index') }}">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-user-secret text-warning text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1">Stakeholder</span>
             </a>
           </li>
         

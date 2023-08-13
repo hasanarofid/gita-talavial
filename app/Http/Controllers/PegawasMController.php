@@ -13,7 +13,7 @@ use App\Imports\ImportUser;
 use App\Exports\ExportUser;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 
 class PegawasMController extends Controller
 {
@@ -24,6 +24,7 @@ class PegawasMController extends Controller
      */
     public function index(Request $request)
     {
+        
         return view('pengawas.index');
     }
 
@@ -52,8 +53,8 @@ class PegawasMController extends Controller
                     })
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="'.route('pengawas.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
-                           $btn = $btn.' <a href="'.route('pengawas.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
+                           $btn = '<a href="'.route('stakeholder.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
+                           $btn = $btn.' <a href="'.route('stakeholder.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
     
                             return $btn;
                     })
@@ -66,19 +67,22 @@ class PegawasMController extends Controller
     public function importfile(Request $request){
         Excel::import(new ImportUser,
                       $request->file('file')->store('files'));
-        return redirect()->back()->with('success', 'Pengawas Import successfully');
+        return redirect()->back()->with('success', 'pengawas Import successfully');
        
     }
 
     public function excelcontoh(Request $request){
          $models = User::where('role','Pengawas')->limit(1)->get();
-        $judul = 'Contoh Data Pengawas';
+        $judul = 'Contoh Data pengawas';
         return Excel::download(new ExportUser($models), $judul.'.xlsx');
     }
 
     /** add data pengawas */
     public function add(){
-        return view('pengawas.add');
+         $wilayah = Kabupaten::get();
+    
+        // dd($wilayah);
+         return view('pengawas.add',compact('wilayah'));
     }
 
      /** add data pengawas */
@@ -112,18 +116,17 @@ class PegawasMController extends Controller
             $user->kode_area = $request->kode_area;
             $user->save();
 
-            return redirect()->route('pengawas.add')->with('success', 'Pengawas created successfully');
+            return redirect()->route('pengawas.index')->with('success', 'pengawas created successfully');
     }
 
     public function edit($id){
-        $models = User::with('profile')->where('id',$id)->first();
+        $models = User::where('id',$id)->first();
         return view('pengawas.edit',compact('models'));
     }
 
      public function hapus($id){
          $user = User::where('id',$id)->delete();
-         $profile = Profile::where('user_id',$id)->delete();
-        return redirect()->back()->with('success', 'Pengawas Delete successfully');
+        return redirect()->back()->with('success', 'pengawas Delete successfully');
     }
 
     public function update(Request $request){
@@ -143,7 +146,7 @@ class PegawasMController extends Controller
             $user->update();
         }
 
-        return redirect()->route('pengawas.edit',$request->id)->with('success', 'Pengawas update successfully');
+        return redirect()->route('pengawas.index',$request->id)->with('success', 'pengawas update successfully');
     }
 
 
