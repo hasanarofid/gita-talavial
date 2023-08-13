@@ -21,7 +21,8 @@ class GuruMSeeder extends Seeder
                 'kota'=>'Yogjakarta',
                 'alamat_lengkap'=>'Desa Magelang RT 10 210',
                 'kode_area'=>42132,
-                                'jabatan'=>'Guru'
+                                'jabatan'=>'Guru',
+                                  'kabupaten_id'=>1
 
             ],
             [
@@ -32,7 +33,8 @@ class GuruMSeeder extends Seeder
                 'kota'=>'Yogjakarta',
                 'alamat_lengkap'=>'Desa Kulon RT 20 RW 10',
                 'kode_area'=>35433,
-                                'jabatan'=>'Guru'
+                                'jabatan'=>'Guru',
+                                  'kabupaten_id'=>1
             ],
           
         ]);

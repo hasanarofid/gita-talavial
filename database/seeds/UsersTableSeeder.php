@@ -18,15 +18,29 @@ class UsersTableSeeder extends Seeder
                 'name'=>'Admin Gita',
                 'email'=>'admin@gitatalavial.com',
                 'password'=>Hash::make('admin12345'),
+                'role'=>'Super Admin',
+                'nip'=>'',
+                'foto_profile'=>'userdefault.jpg',
+                'jenjang_jabatan'=>'',
+                'pangkat'=>'',
+                'gol_ruang'=>'',
+                'kabupaten_id'=>0
+            ],
+              [
+                'id'=>2,
+                'name'=>'Admin Wilayah Seragon',
+                'email'=>'adminseragon@gitatalavial.com',
+                'password'=>Hash::make('admin12345'),
                 'role'=>'Admin',
                 'nip'=>'',
                 'foto_profile'=>'userdefault.jpg',
                 'jenjang_jabatan'=>'',
                 'pangkat'=>'',
-                'gol_ruang'=>''
+                'gol_ruang'=>'',
+                'kabupaten_id'=>1
             ],
             [
-                'id'=>2,
+                'id'=>3,
                 'name'=>'Hasan',
                 'email'=>'hasan@gmail.com',
                 'password'=>Hash::make('hasan12345'),
@@ -35,10 +49,11 @@ class UsersTableSeeder extends Seeder
                 'foto_profile'=>'userdefault.jpg',
                 'jenjang_jabatan'=>'Pengawas Sekolah Utama',
                 'pangkat'=>'Pembina Utama',
-                'gol_ruang'=>'IV/d'
+                'gol_ruang'=>'IV/d',
+                'kabupaten_id'=>1
             ],
             [
-                'id'=>3,
+                'id'=>4,
                 'name'=>'Akbar',
                 'email'=>'akbar@gmail.com',
                 'password'=>Hash::make('akbar12345'),
@@ -47,7 +62,8 @@ class UsersTableSeeder extends Seeder
                 'foto_profile'=>'userdefault.jpg',
                 'jenjang_jabatan'=>'',
                 'pangkat'=>'',
-                'gol_ruang'=>''
+                'gol_ruang'=>'',
+                'kabupaten_id'=>1
             ],
           
             

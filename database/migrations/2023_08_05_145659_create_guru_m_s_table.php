@@ -23,6 +23,8 @@ class CreateGuruMSTable extends Migration
             $table->integer('kode_area')->nullable();
             $table->string('jabatan')->default('Guru');
             $table->boolean('is_aktif')->nullable()->default(true);
+            $table->unsignedBigInteger('kabupaten_id');
+            $table->index('kabupaten_id');
             $table->timestamps();
             $table->index('sekolah_id');
         });

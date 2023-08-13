@@ -22,7 +22,8 @@ class CreateSekolahMSTable extends Migration
             $table->text('alamat_lengkap')->nullable();
             $table->integer('kode_area')->nullable();
             $table->boolean('is_aktif')->nullable()->default(true);
-            
+            $table->unsignedBigInteger('kabupaten_id');
+            $table->index('kabupaten_id');
             $table->timestamps();
         });
     }

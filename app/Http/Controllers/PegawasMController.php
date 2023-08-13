@@ -5,6 +5,7 @@ use App\User;
 use App\Profile;
 use App\GuruM;
 use App\SekolahM;
+use App\Kabupaten;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
@@ -28,7 +29,7 @@ class PegawasMController extends Controller
 
     public function getdata(Request $request){
         if ($request->ajax()) {
-            $post = User::with('profile')->where('role','Pengawas')->latest()->get();
+            $post = User::with('kabupaten')->where('role','Pengawas')->latest()->get();
             // dd($post);
             return Datatables::of($post)
                     ->addIndexColumn()
@@ -41,10 +42,13 @@ class PegawasMController extends Controller
 
                      return  ' <div class="card card-profile"><img src="'.$foto.'" height="100px" alt="Image placeholder" class="card-img-top"></div>';
                     })->addColumn('no_telp', function($row){
-                        return !empty($row->profile->no_telp) ? $row->profile->no_telp: '-';
+                        return !empty($row->no_telp) ? $row->no_telp: '-';
              })
                       ->addColumn('alamat', function($row){
-                               return !empty($row->profile->alamat_lengkap) ? $row->profile->alamat_lengkap: '-';
+                               return !empty($row->alamat_lengkap) ? $row->alamat_lengkap: '-';
+                    })
+                      ->addColumn('kabupaten', function($row){
+                        return !empty($row->kabupaten->nama_kabupaten) ? $row->kabupaten->nama_kabupaten: '-';
                     })
                     ->addColumn('action', function($row){
    
@@ -53,7 +57,7 @@ class PegawasMController extends Controller
     
                             return $btn;
                     })
-                    ->rawColumns(['no_telp','alamat','action','foto'])
+                    ->rawColumns(['no_telp','alamat','action','foto','kabupaten'])
                     ->make(true);
         }
         return view('pengawas.index');
@@ -67,7 +71,7 @@ class PegawasMController extends Controller
     }
 
     public function excelcontoh(Request $request){
-         $models = User::with('profile')->where('role','Pengawas')->limit(1)->get();
+         $models = User::where('role','Pengawas')->limit(1)->get();
         $judul = 'Contoh Data Pengawas';
         return Excel::download(new ExportUser($models), $judul.'.xlsx');
     }
@@ -101,16 +105,12 @@ class PegawasMController extends Controller
 
             $user->password = Hash::make($request->password);
             $user->role = 'Pengawas';
+            
+            $user->no_telp = $request->no_telp;
+            $user->kota = $request->kota;
+            $user->alamat_lengkap = $request->alamat_lengkap;
+            $user->kode_area = $request->kode_area;
             $user->save();
-
-            #profile
-            $profile = new Profile();
-            $profile->user_id = $user->id;
-            $profile->no_telp = $request->no_telp;
-            $profile->kota = $request->kota;
-            $profile->alamat_lengkap = $request->alamat_lengkap;
-            $profile->kode_area = $request->kode_area;
-            $profile->save();
 
             return redirect()->route('pengawas.add')->with('success', 'Pengawas created successfully');
     }
@@ -131,14 +131,12 @@ class PegawasMController extends Controller
          $user->jenjang_jabatan = $request->jenjang_jabatan;
          $user->pangkat = $request->pangkat;
          $user->gol_ruang = $request->gol_ruang;
-         $user->save();
-         $profile = Profile::where('user_id',$request->id)->first();
-
-               $profile->no_telp = $request->no_telp;
-            $profile->kota = $request->kota;
-            $profile->alamat_lengkap = $request->alamat_lengkap;
-            $profile->kode_area = $request->kode_area;
-            $profile->save();
+       
+               $user->no_telp = $request->no_telp;
+            $user->kota = $request->kota;
+            $user->alamat_lengkap = $request->alamat_lengkap;
+            $user->kode_area = $request->kode_area;
+             $user->save();
 
         if(isset($request->password)){
             $user->password = Hash::make($request->password);

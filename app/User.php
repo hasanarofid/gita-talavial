@@ -50,5 +50,10 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+      public function kabupaten()
+    {
+        return $this->hasOne(Kabupaten::class, 'id', 'kabupaten_id');
+    }
+
    
 }

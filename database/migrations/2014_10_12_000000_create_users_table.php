@@ -25,6 +25,13 @@ class CreateUsersTable extends Migration
             $table->string('jenjang_jabatan')->nullable();
             $table->string('pangkat')->nullable();
             $table->string('gol_ruang')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('kota')->nullable();
+            $table->text('alamat_lengkap')->nullable();
+            $table->integer('kode_area')->nullable();
+            $table->unsignedBigInteger('kabupaten_id');
+            $table->index('kabupaten_id');
+
             $table->rememberToken();
             $table->timestamps();
         });

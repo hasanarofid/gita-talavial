@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','Pengawas')
-@section('subjudul','list Pengawas')
+@section('title','Admin')
+@section('subjudul','list Admin')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list Admin</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -24,15 +24,13 @@
           <div class="card-header pb-0 p-3">
                   <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                      <h6 class="mb-0">Tabel Pengawas </h6>
+                      <h6 class="mb-0">Tabel Admin </h6>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
      
 
                   <div class="btn-group" role="group" aria-label="Basic example">
-                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('pengawas.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
-                      <a  class="btn btn-sm bg-info text-white" href="{{  route('pengawas.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
-                      <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('pengawas.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
+                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('admin.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Admin </a>
                    </div>
                    
 
@@ -55,15 +53,14 @@
                     <tr>
                       <th class="text-sm font-weight mb-1 ">No</th>
                       <th class="text-sm font-weight mb-1 ">Foto Profile</th>
-                      <th class="text-sm font-weight mb-1 ">Kabupten</th>
+                      <th class="text-sm font-weight mb-1 ">Wilayah Kabupten</th>
 
-                      <th class="text-sm font-weight mb-1 ">Nama Pengawas</th>
-                      <th class="text-sm font-weight mb-1 ">NIP</th>
-                      <th class="text-sm font-weight mb-1 ">Jenjang Jabatan</th>
-                      <th class="text-sm font-weight mb-1 ">Pangkat</th>
-                      <th class="text-sm font-weight mb-1 ">Gol. Ruang</th>
+                      <th class="text-sm font-weight mb-1 ">Nama Admin</th>
+                      <th class="text-sm font-weight mb-1 ">Email</th>
+
                       <th class="text-sm font-weight mb-1">No Whatsapp</th>
                       <th class="text-sm font-weight mb-1">Alamat</th>
+
                       <th class="text-sm font-weight mb-1">Action</th>
 
                     </tr>
@@ -103,17 +100,15 @@ jQuery(document).ready(function () {
      
         processing: true,
         serverSide: true,
-        ajax: "{{ route('pengawas.getdata') }}",
+        ajax: "{{ route('admin.list') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'foto', name: 'foto'},
             {data: 'kabupaten', name: 'kabupaten'},
 
             {data: 'name', name: 'name'},
-            {data: 'nip', name: 'nip'},
-            {data: 'jenjang_jabatan', name: 'jenjang_jabatan'},
-            {data: 'pangkat', name: 'pangkat'},
-            {data: 'gol_ruang', name: 'gol_ruang'},
+            {data: 'email', name: 'email'},
+ 
             {data: 'no_telp', name: 'no_telp'},
             {data: 'alamat', name: 'alamat'},
 

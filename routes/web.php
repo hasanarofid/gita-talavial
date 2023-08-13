@@ -33,6 +33,22 @@ Route::get('/', 'AdminController@index')->name('admin.index')->middleware(['auth
 Route::get('/dashboard', 'AdminController@index')->name('admin.index')->middleware(['auth']);
 // end panel dashboard admin
 
+// route penel dashboard for superadmin
+Route::prefix('superadmin')->middleware(['auth', 'superadmin'])->group(function () {
+    // route menu admin 
+    Route::prefix('admin')->group(function () {
+        Route::get('/data', 'AdminController@data')->name('admin.data');
+        Route::get('/get-admin', 'AdminController@getdata')->name('admin.list');
+        Route::get('/add-admin', 'AdminController@add')->name('admin.add');
+        Route::post('/store-admin', 'AdminController@store')->name('admin.store');
+        Route::get('/edit-admin/{id}', 'AdminController@edit')->name('admin.edit');
+        Route::post('/update-admin/{id}', 'AdminController@update')->name('admin.update');
+        Route::get('/hapus-admin{id}', 'AdminController@hapus')->name('admin.hapus');
+    });
+    // end route menu admin 
+});    
+// end route penel dashboard for superadmin
+
 // route panel menu pengawas
 Route::get('/pengawas', 'PegawasMController@index')->name('pengawas.index')->middleware(['auth']);
 Route::get('/get-pengawas', 'PegawasMController@getdata')->name('pengawas.getdata')->middleware(['auth']);

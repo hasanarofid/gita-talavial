@@ -19,7 +19,8 @@ class SekolahMSeeder extends Seeder
                 'no_telp'=>'031244233',
                 'kota'=>'Yogjakarta',
                 'alamat_lengkap'=>'Kota Yogjakarta 10',
-                'kode_area'=>42132
+                'kode_area'=>42132,
+                  'kabupaten_id'=>1
             ],
         ]);
     }
