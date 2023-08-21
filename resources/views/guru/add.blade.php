@@ -66,6 +66,17 @@
                         <label for="name">Nama </label>
                         <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Guru" required>
                      </div>
+
+                     <div class="form-group">
+                        <label for="kabupaten_id">Wilayah Kabupaten </label>
+                        <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
+                           <option value="">.: Pilih Wilayah :. </option>
+                           @foreach ($wilayah as $item)
+                              <option value="{{  $item->id }}">{{  $item->nama_kabupaten }}</option>
+                           @endforeach
+                            </select>
+                     </div>
+                     
                      <div class="form-group">
                         <label for="name">Jabatan </label>
                         <select name="jabatan" id="jabatan" class="form-control" required>

@@ -10,15 +10,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 class AdminController extends Controller
 {
     public function index()
     {
-        $total_guru = GuruM::where('is_aktif',true)->get()->count();
-        $total_sekolah = SekolahM::where('is_aktif',true)->get()->count();
-        $total_pengawas = User::where('role','Pengawas')->get()->count();
-        $total_stockholder = User::where('role','Stakeholder')->get()->count();
+        if(Auth::user()->role == 'Super Admin'){
+            $total_guru = GuruM::where('is_aktif',true)->get()->count();
+            $total_sekolah = SekolahM::where('is_aktif',true)->get()->count();
+            $total_pengawas = User::where('role','Pengawas')->get()->count();
+            $total_stockholder = User::where('role','Stakeholder')->get()->count();    
+        }else if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Stakeholder' ){
+            $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+            $kabupaten = Kabupaten::where('kelompok_kabupaten',$kelompok_kabupaten)->get();
+            $id_filter = [];
+            foreach($kabupaten as $kab){
+                $id_filter[] = $kab->id;
+            }
+
+            $total_guru = GuruM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->get()->count();
+            $total_sekolah = SekolahM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->get()->count();
+            $total_pengawas = User::where('role','Pengawas')->whereIn('kabupaten_id',$id_filter)->get()->count();
+            $total_stockholder = User::where('role','Stakeholder')->whereIn('kabupaten_id',$id_filter)->get()->count();    
+             // dd($total_guru);
+
+        }
 
         return view('admin.index',
         compact(

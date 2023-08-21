@@ -59,7 +59,15 @@
                      </div>
 
                      
-
+                     <div class="form-group">
+                        <label for="kabupaten_id">Wilayah Kabupaten </label>
+                        <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
+                           <option value="">.: Pilih Wilayah :. </option>
+                           @foreach ($wilayah as $item)
+                              <option value="{{  $item->id }}">{{  $item->nama_kabupaten }}</option>
+                           @endforeach
+                            </select>
+                     </div>
                      <div class="form-group">
                         <label for="nip">NIP</label>
                         <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP">

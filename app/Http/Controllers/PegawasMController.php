@@ -30,7 +30,19 @@ class PegawasMController extends Controller
 
     public function getdata(Request $request){
         if ($request->ajax()) {
-            $post = User::with('kabupaten')->where('role','Pengawas')->latest()->get();
+            if(Auth::user()->role == 'Super Admin'){
+                $post = User::with('kabupaten')->where('role','Pengawas')->latest()->get(); 
+            }else if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Stakeholder' ){
+                $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+                $kabupaten = Kabupaten::where('kelompok_kabupaten',$kelompok_kabupaten)->get();
+                $id_filter = [];
+                foreach($kabupaten as $kab){
+                    $id_filter[] = $kab->id;
+                }
+    
+                $post = User::with('kabupaten')->where('role','Pengawas')->whereIn('kabupaten_id',$id_filter)->latest()->get();
+    
+            }
             // dd($post);
             return Datatables::of($post)
                     ->addIndexColumn()
@@ -79,7 +91,14 @@ class PegawasMController extends Controller
 
     /** add data pengawas */
     public function add(){
-         $wilayah = Kabupaten::get();
+        //  $wilayah = Kabupaten::get();
+        $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+               
+        $wilayah = Kabupaten::select('nama_kabupaten', DB::raw('MAX(id) as id'),
+         DB::raw('COUNT(*) as total'))
+        ->groupBy('nama_kabupaten')
+        ->where('kelompok_kabupaten',$kelompok_kabupaten)
+        ->get();
     
         // dd($wilayah);
          return view('pengawas.add',compact('wilayah'));
@@ -92,7 +111,7 @@ class PegawasMController extends Controller
 
     /** save data pengawas */
     public function store(Request $request){
-        // dd($request->post());die;
+        // dd($request->post());die;belum
         $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users',
@@ -114,6 +133,7 @@ class PegawasMController extends Controller
             $user->kota = $request->kota;
             $user->alamat_lengkap = $request->alamat_lengkap;
             $user->kode_area = $request->kode_area;
+            $user->kabupaten_id = $request->kabupaten_id;
             $user->save();
 
             return redirect()->route('pengawas.index')->with('success', 'pengawas created successfully');

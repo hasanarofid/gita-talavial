@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 class StakeholderController extends Controller
 {
     public function index()
@@ -23,7 +23,21 @@ class StakeholderController extends Controller
     /** get data */
     public function getdata(Request $request){
         if ($request->ajax()) {
-            $post = User::with('kabupaten')->where('role','Stakeholder')->latest()->get();
+            if(Auth::user()->role == 'Super Admin'){
+                $post = User::with('kabupaten')->where('role','Stakeholder')->latest()->get();
+
+            }else if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Stakeholder' ){
+                $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+                $kabupaten = Kabupaten::where('kelompok_kabupaten',$kelompok_kabupaten)->get();
+                $id_filter = [];
+                foreach($kabupaten as $kab){
+                    $id_filter[] = $kab->id;
+                }
+    
+                $post = User::with('kabupaten')->where('role','Stakeholder')->whereIn('kabupaten_id',$id_filter)->latest()->get();
+    
+            }
+
             // dd($post);
             return Datatables::of($post)
                     ->addIndexColumn()

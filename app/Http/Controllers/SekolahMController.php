@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Imports\SekolahImport;
 use App\Exports\SekolahExport;
+use Illuminate\Support\Facades\DB;
+use App\Kabupaten;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-
+use Auth;
 
 
 class SekolahMController extends Controller
@@ -27,7 +29,21 @@ class SekolahMController extends Controller
 
     public function getdata(Request $request){
         if ($request->ajax()) {
-            $post = SekolahM::where('is_aktif',true)->latest()->get();
+            if(Auth::user()->role == 'Super Admin'){
+                $post = SekolahM::where('is_aktif',true)->latest()->get();
+            }else if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Stakeholder' ){
+                $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+                $kabupaten = Kabupaten::where('kelompok_kabupaten',$kelompok_kabupaten)->get();
+                $id_filter = [];
+                foreach($kabupaten as $kab){
+                    $id_filter[] = $kab->id;
+                }
+    
+                $post =SekolahM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->latest()->get();
+    
+            }
+
+      
             // dd($post);
             return Datatables::of($post)
                     ->addIndexColumn()
@@ -59,7 +75,14 @@ class SekolahMController extends Controller
 
     /** add data Sekolah */
     public function add(){
-        return view('sekolah.add');
+        $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+               
+        $wilayah = Kabupaten::select('nama_kabupaten', DB::raw('MAX(id) as id'),
+         DB::raw('COUNT(*) as total'))
+        ->groupBy('nama_kabupaten')
+        ->where('kelompok_kabupaten',$kelompok_kabupaten)
+        ->get();
+        return view('sekolah.add',compact('wilayah'));
     }
 
      /** add data Sekolah */
@@ -82,6 +105,8 @@ class SekolahMController extends Controller
             $sekolah->kota = $request->kota;
             $sekolah->alamat_lengkap = $request->alamat_lengkap;
             $sekolah->kode_area = $request->kode_area;
+            $sekolah->kabupaten_id = $request->kabupaten_id;
+
             $sekolah->is_aktif = true;
             $sekolah->save();
 
