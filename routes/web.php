@@ -18,9 +18,21 @@ Route::get('/clear-view', function(){
     Artisan::call('view:clear');
     return 'View Cache cleared!';
 });
-
+Route::get('/config-cache', function(){
+    Artisan::call('config:cache');
+    return 'View Cache cleared!';
+});
+Route::get('/clear-compiled', function(){
+    Artisan::call('clear-compiled');
+    return 'View Cache cleared!';
+});
 // call migrate
+Route::get('/composer/autoload', function(){
+    Artisan::call('shell:composer-dump-autoload');
+    return 'Composer autoloader updated!';
+});
 Route::get('/migrate-fresh', 'MigrationController@migrateFresh');
+
 Route::get('/seed', 'SeedController@seed');
 
 

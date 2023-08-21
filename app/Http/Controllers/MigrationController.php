@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class MigrationController extends Controller
 {
     public function migrateFresh(){
-        Artisan::call('migrate:fresh');
+        Artisan::call('migrate:fresh --seed');
         return "Database migate fresh!";
     }
 }
