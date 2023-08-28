@@ -57,6 +57,16 @@ Route::prefix('superadmin')->middleware(['auth', 'superadmin'])->group(function 
         Route::post('/update-admin/{id}', 'AdminController@update')->name('admin.update');
         Route::get('/hapus-admin{id}', 'AdminController@hapus')->name('admin.hapus');
     });
+
+      Route::prefix('mastertupoksi')->group(function () {
+        Route::get('/', 'MastertupoksiController@index')->name('mastertupoksi.index');
+        Route::get('/get-mastertupoksi', 'MastertupoksiController@getdata')->name('mastertupoksi.getdata');
+        Route::get('/add-mastertupoksi', 'MastertupoksiController@add')->name('mastertupoksi.add');
+        Route::post('/store-mastertupoksi', 'MastertupoksiController@store')->name('mastertupoksi.store');
+        Route::get('/edit-mastertupoksi/{id}', 'MastertupoksiController@edit')->name('mastertupoksi.edit');
+        Route::post('/update-mastertupoksi/{id}', 'MastertupoksiController@update')->name('mastertupoksi.update');
+        Route::get('/hapus-mastertupoksi{id}', 'MastertupoksiController@hapus')->name('mastertupoksi.hapus');
+    });
     // end route menu admin 
 });    
 // end route penel dashboard for superadmin
