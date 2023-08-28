@@ -59,8 +59,8 @@ class StakeholderController extends Controller
                         return !empty($row->kabupaten->kelompok_kabupaten) ? $row->kabupaten->kelompok_kabupaten : '-';
                     })
                     ->addColumn('action', function($row){
-                           $btn = '<a href="'.route('admin.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
-                           $btn = $btn.' <a href="'.route('admin.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
+                           $btn = '<a href="'.route('stakeholder.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
+                           $btn = $btn.' <a href="'.route('stakeholder.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
                             return $btn;
                     })
                     ->rawColumns(['no_telp','alamat','action','foto','kabupaten'])
@@ -71,22 +71,36 @@ class StakeholderController extends Controller
     
 
     public function add(){
-        $wilayah = Kabupaten::select('kelompok_kabupaten', DB::raw('MAX(id) as id'), DB::raw('COUNT(*) as total'))
-             ->groupBy('kelompok_kabupaten')
-             ->get();
+        $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+               
+        $wilayah = Kabupaten::select('nama_kabupaten', DB::raw('MAX(id) as id'),
+         DB::raw('COUNT(*) as total'))
+        ->groupBy('nama_kabupaten')
+        ->where('kelompok_kabupaten',$kelompok_kabupaten)
+        ->get();
     
         // dd($wilayah);
          return view('stakeholder.add',compact('wilayah'));
     }
 
     public function edit($id){
-        $model = User::find($id);
-        $wilayah = Kabupaten::select('kelompok_kabupaten', DB::raw('MAX(id) as id'), DB::raw('COUNT(*) as total'))
-             ->groupBy('kelompok_kabupaten')
-             ->get();
+        // $model = User::find($id);
+        // $wilayah = Kabupaten::select('kelompok_kabupaten', DB::raw('MAX(id) as id'), DB::raw('COUNT(*) as total'))
+        //      ->groupBy('kelompok_kabupaten')
+        //      ->get();
     
         // dd($wilayah);
-         return view('stakeholder.edit',compact('model','wilayah'));
+        $models = User::where('id',$id)->first();
+
+        $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+               
+        $wilayah = Kabupaten::select('nama_kabupaten', DB::raw('MAX(id) as id'),
+         DB::raw('COUNT(*) as total'))
+        ->groupBy('nama_kabupaten')
+        ->where('kelompok_kabupaten',$kelompok_kabupaten)
+        ->get();
+
+        return view('stakeholder.edit',compact('models','wilayah'));
     }
 
      /** save data admin */
@@ -114,11 +128,12 @@ class StakeholderController extends Controller
             $user->kode_area = $request->kode_area;
             $user->save();
 
-            return redirect()->route('stakeholder.data')->with('success', 'stakeholder created successfully');
+            return redirect()->route('stakeholder.index')->with('success', 'stakeholder created successfully');
     }
 
     /** save data admin */
     public function update($id,Request $request){
+        // dd($id);
         // dd($request->post());die;
             //  $request->validate([
             //     'name' => 'required|string|max:255',
@@ -139,9 +154,9 @@ class StakeholderController extends Controller
              if(isset($request->password)){
             $user->password = Hash::make($request->password);
             $user->update();
-        }
+        }   
 
-            return redirect()->route('stakeholder.data')->with('success', 'stakeholder updated successfully');
+            return redirect()->route('stakeholder.index')->with('success', 'stakeholder updated successfully');
     }
 
     public function hapus($id){

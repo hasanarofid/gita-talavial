@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','Pengawas')
-@section('subjudul','Edit Pengawas')
+@section('title','Stakeholder')
+@section('subjudul','Edit Stakeholder')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Edit Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Edit Stakeholder</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -26,7 +26,7 @@
             <div class="card-header pb-0 p-3">
                      <div class="row">
                      <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Form Edit Pengawas </h6>
+                        <h6 class="mb-0">Form Edit Stakeholder </h6>
                      </div>
                      
                      </div>
@@ -48,13 +48,23 @@
     </div>
 @endif
 
-                     <form action="{{ route('pengawas.update',array('id'=>$models->id)) }}"
+                     <form action="{{ route('stakeholder.update',array('id'=>$models->id)) }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf
                      <div class="form-group">
-                              <label for="name">Nama Pengawas</label>
+                              <label for="name">Nama Stakeholder</label>
                               <input value="{{ $models->name  }}" type="text" class="form-control" name="name" id="name" placeholder="Nama Pengawas" required>
+                     </div>
+
+                     <div class="form-group">
+                        <label for="kabupaten_id">Wilayah Kabupaten </label>
+                        <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
+                           <option value="">.: Pilih Wilayah :. </option>
+                           @foreach ($wilayah as $item)
+                              <option {{ ($models->kabupaten_id == $item->id) ? 'selected' : '' }} value="{{  $item->id }}">{{  $item->nama_kabupaten }}</option>
+                           @endforeach
+                            </select>
                      </div>
 
                      <div class="form-group">
@@ -82,19 +92,19 @@
                      </div>
                        <div class="form-group">
                               <label for="no_telp">No Telpon</label>
-                              <input value="{{ $models->profile->no_telp  }}" type="number" class="form-control" name="no_telp" id="no_telp" placeholder="No Telp/Wa" required> 
+                              <input value="{{ $models->no_telp  }}" type="number" class="form-control" name="no_telp" id="no_telp" placeholder="No Telp/Wa" required> 
                      </div>
                          <div class="form-group">
                               <label for="alamat_lengkap">Alamat</label>
-                              <textarea class="form-control" name="alamat_lengkap" id="alamat_lengkap" cols="10" rows="5" required>{{ $models->profile->alamat_lengkap  }}</textarea>
+                              <textarea class="form-control" name="alamat_lengkap" id="alamat_lengkap" cols="10" rows="5" required>{{ $models->alamat_lengkap  }}</textarea>
                      </div>
                       <div class="form-group">
                               <label for="kota">Kota</label>
-                              <input type="text" value="{{ $models->profile->kota  }}" class="form-control" name="kota" id="kota" placeholder="Kota">
+                              <input type="text" value="{{ $models->kota  }}" class="form-control" name="kota" id="kota" placeholder="Kota">
                      </div>
                      <div class="form-group">
                               <label for="kode_area">Kode Area</label>
-                              <input type="number" value="{{ $models->profile->kode_area  }}" class="form-control" name="kode_area" id="kode_area" placeholder="Kode Area">
+                              <input type="number" value="{{ $models->kode_area  }}" class="form-control" name="kode_area" id="kode_area" placeholder="Kode Area">
                      </div>
                      <hr>
                      <p>Info Login Update password bila ingin ubah</p>

@@ -57,10 +57,10 @@ $ git push -u origin master
 * master wilayah (done)
 * menambahkan/edit data pengawas (done)
 * Menambahkan data nama sekolah (done)
-* Assign pengawas menangani sekolah mana saja ( 1 pengawas up to 30 sekolah SMK)
-* Mengupdate nama guru /kepsek beserta jabatannya dan no hp di tiap sekolah
+* Assign pengawas menangani sekolah mana saja ( 1 pengawas up to 30 sekolah SMK)  (done)
+* Mengupdate nama guru /kepsek beserta jabatannya dan no hp di tiap sekolah  (done)
 ## Akses Stakeholder
-* Melihat Laporan / infografis tiap wilayah yang sudah dimappingkan
+* Melihat Laporan / infografis tiap wilayah yang sudah dimappingkan 
 
 ## Akses Supervisor:
 1. update profile

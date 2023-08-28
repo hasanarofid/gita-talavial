@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','Pengawas')
-@section('subjudul','add Pengawas')
+@section('title','Stakeholder')
+@section('subjudul','add Stakeholder')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">add Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">add Stakeholder</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -26,7 +26,7 @@
             <div class="card-header pb-0 p-3">
                      <div class="row">
                      <div class="col-6 d-flex align-items-center">
-                        <h6 class="mb-0">Form Add Pengawas </h6>
+                        <h6 class="mb-0">Form Add Stakeholder </h6>
                      </div>
                      
                      </div>
@@ -49,17 +49,25 @@
     </div>
 @endif
 
-                     <form action="{{ route('pengawas.store') }}"
+                     <form action="{{ route('stakeholder.store') }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf
                      <div class="form-group">
-                              <label for="name">Nama Pengawas</label>
-                              <input type="text" class="form-control" name="name" id="name" placeholder="Nama Pengawas" required>
+                              <label for="name">Nama Stakeholder</label>
+                              <input type="text" class="form-control" name="name" id="name" placeholder="Nama Stakeholder" required>
                      </div>
 
                      
-
+                     <div class="form-group">
+                        <label for="kabupaten_id">Wilayah Kabupaten </label>
+                        <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
+                           <option value="">.: Pilih Wilayah :. </option>
+                           @foreach ($wilayah as $item)
+                              <option value="{{  $item->id }}">{{  $item->nama_kabupaten }}</option>
+                           @endforeach
+                            </select>
+                     </div>
                      <div class="form-group">
                         <label for="nip">NIP</label>
                         <input type="text" class="form-control" name="nip" id="nip" placeholder="NIP">

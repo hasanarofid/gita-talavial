@@ -62,6 +62,8 @@
                       <th class="text-sm font-weight mb-1 ">Kabupten</th>
 
                       <th class="text-sm font-weight mb-1 ">Nama</th>
+                      <th class="text-sm font-weight mb-1 ">Email</th>
+
                       <th class="text-sm font-weight mb-1">No Whatsapp</th>
                       <th class="text-sm font-weight mb-1">Alamat</th>
                       <th class="text-sm font-weight mb-1">Action</th>
@@ -103,13 +105,15 @@ jQuery(document).ready(function () {
      
         processing: true,
         serverSide: true,
-        ajax: "{{ route('pengawas.getdata') }}",
+        ajax: "{{ route('stakeholder.getdata') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'foto', name: 'foto'},
             {data: 'kabupaten', name: 'kabupaten'},
 
             {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+
             {data: 'no_telp', name: 'no_telp'},
             {data: 'alamat', name: 'alamat'},
 

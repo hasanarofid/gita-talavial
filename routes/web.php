@@ -116,7 +116,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/get-stakeholder', 'StakeholderController@getdata')->name('stakeholder.getdata');
         Route::get('/add-stakeholder', 'StakeholderController@add')->name('stakeholder.add');
         Route::get('/edit-stakeholder/{id}', 'StakeholderController@edit')->name('stakeholder.edit');
-        Route::post('/update-stakeholder', 'StakeholderController@update')->name('stakeholder.update');
+        Route::post('/update-stakeholder/{id}', 'StakeholderController@update')->name('stakeholder.update');
         Route::get('/import-stakeholder', 'StakeholderController@import')->name('stakeholder.import');
         Route::post('/importfile-stakeholder', 'StakeholderController@importfile')->name('stakeholder.importfile');
         Route::post('/store-stakeholder', 'StakeholderController@store')->name('stakeholder.store');
