@@ -2,7 +2,7 @@
 @section('subjudul','Super Admin ')
 @section('title','Master Tupoksi')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list Pengawas</a></li>
+<li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">list Master Tupoksi</a></li>
 <style>
 #data-table_info{
    font-size: 12px;
@@ -26,7 +26,7 @@
           <div class="card-header pb-0 p-3">
                   <div class="row">
                     <div class="col-6 d-flex align-items-center">
-                      <h6 class="mb-0">Tabel Pengawas </h6>
+                      <h6 class="mb-0">Tabel Master Tupoksi </h6>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
      
@@ -56,16 +56,10 @@
                   <thead>
                     <tr>
                       <th class="text-sm font-weight mb-1 ">No</th>
-                      <th class="text-sm font-weight mb-1 ">Foto Profile</th>
-                      <th class="text-sm font-weight mb-1 ">Kabupten</th>
+                      <th class="text-sm font-weight mb-1 ">Tahun Ajaran</th>
+                      <th class="text-sm font-weight mb-1 ">Semester</th>
 
-                      <th class="text-sm font-weight mb-1 ">Nama Pengawas</th>
-                      <th class="text-sm font-weight mb-1 ">NIP</th>
-                      <th class="text-sm font-weight mb-1 ">Jenjang Jabatan</th>
-                      <th class="text-sm font-weight mb-1 ">Pangkat</th>
-                      <th class="text-sm font-weight mb-1 ">Gol. Ruang</th>
-                      <th class="text-sm font-weight mb-1">No Whatsapp</th>
-                      <th class="text-sm font-weight mb-1">Alamat</th>
+                      <th class="text-sm font-weight mb-1 ">Kegiatan</th>
                       <th class="text-sm font-weight mb-1">Action</th>
 
                     </tr>
@@ -108,16 +102,10 @@ jQuery(document).ready(function () {
         ajax: "{{ route('mastertupoksi.getdata') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'foto', name: 'foto'},
-            {data: 'kabupaten', name: 'kabupaten'},
+            {data: 'tahun_ajaran', name: 'tahun_ajaran'},
+            {data: 'semester', name: 'semester'},
 
-            {data: 'name', name: 'name'},
-            {data: 'nip', name: 'nip'},
-            {data: 'jenjang_jabatan', name: 'jenjang_jabatan'},
-            {data: 'pangkat', name: 'pangkat'},
-            {data: 'gol_ruang', name: 'gol_ruang'},
-            {data: 'no_telp', name: 'no_telp'},
-            {data: 'alamat', name: 'alamat'},
+            {data: 'kegiatan', name: 'kegiatan'},
 
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]

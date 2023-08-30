@@ -61,6 +61,8 @@ Route::prefix('superadmin')->middleware(['auth', 'superadmin'])->group(function 
       Route::prefix('mastertupoksi')->group(function () {
         Route::get('/', 'MastertupoksiController@index')->name('mastertupoksi.index');
         Route::get('/get-mastertupoksi', 'MastertupoksiController@getdata')->name('mastertupoksi.getdata');
+        Route::get('/getkegiatan', 'MastertupoksiController@getkegiatan')->name('mastertupoksi.getkegiatan');
+
         Route::get('/add-mastertupoksi', 'MastertupoksiController@add')->name('mastertupoksi.add');
         Route::post('/store-mastertupoksi', 'MastertupoksiController@store')->name('mastertupoksi.store');
         Route::get('/edit-mastertupoksi/{id}', 'MastertupoksiController@edit')->name('mastertupoksi.edit');

@@ -23,11 +23,11 @@ class MastertupoksiController extends Controller
     public function getdata(Request $request){
         if ($request->ajax()) {
           
-                $post = MasterTupoksi::latest()->get();
+                $post = MasterTupoksi::orderBy('urutan','ASC')->get();
     
             // dd($post);
             return Datatables::of($post)
-                   
+            ->addIndexColumn()
                     ->addColumn('action', function($row){
    
                            $btn = '<a href="'.route('mastertupoksi.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
@@ -67,32 +67,22 @@ class MastertupoksiController extends Controller
 
     /** save data pengawas */
     public function store(Request $request){
-        // dd($request->post());die;belum
-        $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users',
-                'password' => 'required|string|min:6',
-            ]);
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->nip = $request->nip;
-            $user->jenjang_jabatan = $request->jenjang_jabatan;
-            $user->pangkat = $request->pangkat;
-            $user->gol_ruang = $request->gol_ruang;
-            $user->foto_profile = 'userdefault.jpg';
+        // dd($request->post());die;
+  
+            $model = new mastertupoksi();
+            $model->tahun_ajaran = $request->tahun_ajaran;
+            $model->semester = $request->semester;
+            $model->kegiatan = $request->kegiatan;
+            $model->urutan = $request->urutan;
 
-            $user->password = Hash::make($request->password);
-            $user->role = 'Pengawas';
-            
-            $user->no_telp = $request->no_telp;
-            $user->kota = $request->kota;
-            $user->alamat_lengkap = $request->alamat_lengkap;
-            $user->kode_area = $request->kode_area;
-            $user->kabupaten_id = $request->kabupaten_id;
-            $user->save();
+            if($request->is_sub == 'sub'){
+                $model->id_kegiatan = $request->id_kegiatan;
+            }
 
-            return redirect()->route('pengawas.index')->with('success', 'pengawas created successfully');
+            $model->save();
+
+        
+            return redirect()->route('mastertupoksi.index')->with('success', 'mastertupoksi created successfully');
     }
 
     public function edit($id){
@@ -124,4 +114,15 @@ class MastertupoksiController extends Controller
 
         return redirect()->route('pengawas.index',$request->id)->with('success', 'pengawas update successfully');
     }
+
+    public function getkegiatan(Request $request)
+    {
+        $search = $request->term;
+        $data = MasterTupoksi::select('kegiatan as text', 'id')
+        ->where('kegiatan', 'LIKE', "%$search%")
+        ->get();
+        
+        return response()->json($data);
+    }
+
 }

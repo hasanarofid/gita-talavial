@@ -17,6 +17,8 @@
 </style>
 @endsection
 @section ('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css">
+
  <div class="container-fluid py-2">
  
 
@@ -49,7 +51,7 @@
     </div>
 @endif
 
-                     <form action="{{ route('pengawas.store') }}"
+                     <form action="{{ route('mastertupoksi.store') }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf
@@ -64,14 +66,27 @@
                      </div>
 
                      <div class="form-group">
+                        <label for="name">Urutan</label>
+                        <input type="number" class="form-control" name="urutan" id="urutan" placeholder="urutan" required>
+                     </div>
+
+                     <div class="form-group">
                               <label for="name">Tipe</label>
                               <select name="is_sub" id="is_sub" class="form-control">
                                  <option value="kegiatan">kegiatan</option>
                                  <option value="sub">Sub kegiatan</option>
-
                               </select>
-                              <input type="text" class="form-control" name="semester" id="semester" placeholder="Nama semester" required>
                      </div>
+
+                     <div class="form-group" id="div_sub_kegiatan" >
+                        <label for="name">Kegiatan Utama</label>
+                        <select name="id_kegiatan" id="id_kegiatan" class="form-control" style="width: 100%;">
+                          
+                        </select>
+
+               </div>
+
+
 
                          <div class="form-group">
                               <label for="name">Kegiatan</label>
@@ -80,11 +95,7 @@
 
 
 
-                     <div class="form-group" id="div_sub_kegiatan">
-                              <label for="name">Sub Kegiatan</label>
-                              <input type="text" class="form-control" name="sub_kegiatan" id="sub_kegiatan" placeholder="Nama sub_kegiatan" required>
-                     </div>
-
+                   
 
                      
                      
@@ -102,6 +113,32 @@
  </div>
 @endsection
        @section('js')
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
 
+         <script>
+            jQuery(document).ready(function () {
+               jQuery("#div_sub_kegiatan").hide();
+                  jQuery('#id_kegiatan').select2({
+                  ajax: {
+                     url: "{{ route('mastertupoksi.getkegiatan') }}",
+                     dataType: 'json',
+                     processResults: function(data) {
+                           return {
+                              results: data
+                           };
+                     }
+                  }
+               });
+            });
+
+            jQuery("#is_sub").change(function(){
+               var sub = jQuery(this).val();
+               if(sub == 'sub'){
+                  jQuery("#div_sub_kegiatan").show();
+               }else{
+                  jQuery("#div_sub_kegiatan").hide();
+               }
+            })
+         </script>
        @endsection
 

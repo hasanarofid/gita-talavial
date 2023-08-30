@@ -20,6 +20,7 @@ class CreateMasterTupoksi extends Migration
             $table->string('kegiatan');
             $table->integer('id_kegiatan')->nullable();
             $table->string('sub_kegiatan')->nullable();
+            $table->integer('urutan');
             $table->timestamps();
         });
     }
