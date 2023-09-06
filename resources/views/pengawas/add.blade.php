@@ -93,7 +93,10 @@
 
                      <div class="form-group">
                         <label for="gol_ruang">Gol. Ruang</label>
-                        <input type="text" class="form-control" name="gol_ruang" id="gol_ruang" placeholder="Gol. Ruang">
+                        <select name="gol_ruang" id="gol_ruang" class="form-control">
+                        
+                        </select>
+
                      </div>
                      
                      <div class="form-group">
@@ -149,37 +152,37 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
 
          <script>
-            jQuery(document).ready(function () {
+           jQuery(document).ready(function () {
+    // Initialize Select2 for the 'select2' class elements
+    jQuery('.select2').select2();
 
-               jQuery('.select2').select2();
+    // Initialize the 'pangkat' select2 element with AJAX
+    jQuery('#pangkat').select2({
+        ajax: {
+            url: "{{ route('pengawas.getpangkat') }}",
+            dataType: 'json',
+            processResults: function(data) {
+                return {
+                    results: data
+                };
+            }
+        }
+    });
 
-                  jQuery('#pangkat').select2({
-                  ajax: {
-                     url: "{{ route('pengawas.getpangkat') }}",
-                     dataType: 'json',
-                     processResults: function(data) {
-                           return {
-                              results: data
-                           };
-                     }
-                  }
-               });
-
-
-                jQuery('#gol_ruang').select2({
-                  ajax: {
-                     url: "{{ route('pengawas.getRuang') }}",
-                     dataType: 'json',
-                     processResults: function(data) {
-                           return {
-                              results: data
-                           };
-                     }
-                  }
-               });
-            });
-
-          
+    // Initialize the 'gol_ruang' select2 element with AJAX
+    jQuery('#gol_ruang').select2({
+        ajax: {
+            url: "{{ route('pengawas.getRuang') }}",
+            dataType: 'json',
+            processResults: function(data) {
+                return {
+                    results: data
+                };
+            }
+        }
+    });
+});
+   
          </script>
        @endsection
 
