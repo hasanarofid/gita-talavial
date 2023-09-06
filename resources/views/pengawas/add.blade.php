@@ -3,6 +3,8 @@
 @section('subjudul','add Pengawas')
 @section('breadcrumbs')
 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">add Pengawas</a></li>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css">
+
 <style>
 #data-table_info{
    font-size: 12px;
@@ -61,8 +63,8 @@
                      
                      <div class="form-group">
                         <label for="kabupaten_id">Wilayah Kabupaten </label>
-                        <select name="kabupaten_id" id="kabupaten_id" class="form-control" required>
-                           <option value="">.: Pilih Wilayah :. </option>
+                        <select name="kabupaten_id" id="kabupaten_id" class="form-control select2" required>
+                          
                            @foreach ($wilayah as $item)
                               <option value="{{  $item->id }}">{{  $item->nama_kabupaten }}</option>
                            @endforeach
@@ -74,8 +76,8 @@
                      </div>
                      <div class="form-group">
                         <label for="name">Jenjang Jabatan </label>
-                        <select name="jenjang_jabatan" id="jenjang_jabatan" class="form-control" required>
-                           <option value="">.: Pilih Jenjang Jabatan :. </option>
+                        <select name="jenjang_jabatan" id="jenjang_jabatan" class="form-control select2" required>
+                         
                            <option value="Pengawas Sekolah Utama"> Pengawas Sekolah Utama </option>
                            <option value="Pengawas Sekolah Ahli Madya"> Pengawas Sekolah Ahli Madya </option>
                            <option value="Pengawas Sekolah Ahli Muda"> Pengawas Sekolah Ahli Muda </option>
@@ -84,7 +86,9 @@
 
                      <div class="form-group">
                         <label for="pangkat">Pangkat</label>
-                        <input type="text" class="form-control" name="pangkat" id="pangkat" placeholder="Pangkat">
+                        <select name="pangkat" id="pangkat" class="form-control">
+                        
+                        </select>
                      </div>
 
                      <div class="form-group">
@@ -141,7 +145,42 @@
       </div>
  </div>
 @endsection
-       @section('js')
+    @section('js')
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
 
+         <script>
+            jQuery(document).ready(function () {
+
+               jQuery('.select2').select2();
+
+                  jQuery('#pangkat').select2({
+                  ajax: {
+                     url: "{{ route('pengawas.getpangkat') }}",
+                     dataType: 'json',
+                     processResults: function(data) {
+                           return {
+                              results: data
+                           };
+                     }
+                  }
+               });
+
+
+                jQuery('#gol_ruang').select2({
+                  ajax: {
+                     url: "{{ route('pengawas.getRuang') }}",
+                     dataType: 'json',
+                     processResults: function(data) {
+                           return {
+                              results: data
+                           };
+                     }
+                  }
+               });
+            });
+
+          
+         </script>
        @endsection
+
 

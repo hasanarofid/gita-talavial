@@ -100,6 +100,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::post('/store-pengawas', 'PegawasMController@store')->name('pengawas.store');
         Route::get('/hapus-pengawas/{id}', 'PegawasMController@hapus')->name('pengawas.hapus');
         Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('pengawas.excelcontoh');
+        Route::get('/getpangkat', 'PegawasMController@getpangkat')->name('pengawas.getpangkat');
+        Route::get('/getRuang', 'PegawasMController@getRuang')->name('pengawas.getRuang');
+
+       
         // end route panel menu pengawas
     });
 

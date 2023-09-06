@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
                 MarketplaceTableSeeder::class,
                 SekolahMSeeder::class,
                 GuruMSeeder::class,
+                GolPangkatRuangSeeder::class,
             ]);
     }
 }

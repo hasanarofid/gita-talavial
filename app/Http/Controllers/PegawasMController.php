@@ -6,6 +6,7 @@ use App\Profile;
 use App\GuruM;
 use App\SekolahM;
 use App\Kabupaten;
+use App\GolPangkatRuang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
@@ -17,6 +18,28 @@ use Auth;
 
 class PegawasMController extends Controller
 {
+      public function getpangkat(Request $request)
+    {
+        $search = $request->term;
+        $data = GolPangkatRuang::select('pangkat as text', 'id')
+        ->where('pangkat', 'LIKE', "%$search%")
+        // ->whereNull('id_master')
+        ->get();
+        
+        return response()->json($data);
+    }
+
+         public function getRuang(Request $request)
+    {
+        $search = $request->term;
+        $data = GolPangkatRuang::select('ruang_kerja as text', 'id')
+        ->where('ruang_kerja', 'LIKE', "%$search%")
+        // ->whereNull('id_master')
+        ->get();
+        
+        return response()->json($data);
+    }
+
     /**
      * menampilkan data pengawas.
      *
