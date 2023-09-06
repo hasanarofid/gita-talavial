@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 UsersTableSeeder::class,
-                // MasterKabupatenSeeder::class, 
+                 MasterKabupatenSeeder::class, 
                 MarketplaceTableSeeder::class,
                 SekolahMSeeder::class,
                 GuruMSeeder::class,

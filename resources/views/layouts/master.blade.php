@@ -74,9 +74,18 @@
               <span class="nav-link-text ms-1">Master Tupoksi</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link {{ (request()->is('superadmin/mastertupoksi*')) ? 'active' : '' }}" href="{{ route('mastertupoksi.index') }}">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-address-card  text-warning text-sm opacity-10"></i>
+            </div>
+              <span class="nav-link-text ms-1">Pembagian Tupoksi</span>
+            </a>
+          </li>
          @endif
         
-        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Super Admin')
+        @if (Auth::user()->role == 'Admin')
         
           <li class="nav-item">
             <a class="nav-link {{ (request()->is('admin/pengawas*')) ? 'active' : '' }}" href="{{ route('pengawas.index') }}">
