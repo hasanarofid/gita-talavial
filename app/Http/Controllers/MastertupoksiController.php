@@ -119,6 +119,7 @@ class MastertupoksiController extends Controller
     {
         $search = $request->term;
         $data = MasterTupoksi::select('kegiatan as text', 'id')
+        ->whereNull('id_kegiatan')
         ->where('kegiatan', 'LIKE', "%$search%")
         ->get();
         

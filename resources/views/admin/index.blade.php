@@ -103,67 +103,275 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">Rencana Kerja</h6>
+              <h6 class="mb-0">Tupoksi Tahun 2023</h6>
             </div>
             <div class="card-body p-3">
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-mobile-button text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Devices</h6>
-                      <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-tag text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Tickets</h6>
-                      <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-box-2 text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Error logs</h6>
-                      <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                  <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                      <i class="ni ni-satisfied text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-1 text-dark text-sm">Happy users</h6>
-                      <span class="text-xs font-weight-bold">+ 430</span>
-                    </div>
-                  </div>
-                  <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                  </div>
-                </li>
-              </ul>
+            <div class="table-responsive p-0">
+               
+            <table class="table align-items-center mb-0 table-primary table-hover table-bordered">
+              <thead>
+                <tr>
+            <th rowspan="3">No</th>
+            <th rowspan="3" >Kegiatan</th>
+            <th colspan="12" style="text-align: center">Waktu Pelaksanaan</th>
+        </tr>
+        <tr>
+            <th colspan="12" style="text-align: center"> Bulan</th>
+        </tr>
+        <tr>
+            <!-- Enam kolom untuk Jan -->
+            <th style="text-align: center">Jan</th>
+            <th style="text-align: center">Feb</th>
+            <th style="text-align: center">Mar</th>
+            <th style="text-align: center">Apr</th>
+            <th style="text-align: center">Mei</th>
+            <th style="text-align: center">Jun</th>
+            <th style="text-align: center">Jul</th>
+            <th style="text-align: center">Ags</th>
+            <th style="text-align: center">Sept</th>
+            <th style="text-align: center">Okt</th>
+            <th style="text-align: center">Nov</th>
+            <th style="text-align: center">Des</th>
+
+        </tr>
+              </thead>
+              <tbody>
+                     @php
+                      $no = 1;
+                  @endphp
+                  @foreach ($master as $item)
+                  <tr>
+                      <td>{{  empty($item->id_kegiatan) ? $no++ : '' }}</td>
+                      <td class="{{ empty($item->id_kegiatan) ? 'bg-success' : '' }} ">{{ $item->kegiatan  }}</td>
+
+                    
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                                 if($parts[0] == 'Jan' || $parts[1] == 'Jan'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                     
+                    @else
+                          @if ($item->bulan == 'Jan')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                                if($parts[0] == 'Feb' || $parts[1] == 'Feb'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                       
+                    @else
+                          @if ($item->bulan == 'Feb')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                                 if($parts[0] == 'Mar' || $parts[1] == 'Mar'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                   
+                    @else
+                          @if ($item->bulan == 'Mar')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                                 if($parts[0] == 'Apr' || $parts[1] == 'Apr'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                        
+                    @else
+                          @if ($item->bulan == 'Apr')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                                if($parts[0] == 'Mei' || $parts[1] == 'Mei'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                     
+                    @else
+                          @if ($item->bulan == 'Mei')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                               if($parts[0] == 'Jun' || $parts[1] == 'Jun'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                     
+                    @else
+                          @if ($item->bulan == 'Jun')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                               if($parts[0] == 'Jul' || $parts[1] == 'Jul'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                    
+                    @else
+                          @if ($item->bulan == 'Jul')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                               if($parts[0] == 'Ags' || $parts[1] == 'Ags'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+              
+                    @else
+                          @if ($item->bulan == 'Ags')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                               if($parts[0] == 'Sept' || $parts[1] == 'Sept'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                     
+                    @else
+                          @if ($item->bulan == 'Sept')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                                if($parts[0] == 'Okt' || $parts[1] == 'Okt'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                     
+                    @else
+                          @if ($item->bulan == 'Okt')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                               if($parts[0] == 'Nov' || $parts[1] == 'Nov'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                       
+                    @else
+                          @if ($item->bulan == 'Nov')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+                    @if (strpos($item->bulan, ',') !== false)
+                        @php
+                               $parts = explode(",", $item->bulan); 
+                               if($parts[0] == 'Des' || $parts[1] == 'Des'){
+                                echo  '<td class="bg-warning"></td>';
+                               }else{
+                                echo '<td></td>';
+                               }
+                        @endphp
+                    @else
+                          @if ($item->bulan == 'Des')
+                            <td class="bg-warning"></td>
+                          @else
+                              <td ></td>
+                          @endif
+                    @endif
+
+
+                    
+                   
+                
+                       </tr>
+                  @endforeach
+                   
+                  </tbody>
+            
+            </table>
+            </div>
             </div>
           </div>
         </div>

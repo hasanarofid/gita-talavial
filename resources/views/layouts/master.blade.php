@@ -76,7 +76,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('superadmin/mastertupoksi*')) ? 'active' : '' }}" href="{{ route('mastertupoksi.index') }}">
+            <a class="nav-link {{ (request()->is('superadmin/pembagiantupoksi*')) ? 'active' : '' }}" href="{{ route('pembagiantupoksi.index') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-address-card  text-warning text-sm opacity-10"></i>
             </div>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\MasterTupoksi;
 class AdminController extends Controller
 {
     public function index()
@@ -35,13 +36,15 @@ class AdminController extends Controller
              // dd($total_guru);
 
         }
-
+    $master = MasterTupoksi::orderBy('urutan')->get();
+    // dd($master);die;
         return view('admin.index',
         compact(
             'total_guru',
             'total_sekolah',
             'total_pengawas',
             'total_stockholder',
+            'master'
             ) );
     }
 
