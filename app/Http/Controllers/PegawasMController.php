@@ -15,9 +15,29 @@ use App\Exports\ExportUser;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Http;
 
 class PegawasMController extends Controller
 {
+    //tesWa
+    public function tesWa(){
+        $token = env('WABLAS_TOKEN');
+        $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
+        $message = 'test get'; // Ganti dengan pesan Anda
+
+        $response = Http::get("https://jogja.wablas.com/api/send-message", [
+            'phone' => $phone,
+            'message' => $message,
+            'token' => $token,
+        ]);
+
+        $result = $response->body();
+
+        echo "<pre>";
+        dd($result);
+
+    }
+
       public function getpangkat(Request $request)
     {
         $search = $request->term;

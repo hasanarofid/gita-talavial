@@ -102,6 +102,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
         Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('pengawas.excelcontoh');
         Route::get('/getpangkat', 'PegawasMController@getpangkat')->name('pengawas.getpangkat');
         Route::get('/getRuang', 'PegawasMController@getRuang')->name('pengawas.getRuang');
+        Route::get('/tesWa', 'PegawasMController@tesWa')->name('pengawas.tesWa');
 
        
         // end route panel menu pengawas
@@ -154,6 +155,19 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // end route panel menu stakeholder
 });   
 // end
+
+// route halaman pengawas
+Route::middleware(['web', 'pengawas'])->group(function () {
+    Route::get('/pengawas/login', 'Auth\LoginController@showPengawasLoginForm');
+    Route::post('/pengawas/login', 'Auth\LoginController@superPengawasLogin')->name('superPengawasLogin');
+    Route::get('/pengawas', 'PengawasController@index')->name('pengawas.index');
+});
+
+// Route::prefix('pengawas')->middleware(['auth', 'pengawas'])->group(function () {
+
+// });
+// end route halaman pengawas
+
 Auth::routes();
 Route::get('fotopengawas/{filename?}', function ($filename) {
     $path = storage_path('app/public/pengawas/' . $filename);

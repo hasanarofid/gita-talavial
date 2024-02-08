@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+
 class PengawasMiddleware
 {
     /**
@@ -15,11 +16,16 @@ class PengawasMiddleware
      */
     public function handle($request, Closure $next)
     {
-         if(Auth::user()->role == "Pengawas"){
+        // Pengecualian untuk route '/pengawas'
+        if ($request->is('pengawas') || $request->is('pengawas/*')) {
             return $next($request);
         }
-        else{
-            return redirect('/');
+
+        // Cek apakah pengguna terautentikasi dan memiliki peran 'Pengawas'
+        if(Auth::check() && Auth::user()->role == "Pengawas") {
+            return $next($request);
+        } else {
+            return redirect('/pengawas');
         }
     }
 }
