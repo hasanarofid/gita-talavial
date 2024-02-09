@@ -9,8 +9,9 @@
         <div class="card">
           <div class="card-body">
             <img src="{{ asset('delmansuper.jpeg') }}" height="150px" alt="Image placeholder" class="card-img">
-            <h5 class="mb-1 pt-3">Model Manajemen Supervisi </h5>
-            <p class="mb-4">Please sign-in to your account and start the adventure</p>
+            <h4 class="mb-1 pt-3 text-center">Model Manajemen Supervisi Kolegial
+              Provinsi Banten </h4>
+              <hr>
             <form  role="form" method="POST" action="{{ route('superPengawasLogin') }}">
                 @csrf
             <div class="mb-3">

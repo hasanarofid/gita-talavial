@@ -160,6 +160,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['web', 'pengawas'])->group(function () {
     Route::get('/pengawas', 'PengawasController@index')->name('pengawas.index');
     Route::get('/editprofile', 'PengawasController@editprofile')->name('pengawas.editprofile');
+    Route::post('/updateprofile', 'PengawasController@updateprofile')->name('pengawas.updateprofile');
 
     // route panel menu pengawas rencanakerja
     Route::prefix('rencanakerja')->group(function () {
@@ -231,12 +232,20 @@ Route::middleware(['web', 'pengawas'])->group(function () {
 // end route halaman pengawas
 
 Auth::routes();
-Route::get('fotopengawas/{filename?}', function ($filename) {
+Route::get('fotopengawas/{filename}', function ($filename) {
     $path = storage_path('app/public/pengawas/' . $filename);
+
+    if (!File::exists($path)) {
+        Log::error('Image file not found: ' . $path);
+        abort(404);
+    }
+
     $file = File::get($path);
     $type = File::mimeType($path);
+
     $response = Response::make($file, 200);
     $response->header("Content-Type", $type);
+
     return $response;
 })->name('fotopengawas');
 

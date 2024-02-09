@@ -10,7 +10,7 @@
       if(Auth::user()->foto_profile == 'userdefault.jpg'){
             $foto = asset('userdefault.jpg');
         }else{
-            $foto =  route('pengawas',$row->foto_profile );
+            $foto =  route('fotopengawas',Auth::user()->foto_profile );
         }
       @endphp
       <!-- Header -->
@@ -25,7 +25,7 @@
                 <img
                   src="{{ $foto }}"
                   alt="user image"
-                  class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
+                  class="d-block ms-0 ms-sm-4 rounded user-profile-img" style="height: 100px !important" />
               </div>
               <div class="flex-grow-1 mt-3 mt-sm-5">
                 <div
@@ -72,7 +72,20 @@
                 </li>
                 <li class="d-flex align-items-center mb-3">
                   <i class="ti ti-file-description"></i><span class="fw-bold mx-2">Homepage:</span>
-                  <span>English</span>
+                  <span>
+                    @php
+                    $profile = App\Profile::where('user_id', Auth::user()->id)->first();
+                @endphp
+            
+                @if (!empty($profile->homepage))
+                    <a href="{{ $profile->homepage }}" target="_blank">{{ $profile->homepage }}</a>
+                @endif
+
+             </span>
+                </li>
+                <li class="d-flex align-items-center mb-3">
+                  <i class="ti ti-flag"></i><span class="fw-bold mx-2">Bio:</span> <span>
+                    {{ !empty($profile->bio) ? $profile->bio : '' }}</span>
                 </li>
               </ul>
 

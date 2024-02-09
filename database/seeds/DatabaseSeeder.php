@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             [
                 UsersTableSeeder::class,
                 ProfilesTableSeeder::class,
-                 MasterKabupatenSeeder::class, 
+                MasterKabupaten2Seeder::class, 
                 MarketplaceTableSeeder::class,
                 SekolahMSeeder::class,
                 GuruMSeeder::class,

@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html
+lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+  class="light-style layout-navbar-fixed layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="{{ asset('theme/assets/') }}"
+  data-template="vertical-menu-template-no-customizer"
+>
   <head>
     <meta
       name="viewport"
@@ -58,11 +65,11 @@
          
           <aside  id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           
-            <div class="app-brand demo" style="margin-top: 10px">
+            <div class="app-brand demo" style="height: 190px !important;" >
               
 
-              <a href="{{ route('pengawas.index') }}" class="app-brand-link">
-                <img src="{{ asset('delmansuper.jpeg') }}" height="200px" width="200px" alt="Image placeholder" class="card-img">
+              <a href="{{ route('pengawas.index') }}" class="app-brand-link" >
+                <img src="{{ asset('delmansuper.jpeg') }}"   height="200px" width="200px" alt="Image placeholder" class="">
 
 
               </a>
@@ -191,7 +198,7 @@
                       if(Auth::user()->foto_profile == 'userdefault.jpg'){
                             $foto = asset('userdefault.jpg');
                         }else{
-                            $foto =  route('pengawas',$row->foto_profile );
+                            $foto =  route('fotopengawas',Auth::user()->foto_profile );
                         }
                   @endphp
   
@@ -200,16 +207,16 @@
                   <li class="nav-item navbar-dropdown dropdown-user dropdown">
                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                       <div class="avatar avatar-online">
-                        <img src="{{ $foto }}" alt class="h-auto rounded-circle" />
+                        <img src="{{ $foto }}" alt class="rounded-circle" />
                       </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                       <li>
-                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <a class="dropdown-item" href="{{ route('pengawas.index') }}">
                           <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                               <div class="avatar avatar-online">
-                                <img src="{{ $foto }}" alt class="h-auto rounded-circle" />
+                                <img src="{{ $foto }}" alt class="rounded-circle" />
                               </div>
                             </div>
                             <div class="flex-grow-1">

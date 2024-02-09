@@ -18,7 +18,9 @@ class CreateProfilesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('no_telp')->nullable();
             $table->string('kota')->nullable();
+            $table->string('homepage')->nullable();
             $table->text('alamat_lengkap')->nullable();
+            $table->text('bio')->nullable();
             $table->integer('kode_area')->nullable();
             $table->timestamps();
 
