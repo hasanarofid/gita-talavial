@@ -161,6 +161,7 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     Route::get('/pengawas/login', 'Auth\LoginController@showPengawasLoginForm');
     Route::post('/pengawas/login', 'Auth\LoginController@superPengawasLogin')->name('superPengawasLogin');
     Route::get('/pengawas', 'PengawasController@index')->name('pengawas.index');
+    Route::post('/pengawas/logout', 'Auth\LoginController@logoutpengawas')->name('pengawas.logout');
 });
 
 // Route::prefix('pengawas')->middleware(['auth', 'pengawas'])->group(function () {

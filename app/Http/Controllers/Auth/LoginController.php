@@ -61,6 +61,20 @@ class LoginController extends Controller
             }
     }
 
+    public function logoutpengawas(Request $request)
+    {
+        // Add your custom logout logic here, if needed
+
+        // Logout the user
+        Auth::logout();
+
+        // Clear the session data
+        $request->session()->invalidate();
+        dd(2);
+        // Redirect to the login page or any other page you prefer
+        return redirect('/pengawas/login');
+    }
+
     /**
      * Where to redirect users after login.
      *

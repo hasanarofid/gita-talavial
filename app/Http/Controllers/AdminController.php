@@ -16,36 +16,46 @@ class AdminController extends Controller
 {
     public function index()
     {
-        if(Auth::user()->role == 'Super Admin'){
-            $total_guru = GuruM::where('is_aktif',true)->get()->count();
-            $total_sekolah = SekolahM::where('is_aktif',true)->get()->count();
-            $total_pengawas = User::where('role','Pengawas')->get()->count();
-            $total_stockholder = User::where('role','Stakeholder')->get()->count();    
-        }else if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Stakeholder' ){
-            $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
-            $kabupaten = Kabupaten::where('kelompok_kabupaten',$kelompok_kabupaten)->get();
-            $id_filter = [];
-            foreach($kabupaten as $kab){
-                $id_filter[] = $kab->id;
+        if (Auth::check()) {
+            // Periksa apakah pengguna adalah pengawas
+            if (Auth::user()->role == "Pengawas") {
+                // Pengguna sudah login dan adalah pengawas, lanjutkan ke halaman pengawas
+                Auth::logout(); // Logout pengguna yang bukan pengawas
+                return redirect('/pengawas/login');
+            } else {
+                if(Auth::user()->role == 'Super Admin'){
+                    $total_guru = GuruM::where('is_aktif',true)->get()->count();
+                    $total_sekolah = SekolahM::where('is_aktif',true)->get()->count();
+                    $total_pengawas = User::where('role','Pengawas')->get()->count();
+                    $total_stockholder = User::where('role','Stakeholder')->get()->count();    
+                }else if(Auth::user()->role == 'Admin' || Auth::user()->role == 'Stakeholder' ){
+                    $kelompok_kabupaten = Kabupaten::find(Auth::user()->kabupaten_id)->kelompok_kabupaten;
+                    $kabupaten = Kabupaten::where('kelompok_kabupaten',$kelompok_kabupaten)->get();
+                    $id_filter = [];
+                    foreach($kabupaten as $kab){
+                        $id_filter[] = $kab->id;
+                    }
+        
+                    $total_guru = GuruM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->get()->count();
+                    $total_sekolah = SekolahM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->get()->count();
+                    $total_pengawas = User::where('role','Pengawas')->whereIn('kabupaten_id',$id_filter)->get()->count();
+                    $total_stockholder = User::where('role','Stakeholder')->whereIn('kabupaten_id',$id_filter)->get()->count();    
+                     // dd($total_guru);
+        
+                }
+            $master = MasterTupoksi::orderBy('urutan')->get();
+            // dd($master);die;
+                return view('admin.index',
+                compact(
+                    'total_guru',
+                    'total_sekolah',
+                    'total_pengawas',
+                    'total_stockholder',
+                    'master'
+                    ) );
             }
-
-            $total_guru = GuruM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->get()->count();
-            $total_sekolah = SekolahM::where('is_aktif',true)->whereIn('kabupaten_id',$id_filter)->get()->count();
-            $total_pengawas = User::where('role','Pengawas')->whereIn('kabupaten_id',$id_filter)->get()->count();
-            $total_stockholder = User::where('role','Stakeholder')->whereIn('kabupaten_id',$id_filter)->get()->count();    
-             // dd($total_guru);
-
         }
-    $master = MasterTupoksi::orderBy('urutan')->get();
-    // dd($master);die;
-        return view('admin.index',
-        compact(
-            'total_guru',
-            'total_sekolah',
-            'total_pengawas',
-            'total_stockholder',
-            'master'
-            ) );
+       
     }
 
     public function data()

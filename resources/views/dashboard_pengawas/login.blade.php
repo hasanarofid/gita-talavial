@@ -40,7 +40,7 @@
               </a>
             </div>
             <!-- /Logo -->
-            <h4 class="mb-1 pt-2">Welcome Pengawas! 👋</h4>
+            <h5 class="mb-1 pt-3">Model Manajemen Supervisi </h5>
             <p class="mb-4">Please sign-in to your account and start the adventure</p>
             <form  role="form" method="POST" action="{{ route('superPengawasLogin') }}">
                 @csrf
