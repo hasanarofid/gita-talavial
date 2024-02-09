@@ -10,7 +10,7 @@
     <meta name="description" content="Pengawas" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('theme/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('delmansuper.jpeg') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
