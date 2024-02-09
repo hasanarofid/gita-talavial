@@ -158,9 +158,70 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 // route halaman pengawas
 Route::middleware(['web', 'pengawas'])->group(function () {
+    Route::get('/pengawas', 'PengawasController@index')->name('pengawas.index');
+    Route::get('/editprofile', 'PengawasController@editprofile')->name('pengawas.editprofile');
+
+    // route panel menu pengawas rencanakerja
+    Route::prefix('rencanakerja')->group(function () {
+        Route::get('/', 'RencanaKerjaController@index')->name('pengawas.rencanakerja');
+    });
+    // end route panel menu pengawas rencanakerja
+
+    // route panel menu pengawas activitas
+    Route::prefix('activitas')->group(function () {
+        Route::get('/', 'ActivitasController@index')->name('pengawas.activitas');
+    });
+    // end route panel menu pengawas activitas
+
+    // route panel menu pengawas umpanbalik
+    Route::prefix('masterumpanbalik')->group(function () {
+        Route::get('/', 'masterumpanbalikController@index')->name('pengawas.masterumpanbalik');
+    });
+    // end route panel menu pengawas umpanbalik
+
+    
+   
+
+    // route panel menu pengawas datapengawas
+    Route::prefix('datapengawas')->group(function () {
+        Route::get('/', 'DatapengawasController@index')->name('pengawas.datapengawas');
+    });
+    // end route panel menu pengawas datapengawas
+
+    // route panel menu pengawas perencanaan
+    Route::prefix('perencanaan')->group(function () {
+        Route::get('/', 'PerencanaanController@index')->name('pengawas.perencanaan');
+    });
+    // end route panel menu pengawas perencanaan
+
+    // route panel menu pengawas pelaporan
+    Route::prefix('pelaporan')->group(function () {
+        Route::get('/', 'PelaporanController@index')->name('pengawas.pelaporan');
+    });
+    // end route panel menu pengawas pelaporan
+
+    // route panel menu pengawas pelaporan
+    Route::prefix('pelaporan')->group(function () {
+        Route::get('/', 'PelaporanController@index')->name('pengawas.pelaporan');
+    });
+    // end route panel menu pengawas pelaporan
+
+     // route panel menu pengawas sekolahbinaan
+     Route::prefix('sekolahbinaan')->group(function () {
+        Route::get('/', 'SekolahbinaanController@index')->name('pengawas.sekolahbinaan');
+    });
+    // end route panel menu pengawas sekolahbinaan
+
+    // route panel menu pengawas umpanbalik
+    Route::prefix('umpanbalik')->group(function () {
+        Route::get('/', 'UmpanbalikController@index')->name('pengawas.umpanbalik');
+    });
+    // end route panel menu pengawas umpanbalik
+  
+    
+    // login logout pengawas
     Route::get('/pengawas/login', 'Auth\LoginController@showPengawasLoginForm');
     Route::post('/pengawas/login', 'Auth\LoginController@superPengawasLogin')->name('superPengawasLogin');
-    Route::get('/pengawas', 'PengawasController@index')->name('pengawas.index');
     Route::post('/pengawas/logout', 'Auth\LoginController@logoutpengawas')->name('pengawas.logout');
 });
 

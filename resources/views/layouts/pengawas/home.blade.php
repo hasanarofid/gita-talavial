@@ -92,17 +92,17 @@
                 </a>
                 <ul class="menu-sub">
                   <li class="menu-item">
-                    <a href="index.html" class="menu-link">
+                    <a href="{{ route('pengawas.rencanakerja') }}" class="menu-link">
                       <div data-i18n="Rencana Kerja">Rencana Kerja</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="dashboards-crm.html" class="menu-link">
+                    <a href="{{ route('pengawas.activitas') }}" class="menu-link">
                       <div data-i18n="Activitas">Activitas</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="dashboards-ecommerce.html" class="menu-link">
+                    <a href="{{ route('pengawas.masterumpanbalik') }}" class="menu-link">
                       <div data-i18n="Umpan Balik">Umpan Balik</div>
                     </a>
                   </li>
@@ -118,12 +118,12 @@
   
                 <ul class="menu-sub">
                   <li class="menu-item">
-                    <a href="layouts-collapsed-menu.html" class="menu-link">
+                    <a href="{{ route('pengawas.sekolahbinaan') }}" class="menu-link">
                       <div data-i18n="Data Sekolah Binaan">Data Sekolah Binaan</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a href="layouts-content-navbar.html" class="menu-link">
+                    <a href="{{ route('pengawas.datapengawas') }}" class="menu-link">
                       <div data-i18n="Data Pengawas">Data Pengawas</div>
                     </a>
                   </li>
@@ -135,19 +135,19 @@
                 <span class="menu-header-text">Delman Super</span>
               </li>
               <li class="menu-item">
-                <a href="app-email.html" class="menu-link">
+                <a href="{{ route('pengawas.perencanaan') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                   <div data-i18n="Perencanaan">Perencanaan</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a href="app-chat.html" class="menu-link">
+                <a href="{{ route('pengawas.pelaporan') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-messages"></i>
                   <div data-i18n="Pelaporan">Pelaporan</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a href="app-calendar.html" class="menu-link">
+                <a href="{{ route('pengawas.umpanbalik') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-calendar"></i>
                   <div data-i18n="Umpan Balik">Umpan Balik</div>
                 </a>
@@ -267,27 +267,9 @@
             <script>
               document.write(new Date().getFullYear());
             </script>
-            , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="fw-semibold">Pixinvent</a>
+            , made with ❤️ by <a href="{{ route('pengawas.index') }}" target="_blank" class="fw-semibold">Delman Super</a>
           </div>
-          <div>
-            <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank"
-              >License</a
-            >
-            <a href="https://1.envato.market/pixinvent_portfolio" target="_blank" class="footer-link me-4"
-              >More Themes</a
-            >
 
-            <a
-              href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/"
-              target="_blank"
-              class="footer-link me-4"
-              >Documentation</a
-            >
-
-            <a href="https://pixinvent.ticksy.com/" target="_blank" class="footer-link d-none d-sm-inline-block"
-              >Support</a
-            >
-          </div>
         </div>
       </div>
     </footer>

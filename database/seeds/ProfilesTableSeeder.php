@@ -37,6 +37,14 @@ class ProfilesTableSeeder extends Seeder
                 'alamat_lengkap'=>'Desa Wetan RT 20 RW 10',
                 'kode_area'=>35433
             ],
+            [
+                'id'=>4,
+                'user_id'=>4,
+                'no_telp'=>'085234423',
+                'kota'=>'Yogjakarta',
+                'alamat_lengkap'=>'Desa Wetan RT 20 RW 10',
+                'kode_area'=>35433
+            ],
        
         ]);
     }
