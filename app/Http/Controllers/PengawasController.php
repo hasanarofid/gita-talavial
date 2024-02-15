@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Password;
 class PengawasController extends Controller
 {
     //index
@@ -59,5 +60,20 @@ class PengawasController extends Controller
         return redirect()->route('pengawas.editprofile')->with('success', 'Profile berhasil diupdate!');
 
     }
+
+    //ubahpassword
+    public function ubahpassword(Request $request){
+        $request->validate(['email' => 'required|email']);
+
+            $status = Password::sendResetLink(
+                $request->only('email')
+            );
+
+            return $status === Password::RESET_LINK_SENT
+                        ? back()->with('status', __($status))
+                        : back()->withErrors(['email' => __($status)]);
+                        
+    }
+
 
 }

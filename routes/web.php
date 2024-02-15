@@ -161,6 +161,7 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     Route::get('/pengawas', 'PengawasController@index')->name('pengawas.index');
     Route::get('/editprofile', 'PengawasController@editprofile')->name('pengawas.editprofile');
     Route::post('/updateprofile', 'PengawasController@updateprofile')->name('pengawas.updateprofile');
+    Route::post('/ubahpassword', 'PengawasController@ubahpassword')->name('pengawas.ubahpassword');
 
     // route panel menu pengawas rencanakerja
     Route::prefix('rencanakerja')->group(function () {

@@ -112,7 +112,10 @@
               <h5 class="card-action-title mb-0">Ubah Password</h5>
             </div>
             <div class="card-body ">
-                <form id="formUpdp" novalidate="novalidate">
+                <form id="formUpdp"
+                action="{{ route('pengawas.updateprofile') }}"
+                        method="POST"
+                >
                     <div class="mb-2">
                         <label for="passl" class="form-label">Pasword Lama</label>
                         <input type="password" class="form-control" id="passl" name="passl" autocomplete="off">
