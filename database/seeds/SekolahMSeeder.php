@@ -14,11 +14,31 @@ class SekolahMSeeder extends Seeder
         DB::table('sekolah_m')->insert([
             [
                 'id'=>1,
-                'npsn'=>59955823,
-                 'nama_sekolah'=>'SMK Negri 2 Yogjakarta',
+                'npsn'=>59955821,
+                 'nama_sekolah'=>'SMAN 1 Leuwidamar Lebak',
                 'no_telp'=>'031244233',
-                'kota'=>'Yogjakarta',
-                'alamat_lengkap'=>'Kota Yogjakarta 10',
+                'kota'=>'Banten',
+                'alamat_lengkap'=>'Lebak',
+                'kode_area'=>42132,
+                  'kabupaten_id'=>1
+            ],
+            [
+                'id'=>2,
+                'npsn'=>59955822,
+                 'nama_sekolah'=>'SMAN 2 Leuwidamar Lebak',
+                'no_telp'=>'031244233',
+                'kota'=>'Banten',
+                'alamat_lengkap'=>'Lebak',
+                'kode_area'=>42132,
+                  'kabupaten_id'=>1
+            ],
+            [
+                'id'=>3,
+                'npsn'=>59955823,
+                 'nama_sekolah'=>'SMAN 1 Rangkasbitung Lebak',
+                'no_telp'=>'031244233',
+                'kota'=>'Banten',
+                'alamat_lengkap'=>'Lebak',
                 'kode_area'=>42132,
                   'kabupaten_id'=>1
             ],

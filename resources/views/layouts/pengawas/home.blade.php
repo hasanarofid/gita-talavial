@@ -84,31 +84,31 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}"
 
   
             <ul class="menu-inner py-1" style="margin-top: 10px">
-              <li class="menu-item active">
+              <li class="menu-item {{ ( request()->is('pengawas') || request()->is('editprofile') ) ? 'active' : '' }}">
                 <a href="{{ route('pengawas.index') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-user"></i>
                   <div data-i18n="Profile">Profile</div>
                 </a>
               </li>
               <!-- Dashboards -->
-              <li class="menu-item">
+              <li class="menu-item {{ ( request()->is('rencanakerja') || request()->is('activitas') || request()->is('masterumpanbalik') ) ? 'active open' : '' }} " >
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                   <i class="menu-icon tf-icons ti ti-smart-home"></i>
                   <div data-i18n="Dashboards">Dashboards</div>
                   <div class="badge bg-label-primary rounded-pill ms-auto">3</div>
                 </a>
-                <ul class="menu-sub">
-                  <li class="menu-item">
+                <ul class="menu-sub ">
+                  <li class="menu-item {{ (request()->is('rencanakerja')) ? 'active' : '' }}">
                     <a href="{{ route('pengawas.rencanakerja') }}" class="menu-link">
                       <div data-i18n="Rencana Kerja">Rencana Kerja</div>
                     </a>
                   </li>
-                  <li class="menu-item">
+                  <li class="menu-item {{ (request()->is('activitas')) ? 'active' : '' }}">
                     <a href="{{ route('pengawas.activitas') }}" class="menu-link">
                       <div data-i18n="Activitas">Activitas</div>
                     </a>
                   </li>
-                  <li class="menu-item">
+                  <li class="menu-item {{ (request()->is('masterumpanbalik')) ? 'active' : '' }}">
                     <a href="{{ route('pengawas.masterumpanbalik') }}" class="menu-link">
                       <div data-i18n="Umpan Balik">Umpan Balik</div>
                     </a>
@@ -117,19 +117,19 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}"
               </li>
   
               <!-- Layouts -->
-              <li class="menu-item">
+              <li class="menu-item {{ ( request()->is('sekolahbinaan') || request()->is('datapengawas')   ) ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                   <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                   <div data-i18n="Master Data">Master Data</div>
                 </a>
   
                 <ul class="menu-sub">
-                  <li class="menu-item">
+                  <li class="menu-item {{ (request()->is('sekolahbinaan')) ? 'active' : '' }}">
                     <a href="{{ route('pengawas.sekolahbinaan') }}" class="menu-link">
                       <div data-i18n="Data Sekolah Binaan">Data Sekolah Binaan</div>
                     </a>
                   </li>
-                  <li class="menu-item">
+                  <li class="menu-item {{ (request()->is('datapengawas')) ? 'active' : '' }}">
                     <a href="{{ route('pengawas.datapengawas') }}" class="menu-link">
                       <div data-i18n="Data Pengawas">Data Pengawas</div>
                     </a>
@@ -141,19 +141,19 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}"
               <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Delman Super</span>
               </li>
-              <li class="menu-item">
+              <li class="menu-item {{ (request()->is('perencanaan')) ? 'active' : '' }}">
                 <a href="{{ route('pengawas.perencanaan') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                   <div data-i18n="Perencanaan">Perencanaan</div>
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item {{ (request()->is('pelaporan')) ? 'active' : '' }}">
                 <a href="{{ route('pengawas.pelaporan') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-messages"></i>
                   <div data-i18n="Pelaporan">Pelaporan</div>
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item {{ (request()->is('umpanbalik')) ? 'active' : '' }}">
                 <a href="{{ route('pengawas.umpanbalik') }}" class="menu-link">
                   <i class="menu-icon tf-icons ti ti-calendar"></i>
                   <div data-i18n="Umpan Balik">Umpan Balik</div>

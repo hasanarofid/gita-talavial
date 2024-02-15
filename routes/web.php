@@ -177,7 +177,7 @@ Route::middleware(['web', 'pengawas'])->group(function () {
 
     // route panel menu pengawas umpanbalik
     Route::prefix('masterumpanbalik')->group(function () {
-        Route::get('/', 'masterumpanbalikController@index')->name('pengawas.masterumpanbalik');
+        Route::get('/', 'MasterumpanbalikController@index')->name('pengawas.masterumpanbalik');
     });
     // end route panel menu pengawas umpanbalik
 

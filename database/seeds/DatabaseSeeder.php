@@ -20,6 +20,10 @@ class DatabaseSeeder extends Seeder
                 SekolahMSeeder::class,
                 GuruMSeeder::class,
                 GolPangkatRuangSeeder::class,
+                MasterTupoksiSeeder::class,
+                SekolahBinaanTSeeder::class,
+                TugaskerjaTSeeder::class,
+                UmpanbalikMSeeder::class,
             ]);
     }
 }
