@@ -65,6 +65,19 @@ class UsersTableSeeder extends Seeder
                 'gol_ruang'=>'',
                 'kabupaten_id'=>1
             ],
+            [
+                'id'=>5,
+                'name'=>'Dr. Eko Supraptono, M.Si.',
+                'email'=>'ekosupraptono@gmail.com',
+                'password'=>Hash::make('pengawas123'),
+                'role'=>'Pengawas',
+                'nip'=>'196404151992031006',
+                'foto_profile'=>'userdefault.jpg',
+                'jenjang_jabatan'=>'Pengawas Sekolah Utama',
+                'pangkat'=>'Pembina Utama',
+                'gol_ruang'=>'IV/d',
+                'kabupaten_id'=>1
+            ],
           
             
             

@@ -45,6 +45,15 @@ class ProfilesTableSeeder extends Seeder
                 'alamat_lengkap'=>'Desa Wetan RT 20 RW 10',
                 'kode_area'=>35433
             ],
+
+            [
+                'id'=>5,
+                'user_id'=>5,
+                'no_telp'=>'085234423',
+                'kota'=>'Banten',
+                'alamat_lengkap'=>'Desa Banten',
+                'kode_area'=>35433
+            ],
        
         ]);
     }

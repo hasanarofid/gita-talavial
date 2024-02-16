@@ -27,6 +27,21 @@ class SekolahBinaanTSeeder extends Seeder
                 'id_pengawas'=>3,
                 'id_sekolah'=>3
             ],
+            [
+                'id'=>4,
+                'id_pengawas'=>5,
+                'id_sekolah'=>1
+            ],
+            [
+                'id'=>5,
+                'id_pengawas'=>5,
+                'id_sekolah'=>2
+            ],
+            [
+                'id'=>6,
+                'id_pengawas'=>5,
+                'id_sekolah'=>3
+            ],
         ]);
     }
 }

@@ -40,9 +40,14 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}"
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/node-waves/node-waves.css') }}" />
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/flatpickr/flatpickr.css') }}" />
+    <!-- Row Group CSS -->
+    <link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{ asset('theme/assets/vendor/css/pages/page-profile.css') }}" />
@@ -322,8 +327,7 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}"
     <script src="{{ asset('theme/assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
-    <script src="{{ asset('theme/assets/js/pages-profile.js') }}"></script>
-
+    <script src="{{ asset('theme/assets/js/tables-datatables-basic.js') }}"></script>
     @yield('script')
 
   </body>
