@@ -112,10 +112,26 @@
               <h5 class="card-action-title mb-0">Ubah Password</h5>
             </div>
             <div class="card-body ">
+
+                @if(Session::has('success_pass'))
+      <div class="alert alert-success">
+          {{ Session::get('success_pass') }}
+      </div>
+      {{ Session::forget('success_pass') }}
+  @endif
+
+  @if(Session::has('error_pass'))
+      <div class="alert alert-danger">
+          {{ Session::get('error_pass') }}
+      </div>
+      {{ Session::forget('error_pass') }}
+  @endif
+
                 <form id="formUpdp"
-                action="{{ route('pengawas.updateprofile') }}"
+                action="{{ route('pengawas.ubahpassword') }}"
                         method="POST"
                 >
+                @csrf
                     <div class="mb-2">
                         <label for="passl" class="form-label">Pasword Lama</label>
                         <input type="password" class="form-control" id="passl" name="passl" autocomplete="off">

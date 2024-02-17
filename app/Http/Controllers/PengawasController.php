@@ -6,6 +6,7 @@ use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Password;
 class PengawasController extends Controller
@@ -62,18 +63,30 @@ class PengawasController extends Controller
     }
 
     //ubahpassword
-    public function ubahpassword(Request $request){
-        $request->validate(['email' => 'required|email']);
+    public function ubahpassword(Request $request) {
+        // Validasi input
+        $request->validate([
+            'passl' => 'required',
+            'passb' => 'required|string|min:8|confirmed',
+        ]);
+    
+        // Ambil pengguna yang sedang login
+        $user = User::find(Auth::user()->id);
+    
+        // Periksa apakah password lama yang dimasukkan benar
+        if (!Hash::check($request->passl, $user->password)) {
+            return back()->with('error', 'Password lama tidak sesuai.');
+        }
 
-            $status = Password::sendResetLink(
-                $request->only('email')
-            );
-
-            return $status === Password::RESET_LINK_SENT
-                        ? back()->with('status', __($status))
-                        : back()->withErrors(['email' => __($status)]);
-                        
+        if ($request->passb != $request->passu) {
+            return back()->with('error', 'Password  tidak sesuai dengan ulangi password.');
+        }
+    
+        // Update password baru
+        $user->password = Hash::make($request->passb);
+        $user->save();
+    
+        return redirect()->back()->with('success_pass', 'Password berhasil diubah.');
     }
-
 
 }
