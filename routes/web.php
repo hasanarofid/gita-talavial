@@ -199,13 +199,18 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     // route panel menu pengawas pelaporan
     Route::prefix('pelaporan')->group(function () {
         Route::get('/', 'PelaporanController@index')->name('pengawas.pelaporan');
+        Route::post('/save-pelaporan', 'PelaporanController@save')->name('pengawas.pelaporan.save-pelaporan');
+        Route::post('/update-pelaporan', 'PelaporanController@update')->name('pengawas.pelaporan.update');
+        Route::get('/get-pelaporan', 'PelaporanController@getdata')->name('pengawas.pelaporan.getdata');
+        Route::get('/edit-pelaporan/{id}', 'PelaporanController@edit')->name('pengawas.pelaporan.edit');
+        Route::get('/hapus-pelaporan/{id}', 'PelaporanController@hapus')->name('pengawas.pelaporan.hapus');
     });
     // end route panel menu pengawas pelaporan
 
     // route panel menu pengawas pelaporan
-    Route::prefix('pelaporan')->group(function () {
-        Route::get('/', 'PelaporanController@index')->name('pengawas.pelaporan');
-    });
+    // Route::prefix('pelaporan')->group(function () {
+    //     Route::get('/', 'PelaporanController@index')->name('pengawas.pelaporan');
+    // });
     // end route panel menu pengawas pelaporan
 
      // route panel menu pengawas sekolahbinaan
@@ -233,6 +238,23 @@ Route::middleware(['web', 'pengawas'])->group(function () {
 // end route halaman pengawas
 
 Auth::routes();
+Route::get('laporan/{filename}', function ($filename) {
+    $path = storage_path('app/public/laporan/' . $filename);
+
+    if (!File::exists($path)) {
+        Log::error('Image file not found: ' . $path);
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+})->name('laporan');
+
 Route::get('fotopengawas/{filename}', function ($filename) {
     $path = storage_path('app/public/pengawas/' . $filename);
 
