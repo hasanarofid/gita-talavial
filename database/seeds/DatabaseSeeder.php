@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
                 SekolahBinaanTSeeder::class,
                 TugaskerjaTSeeder::class,
                 UmpanbalikMSeeder::class,
+                KategorySeeder::class,
+                SubKategorySeeder::class,
             ]);
     }
 }

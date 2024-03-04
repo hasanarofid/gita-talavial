@@ -33,7 +33,7 @@ class GuruMSeeder extends Seeder
                 'kota'=>'Yogjakarta',
                 'alamat_lengkap'=>'Desa Kulon RT 20 RW 10',
                 'kode_area'=>35433,
-                                'jabatan'=>'Guru',
+                                'jabatan'=>'Kepala Sekolah',
                                   'kabupaten_id'=>1
             ],
           

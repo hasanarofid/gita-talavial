@@ -10,4 +10,8 @@ class UmpanbalikController extends Controller
    public function index(){
     return view('dashboard_pengawas.umpanbalik.index');
     }
+
+    public function umpan($generate){
+        dd($generate);
+    }
 }

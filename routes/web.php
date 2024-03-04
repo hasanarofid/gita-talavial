@@ -34,16 +34,19 @@ Route::get('/composer/autoload', function(){
 Route::get('/migrate-fresh', 'MigrationController@migrateFresh');
 
 Route::get('/seed', 'SeedController@seed');
-
+Route::get('/umpan-balik/{generate}', 'UmpanbalikController@umpan');
 
 Route::get('/', function(){
     return redirect('/login');
 });
 
+
 // route panel dashboard admin
 Route::get('/', 'AdminController@index')->name('admin.index')->middleware(['auth']);
 Route::get('/dashboard', 'AdminController@index')->name('admin.index')->middleware(['auth']);
 // end panel dashboard admin
+// umpan balik
+
 
 // route penel dashboard for superadmin
 Route::prefix('superadmin')->middleware(['auth', 'superadmin'])->group(function () {

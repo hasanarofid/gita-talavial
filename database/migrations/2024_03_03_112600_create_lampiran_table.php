@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUmpanbalikTTable extends Migration
+class CreateLampiranTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateUmpanbalikTTable extends Migration
      */
     public function up()
     {
-        Schema::create('umpanbalik_t', function (Blueprint $table) {
+        Schema::create('lampiran', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
             $table->integer('id_pelaporan');
-            $table->string('generate_url');
-            $table->integer('id_pengawas');
+            $table->string('foto')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateUmpanbalikTTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('umpanbalik_t');
+        Schema::dropIfExists('lampiran');
     }
 }
