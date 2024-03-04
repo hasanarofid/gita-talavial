@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UmpanbalikM;
+use App\Models\UmpanbalikT;
 use Illuminate\Http\Request;
 
 class UmpanbalikController extends Controller
@@ -12,6 +14,10 @@ class UmpanbalikController extends Controller
     }
 
     public function umpan($generate){
-        dd($generate);
+        $model = UmpanbalikT::where('generate_url',$generate)->first();
+        $umpanBalikM = UmpanbalikM::orderBy('urutan')->get();
+
+        return view('umpanbalik.index');
+        dd($umpanBalikM);
     }
 }
