@@ -35,6 +35,8 @@ Route::get('/migrate-fresh', 'MigrationController@migrateFresh');
 
 Route::get('/seed', 'SeedController@seed');
 Route::get('/umpan-balik/{generate}', 'UmpanbalikController@umpan');
+Route::post('/kirimumpanbalik', 'UmpanbalikController@saveumpan')->name('kirimumpanbalik');
+Route::get('/tanggapan', 'UmpanbalikController@tanggapan')->name('tanggapan');
 
 Route::get('/', function(){
     return redirect('/login');

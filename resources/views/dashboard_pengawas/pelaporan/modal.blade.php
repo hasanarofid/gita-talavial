@@ -84,7 +84,7 @@
                         </div>
                         <label class="form-label col-md-1 text-right">Tanggal</label>
                         <div class="col-md-4">
-                            <input id="tgl_pendampingan" name="tgl_pendampingan" type="date" class="form-control" >
+                            <input id="tgl_pendampingan" name="tgl_pendampingan" type="date" class="form-control" required >
                         </div>
                     </div>
                 </div>

@@ -18,6 +18,7 @@ class CreateUmpanbalikMTable extends Migration
             $table->string('pertanyaan')->nullable();
             $table->text('jawaban')->nullable();
             $table->string('type_input')->nullable();
+            $table->string('aspek')->nullable();
             $table->boolean('status')->nullable()->default(true);
             $table->integer('urutan');
             $table->timestamps();

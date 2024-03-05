@@ -86,26 +86,26 @@ class PelaporanController extends Controller
         $umpanBalik->generate_url = $uniqueUrl;
         $umpanBalik->save();
         //  kirim wa
-        // $token = env('WABLAS_TOKEN');
-        // // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
-        // $phone = $user->no_telp; 
-        // $fullUrl = url('umpan-balik/' . $uniqueUrl);
-        // $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
-        // Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
-        // Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
-        // '.$fullUrl.'.
-        // Terimakasih
-        // Salam, 
-        // Admin Delman Super';
+        $token = env('WABLAS_TOKEN');
+        // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
+        $phone = $user->no_telp; 
+        $fullUrl = url('umpan-balik/' . $uniqueUrl);
+        $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
+        Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
+        Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
+        '.$fullUrl.'.
+        Terimakasih
+        Salam, 
+        Admin Delman Super';
 
-        // // dd($decodedPesan);
-        // $response = Http::get("https://jogja.wablas.com/api/send-message", [
-        //     'phone' => $phone,
-        //     'message' => $pesan,
-        //     'token' => $token,
-        // ]);
+        // dd($decodedPesan);
+        $response = Http::get("https://jogja.wablas.com/api/send-message", [
+            'phone' => $phone,
+            'message' => $pesan,
+            'token' => $token,
+        ]);
 
-        // $result = $response->body();
+        $result = $response->body();
 
        return true;
     }
