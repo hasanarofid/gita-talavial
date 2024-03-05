@@ -69,6 +69,10 @@
         transform: none;
     }
 }
+.hide {
+    display: none !important;
+}
+
     </style>
   </head>
 
@@ -234,22 +238,14 @@
                           </div>
                           <div class="row mt-3">
                             <div class="col text-left">
-                                <button type="button" class="btn btn-primary" id="prevBtn">Previous</button>
+                                <button type="button" class="btn btn-primary" id="prevBtn" >Previous</button>
                             </div>
                             <div class="col text-end">
                                 <button type="button" class="btn btn-primary" id="nextBtn">Next</button>
-                                <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">Submit</button>
+                                <button type="submit" class="btn btn-success" id="submitBtn" >Submit</button>
                             </div>
                         </div>
 
-                          {{-- <div class="row">
-                              <div class="col text-left">
-                                  <button type="button" class="btn btn-primary" id="nextBtn">Berikutnya</button>
-                              </div>
-                              <div class="col text-end">
-                                  <a href="#"  id="resetBtn">Kosongkan Formulir</a>
-                              </div>
-                          </div> --}}
                       </form>
                   </div>
                   
@@ -303,7 +299,6 @@
     <script src="{{ asset('theme/assets/vendor/libs/i18n/i18n.js') }}"></script>
     <script src="{{ asset('theme/assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
 
-    <script src="{{ asset('theme/assets/vendor/js/menu.js') }}"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
@@ -312,49 +307,50 @@
     <script src="{{ asset('theme/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{ asset('theme/assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
-    <script src="{{ asset('theme/assets/js/dashboards-analytics.js') }}"></script>
 
     <script>
      $(document).ready(function() {
-          var currentStep = 0;
-          var totalSteps = $('.formStep').length;
+      var currentStep = 0;
+    var totalSteps = $('.formStep').length;
 
-          $('#nextBtn').click(function() {
-              if (currentStep < totalSteps - 1) {
-                  $('.formStep').eq(currentStep).hide();
-                  currentStep++;
-                  $('.formStep').eq(currentStep).show();
-                  updateButtons();
-              }
-          });
+    // Initial button state
+    updateButtons();
 
-          $('#prevBtn').click(function() {
-              if (currentStep > 0) {
-                  $('.formStep').eq(currentStep).hide();
-                  currentStep--;
-                  $('.formStep').eq(currentStep).show();
-                  updateButtons();
-              }
-          });
+    $('#nextBtn').click(function() {
+        if (currentStep < totalSteps - 1) {
+            $('.formStep').eq(currentStep).hide();
+            currentStep++;
+            $('.formStep').eq(currentStep).show();
+            updateButtons();
+        }
+    });
 
-          function updateButtons() {
-              if (currentStep === 0) {
-                  $('#prevBtn').hide();
-              } else {
-                  $('#prevBtn').show();
-              }
+    $('#prevBtn').click(function() {
+        if (currentStep > 0) {
+            $('.formStep').eq(currentStep).hide();
+            currentStep--;
+            $('.formStep').eq(currentStep).show();
+            updateButtons();
+        }
+    });
 
-              if (currentStep === totalSteps - 1) {
-                  $('#nextBtn').hide();
-                  $('#submitBtn').show();
-              } else {
-                  $('#nextBtn').show();
-                  $('#submitBtn').hide();
-              }
-          }
+    function updateButtons() {
+    if (currentStep === 0) {
+        $('#prevBtn').addClass('hide'); // Menambahkan kelas CSS 'hide'
+    } else {
+        $('#prevBtn').removeClass('hide'); // Menghapus kelas CSS 'hide'
+    }
+
+    if (currentStep === totalSteps - 1) {
+        $('#nextBtn').addClass('hide'); // Menambahkan kelas CSS 'hide'
+        $('#submitBtn').removeClass('hide'); // Menghapus kelas CSS 'hide'
+    } else {
+        $('#nextBtn').removeClass('hide'); // Menghapus kelas CSS 'hide'
+        $('#submitBtn').addClass('hide'); // Menambahkan kelas CSS 'hide'
+    }
+}
       });
     </script>
   </body>
