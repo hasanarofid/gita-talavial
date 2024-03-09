@@ -5,6 +5,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script>
   $(document).ready(function () {
+  
 
    //   alert(3);
     var table = $('#dataTable').DataTable({
@@ -24,10 +25,50 @@
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });
-
-    
-
   });
+
+  function lihatPerencanaan(id) {      
+    $.ajax({
+        url: '{{ route("pengawas.pelaporan.edit", ":id") }}'.replace(':id', id),
+        type: 'GET',
+        success: function(response) {
+            // Tampilkan data dalam modal
+            $('#editPerencanaan #id').val(response.id); 
+            $('#editPerencanaan #tahun_ajaran_edit').val(response.tahun_ajaran); 
+            $('#editPerencanaan #nama_program_kerja_edit').val(response.nama_program_kerja); 
+            $('#editPerencanaan #judul_edit').val(response.judul); 
+            $('#editPerencanaan #kategoriprogram_id_edit').val(response.kategoriprogram_id).trigger('change');
+            $('#editPerencanaan #tenggat_waktu_edit').val(response.tenggat_waktu).trigger('change');
+            var selectedValues = response.sekolah_id.split(',').map(Number); // Ubah string menjadi array integer
+            $('#editPerencanaan #sekolah_id_edit').val(selectedValues).trigger('change');
+           
+         
+            $('#editPerencanaan #deskripsi_permasalahan_edit').val(response.deskripsi_permasalahan);
+            $('#editPerencanaan #target_capaian_edit').val(response.target_capaian);
+
+
+            ClassicEditor
+            .create( document.querySelector( '#deskripsi_permasalahan_edit' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+            ClassicEditor
+            .create( document.querySelector( '#target_capaian_edit' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+         
+
+            
+            $('#editPerencanaan').modal('show');
+        },
+        error: function(xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+  }
 
 
 

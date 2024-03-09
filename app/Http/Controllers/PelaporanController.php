@@ -153,4 +153,13 @@ class PelaporanController extends Controller
            }
     }
 
+    public function edit($id)
+    {
+        // Ambil data dari model berdasarkan ID atau yang lain sesuai kebutuhan
+        $data = RencanaKerjaT::findOrFail($id); // Gantilah YourModel dengan model yang sesuai
+        
+        return response()->json($data);
+    }
+
+
 }

@@ -66,7 +66,6 @@
             $('#editPerencanaan #id').val(response.id); 
             $('#editPerencanaan #tahun_ajaran_edit').val(response.tahun_ajaran); 
             $('#editPerencanaan #nama_program_kerja_edit').val(response.nama_program_kerja); 
-            $('#editPerencanaan #judul_edit').val(response.judul); 
             $('#editPerencanaan #kategoriprogram_id_edit').val(response.kategoriprogram_id).trigger('change');
             $('#editPerencanaan #tenggat_waktu_edit').val(response.tenggat_waktu).trigger('change');
             var selectedValues = response.sekolah_id.split(',').map(Number); // Ubah string menjadi array integer
@@ -94,7 +93,6 @@
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'tahun_ajaran', name: 'tahun_ajaran'},
             {data: 'nama_program_kerja', name: 'nama_program_kerja'},
-            {data: 'judul', name: 'judul'},
             {data: 'nama_kategori', name: 'nama_kategori'},
             {data: 'nama_sekolah', name: 'nama_sekolah'},
             {data: 'tenggat_waktu', name: 'tenggat_waktu'},

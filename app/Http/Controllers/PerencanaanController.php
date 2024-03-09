@@ -86,7 +86,6 @@ class PerencanaanController extends Controller
         $model->nama_program_kerja = $request->post('nama_program_kerja');
         $model->kategoriprogram_id = $request->post('kategoriprogram_id');
         $model->sekolah_id = $sekolah_ids;
-        $model->judul = $request->post('judul');
         $model->deskripsi_permasalahan = $request->post('deskripsi_permasalahan');
         $model->target_capaian = $request->post('target_capaian');
         $model->tenggat_waktu = $request->post('tenggat_waktu');
@@ -104,7 +103,6 @@ class PerencanaanController extends Controller
         $data->nama_program_kerja = $request->post('nama_program_kerja');
         $data->kategoriprogram_id = $request->post('kategoriprogram_id');
         $data->sekolah_id = $sekolah_ids;
-        $data->judul = $request->post('judul');
         $data->deskripsi_permasalahan = $request->post('deskripsi_permasalahan');
         $data->target_capaian = $request->post('target_capaian');
         $data->tenggat_waktu = $request->post('tenggat_waktu');

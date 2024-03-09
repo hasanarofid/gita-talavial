@@ -48,11 +48,7 @@
                       @endforeach
                         </select>
                 </div>
-                <div class="col-12">
-                  <label class="form-label" for="judul">Judul </label>
-                  <input type="text" name="judul" id="judul" class="form-control" required>
-                </div>
-
+                
 
                   <div class="col-12">
                     <label class="form-label" for="deskripsi_permasalahan">Deskripsikan alasan membuat program kerja </label>
@@ -153,10 +149,7 @@
                         @endforeach
                           </select>
                   </div>
-                  <div class="col-12">
-                    <label class="form-label" for="judul">Judul </label>
-                    <input type="text" name="judul" id="judul_edit" class="form-control" required>
-                  </div>
+                
   
   
                     <div class="col-12">

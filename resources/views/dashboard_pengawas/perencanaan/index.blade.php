@@ -38,7 +38,6 @@
                                   <th>No</th>
                                   <th>Tahun</th>
                                   <th>Nama Program Kerja</th>
-                                  <th>Judul</th>
                                   <th>Kategori</th>
                                   <th>Sekolah Sasaran</th>
                                   <th>Tenggat waktu</th>
