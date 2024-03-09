@@ -198,6 +198,11 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     // route panel menu pengawas perencanaan
     Route::prefix('perencanaan')->group(function () {
         Route::get('/', 'PerencanaanController@index')->name('pengawas.perencanaan');
+        Route::post('/save-perencanaan', 'PerencanaanController@save')->name('pengawas.perencanaan.save-perencanaan');
+        Route::post('/update-perencanaan', 'PerencanaanController@update')->name('pengawas.perencanaan.update');
+        Route::get('/get-perencanaan', 'PerencanaanController@getdata')->name('pengawas.perencanaan.getdata');
+        Route::get('/edit-perencanaan/{id}', 'PerencanaanController@edit')->name('pengawas.perencanaan.edit');
+        Route::delete('/hapus-perencanaan/{id}', 'PerencanaanController@hapus')->name('pengawas.perencanaan.hapus');
     });
     // end route panel menu pengawas perencanaan
 
