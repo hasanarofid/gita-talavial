@@ -2,10 +2,7 @@
 
 
 <script src="{{ asset('theme/assets/js/modal-edit-user.js') }}"></script>
-<script src="{{ asset('theme/assets/vendor/libs/quill/katex.js') }}"></script>
-<script src="{{ asset('theme/assets/vendor/libs/quill/quill.js') }}"></script>
-
-<script src="{{ asset('theme/assets/js/forms-editors.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script>
   $(document).ready(function () {
 
@@ -16,11 +13,14 @@
         serverSide: true,
         ajax: "{{ route('pengawas.pelaporan.getdata') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'sasaran', name: 'sasaran'},
+          {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'tahun_ajaran', name: 'tahun_ajaran'},
+            {data: 'nama_program_kerja', name: 'nama_program_kerja'},
             {data: 'judul', name: 'judul'},
-            {data: 'kategori', name: 'kategori'},
-            {data: 'tgl_pendampingan', name: 'tgl_pendampingan'},
+            {data: 'nama_kategori', name: 'nama_kategori'},
+            {data: 'nama_sekolah', name: 'nama_sekolah'},
+            {data: 'tenggat_waktu', name: 'tenggat_waktu'},
+            {data: 'tanggal', name: 'tanggal'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
     });

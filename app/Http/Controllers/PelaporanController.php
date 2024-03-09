@@ -7,6 +7,7 @@ use App\Models\Kategory;
 use App\Models\TugaskerjaT;
 use Illuminate\Http\Request;
 use App\Models\Pelaporan;
+use App\Models\RencanaKerjaT;
 use App\Models\SekolahbinaanT;
 use App\Models\SubKategory;
 use App\Models\UmpanbalikT;
@@ -115,33 +116,41 @@ class PelaporanController extends Controller
         if ($request->ajax()) {
 
     
-         $post = Pelaporan::where('id_pegawas',Auth::user()->id)->latest()->get();
-    
-            return Datatables::of($post)
-                    ->addIndexColumn()
-            //          ->addColumn('foto', function($row){
-            //             if($row->foto == 'userdefault.jpg'){
-            //                 $foto = asset('userdefault.jpg');
-            //             }else{
-            //                 $foto =  route('laporan',$row->foto );
-            //             }
-
-            //          return  ' <div class="card card-profile"><img src="'.$foto.'" height="100px" alt="Image placeholder" class="card-img-top"></div>';
-            //         })->addColumn('tugas', function($row){
-            //             return !empty($row->tugaskerja->tugas->kegiatan) ? $row->tugaskerja->tugas->kegiatan: '-';
-            // ->addColumn('tanggal', function($row){
-            //     return $row->tgl_pendampingan->format('d M Y h:i:s');
-            // })
-            ->addColumn('action', function($row){
+            $post = RencanaKerjaT::with('kategoriprogram')
+            ->where('id_pengawas',Auth::user()->id)->latest()->get();
+       
+               return Datatables::of($post)
+                       ->addIndexColumn()
+                    ->addColumn('tanggal', function($row){
+                   return $row->created_at->format('d M Y h:i:s');
+               })
+               ->addColumn('nama_kategori', function($row){
+                   return $row->kategoriprogram->nama;
+               })
    
-                           $btn = '<a href="'.route('pengawas.pelaporan.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
-                           $btn = $btn.' <a href="'.route('pengawas.pelaporan.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
-    
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        }
+                ->addColumn('nama_sekolah', function($row){
+                   $sekolahIds = explode(',', $row->sekolah_id);
+                   $sekolahs = SekolahM::whereIn('id', $sekolahIds)->get();
+                   
+                   $nama_sekolah = '';
+                   foreach ($sekolahs as $sekolah) {
+                       $nama_sekolah .= '<span class="badge bg-label-primary m-1">' . $sekolah->nama_sekolah . '</span> '; // Added a space for separation
+                   }
+                   // dd($nama_sekolah);
+                   
+                   return $nama_sekolah;
+               })
+   
+               ->addColumn('action', function($row){
+      
+                              $btn = '<a  onclick="lihatPerencanaan('.$row->id.')" class="btn btn-sm bg-warning text-white " > <i class="fa fa-edit"></i> Edit</a>';
+                              $btn = $btn. '<a href="#" onclick="addLampiran('.$row->id.')" class="btn btn-info btn-sm "><i class="fa fa-add"></i> Lampiran</a>';
+       
+                               return $btn;
+                       })
+                       ->rawColumns(['action','nama_kategori','nama_sekolah'])
+                       ->make(true);
+           }
     }
 
 }

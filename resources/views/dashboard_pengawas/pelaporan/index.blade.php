@@ -23,7 +23,6 @@
               <small class="text-muted">Pengawas : {{ Auth::user()->name}}</small>
             </div>
 
-            <a  class="btn btn-sm bg-primary text-white " data-bs-toggle="modal" data-bs-target="#editUser"><i class="fas fa-plus" aria-hidden="true"></i> Tambah </a>
           
           </div>
           <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
@@ -34,13 +33,16 @@
                       <table class="table table-bordered table-striped" id="dataTable">
                           <thead>
                               <tr>
-                                  <th>No</th>
-                                  <th>Sasaran</th>
-                                  <th>Judul Laporan</th>
-                                  <th>Kategori</th>
-                                  <th>Tanggal Dibuat</th>
-                                  <th>#</th>
-                              </tr>
+                                <th>No</th>
+                                <th>Tahun</th>
+                                <th>Nama Program Kerja</th>
+                                <th>Judul</th>
+                                <th>Kategori</th>
+                                <th>Sekolah Sasaran</th>
+                                <th>Tenggat waktu</th>
+                                <th>Tanggal Dibuat</th>
+                                <th>#</th>
+                            </tr>
                           </thead>
                       </table>
                       <br>

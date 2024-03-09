@@ -2,16 +2,62 @@
 
 
 <script src="{{ asset('theme/assets/js/modal-edit-user.js') }}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.2.6/js/froala_editor.pkgd.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+{{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/3.2.6/js/froala_editor.pkgd.min.js"></script> --}}
+{{-- <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Include SweetAlert2 -->
 <script>
-      new FroalaEditor('#deskripsi_permasalahan');
-      new FroalaEditor('#target_capaian');
+    ClassicEditor
+        .create( document.querySelector( '#deskripsi_permasalahan' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+
+        ClassicEditor
+        .create( document.querySelector( '#target_capaian' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+        // var element = document.querySelector("#deskripsi_permasalahan");
+        // if (element) {
+        //     var editor = new Trix.Editor(element);
+        // }
+
+        // var target_capaian = document.querySelector("#target_capaian");
+        // if (target_capaian) {
+        //     var editor = new Trix.Editor(target_capaian);
+        // }
+
+
+    //   new FroalaEditor('#deskripsi_permasalahan');
+    //   new FroalaEditor('#target_capaian');
 
       function editPerencanaan(id) {
-        new FroalaEditor('#deskripsi_permasalahan_edit');
-        new FroalaEditor('#target_capaian_edit');
+        ClassicEditor
+        .create( document.querySelector( '#deskripsi_permasalahan_edit' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 
+        ClassicEditor
+        .create( document.querySelector( '#target_capaian_edit' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+//         var deskripsi_permasalahan_edit = document.querySelector("#deskripsi_permasalahan_edit");
+// if (deskripsi_permasalahan_edit) {
+//     var editor = new Trix.Editor(deskripsi_permasalahan_edit);
+// }
+
+// var target_capaian_edit = document.querySelector("#target_capaian_edit");
+// if (target_capaian_edit) {
+//     var editor = new Trix.Editor(target_capaian_edit);
+// }
+
+
+        // new FroalaEditor('#deskripsi_permasalahan_edit');
+        // new FroalaEditor('#target_capaian_edit');
+       
     $.ajax({
         url: '{{ route("pengawas.perencanaan.edit", ":id") }}'.replace(':id', id),
         type: 'GET',
