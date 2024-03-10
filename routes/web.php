@@ -35,6 +35,7 @@ Route::get('/migrate-fresh', 'MigrationController@migrateFresh');
 
 Route::get('/seed', 'SeedController@seed');
 Route::get('/umpan-balik/{generate}', 'UmpanbalikController@umpan');
+Route::get('/umpan-balik-view/{generate}', 'UmpanbalikController@umpanview');
 Route::post('/kirimumpanbalik', 'UmpanbalikController@saveumpan')->name('kirimumpanbalik');
 Route::get('/tanggapan', 'UmpanbalikController@tanggapan')->name('tanggapan');
 
@@ -171,18 +172,21 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     // route panel menu pengawas rencanakerja
     Route::prefix('rencanakerja')->group(function () {
         Route::get('/', 'RencanaKerjaController@index')->name('pengawas.rencanakerja');
+        Route::get('/chart-rencanakerja', 'RencanaKerjaController@getchart')->name('pengawas.rencanakerja.chart');
     });
     // end route panel menu pengawas rencanakerja
 
     // route panel menu pengawas activitas
     Route::prefix('activitas')->group(function () {
         Route::get('/', 'ActivitasController@index')->name('pengawas.activitas');
+        Route::get('/chart-activitas', 'ActivitasController@getchart')->name('pengawas.activitas.chart');
     });
     // end route panel menu pengawas activitas
 
     // route panel menu pengawas umpanbalik
     Route::prefix('masterumpanbalik')->group(function () {
         Route::get('/', 'MasterumpanbalikController@index')->name('pengawas.masterumpanbalik');
+        Route::get('/chart-masterumpanbalik', 'MasterumpanbalikController@getchart')->name('pengawas.masterumpanbalik.chart');
     });
     // end route panel menu pengawas umpanbalik
 
@@ -210,6 +214,7 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     Route::prefix('pelaporan')->group(function () {
         Route::get('/', 'PelaporanController@index')->name('pengawas.pelaporan');
         Route::post('/save-pelaporan', 'PelaporanController@save')->name('pengawas.pelaporan.save-pelaporan');
+        Route::post('/simpansubkategory', 'PelaporanController@simpansubkategory')->name('pengawas.perencanaan.simpansubkategory');
         Route::post('/update-pelaporan', 'PelaporanController@update')->name('pengawas.pelaporan.update');
         Route::get('/get-pelaporan', 'PelaporanController@getdata')->name('pengawas.pelaporan.getdata');
         Route::get('/edit-pelaporan/{id}', 'PelaporanController@edit')->name('pengawas.pelaporan.edit');
@@ -232,6 +237,8 @@ Route::middleware(['web', 'pengawas'])->group(function () {
     // route panel menu pengawas umpanbalik
     Route::prefix('umpanbalik')->group(function () {
         Route::get('/', 'UmpanbalikController@index')->name('pengawas.umpanbalik');
+        Route::get('/get-umpanbalik', 'UmpanbalikController@getdata')->name('pengawas.umpanbalik.getdata');
+        Route::get('/show-umpanbalik/{id}', 'UmpanbalikController@show')->name('pengawas.umpanbalik.show');
     });
     // end route panel menu pengawas umpanbalik
   

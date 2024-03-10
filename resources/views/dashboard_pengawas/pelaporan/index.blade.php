@@ -34,12 +34,9 @@
                           <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Tahun</th>
-                                <th>Nama Program Kerja</th>
-                                <th>Judul</th>
+                                <th>Sasaran</th>
+                                <th>Judul Laporan</th>
                                 <th>Kategori</th>
-                                <th>Sekolah Sasaran</th>
-                                <th>Tenggat waktu</th>
                                 <th>Tanggal Dibuat</th>
                                 <th>#</th>
                             </tr>

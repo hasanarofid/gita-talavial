@@ -16,6 +16,7 @@ use Auth;
 use Illuminate\Support\Str;
 use DataTables;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 class PelaporanController extends Controller
 {
      //index
@@ -23,7 +24,7 @@ class PelaporanController extends Controller
         $kegiatan = TugaskerjaT::with('tugas')
         ->where('id_pengawas',Auth::user()->id)->get();
         $kategory = Kategory::get();
-        $subkategory = [];
+        $subkategory = SubKategory::get();
         $binaan = SekolahbinaanT::with('sekolah')
         ->where('id_pengawas',Auth::user()->id)->get();
         // dd($binaan);
@@ -36,35 +37,30 @@ class PelaporanController extends Controller
     // save pelaporan
     public function save(Request $request){
         
-        // dd($request);
-        // if ($request->hasFile('foto')) {
-        //     $image = $request->file('foto');
+        if ($request->hasFile('lampiran')) {
+            $lampiran = $request->file('lampiran');
 
-        //     // Generate a unique name based on the current date and time.
-        //     $imageName = 'laporan'.now()->format('YmdHis') . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            // Generate a unique name based on the current date and time.
+            $lampiranName = 'lampiran'.now()->format('YmdHis') . '_' . Str::random(10) . '.' . $lampiran->getClientOriginalExtension();
         
-        //     // Store the image in the "blog" directory within the "public" disk.
-        //     $request->foto->storeAs('laporan', $imageName, 'public');
+            // Store the image in the "blog" directory within the "public" disk.
+            $request->lampiran->storeAs('lampiran', $lampiranName, 'public');
             
-        // }else{
-        //     $imageName = 'userdefault.jpg';
-        // }
+        }
                 // $pelaporan->foto = $imageName;
 
-        $pelaporan = new Pelaporan();
-        $pelaporan->id_sekolah = $request->post('id_sekolah');
-        $pelaporan->id_tugas = $request->post('id_tugas');
-        $pelaporan->kategori = $request->post('kategori');
+        $pelaporan = RencanaKerjaT::findOrFail($request->post('id'));
+        $pelaporan->kategoriprogram_id = $request->post('kategoriprogram_id');
         $pelaporan->sub_kategori = $request->post('sub_kategori');
         $pelaporan->sasaran = $request->post('sasaran');
-        $pelaporan->object = $request->post('objek');
-        $pelaporan->judul = $request->post('judul');
+        // $pelaporan->object_sasaran = $request->post('object_sasaran');
         $pelaporan->tgl_pendampingan = $request->post('tgl_pendampingan');
-        $pelaporan->deskripsi_permasalahan = $request->post('deskripsi_permasalahan_hidden');
-        $pelaporan->uraian = $request->post('uraian_hidden');
-        $pelaporan->catatan_evaluasi = $request->post('catatan_hidden');
-        $pelaporan->saran_rekomendasi = $request->post('saran_hidden');
-        $pelaporan->id_pegawas = Auth::user()->id;
+        $pelaporan->judul = $request->post('judul');
+        $pelaporan->deskripsi_permasalahan = $request->post('deskripsi_permasalahan');
+        $pelaporan->target_capaian = $request->post('target_capaian');
+        $pelaporan->catatan_evaluasi = $request->post('catatan_evaluasi');
+        $pelaporan->saran_rekomendasi = $request->post('saran_rekomendasi');
+        $pelaporan->lampiran = $lampiranName;
         $pelaporan->save();
 
         // $this->buildUmpanBalik($pelaporan->id);
@@ -75,38 +71,39 @@ class PelaporanController extends Controller
 
     // build buildUmpanBalik
     public static function buildUmpanBalik($id){
-        $pelaporan = Pelaporan::find($id);
+        $pelaporan = RencanaKerjaT::find($id);
         $user = GuruM::where('sekolah_id',$pelaporan->id_sekolah)
                     ->where('jabatan','Kepala Sekolah')->first();
                     // dd($user);
         $uniqueUrl = Str::uuid()->getHex();
         $umpanBalik = new UmpanbalikT();
         $umpanBalik->id_pelaporan = $id;
-        $umpanBalik->id_user = $user->id;
-        $umpanBalik->id_pengawas = $pelaporan->id_pegawas;
+        // $umpanBalik->id_user = $user->id;
+        $umpanBalik->id_user = 1;
+        $umpanBalik->id_pengawas = $pelaporan->id_pengawas;
         $umpanBalik->generate_url = $uniqueUrl;
         $umpanBalik->save();
         //  kirim wa
-        $token = env('WABLAS_TOKEN');
-        // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
-        $phone = $user->no_telp; 
-        $fullUrl = url('umpan-balik/' . $uniqueUrl);
-        $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
-        Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
-        Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
-        '.$fullUrl.'.
-        Terimakasih
-        Salam, 
-        Admin Delman Super';
+        // $token = env('WABLAS_TOKEN');
+        // // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
+        // $phone = $user->no_telp; 
+        // $fullUrl = url('umpan-balik/' . $uniqueUrl);
+        // $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
+        // Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
+        // Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
+        // '.$fullUrl.'.
+        // Terimakasih
+        // Salam, 
+        // Admin Delman Super';
 
-        // dd($decodedPesan);
-        $response = Http::get("https://jogja.wablas.com/api/send-message", [
-            'phone' => $phone,
-            'message' => $pesan,
-            'token' => $token,
-        ]);
+        // // dd($decodedPesan);
+        // $response = Http::get("https://jogja.wablas.com/api/send-message", [
+        //     'phone' => $phone,
+        //     'message' => $pesan,
+        //     'token' => $token,
+        // ]);
 
-        $result = $response->body();
+        // $result = $response->body();
 
        return true;
     }
@@ -121,9 +118,14 @@ class PelaporanController extends Controller
        
                return Datatables::of($post)
                        ->addIndexColumn()
-                    ->addColumn('tanggal', function($row){
-                   return $row->created_at->format('d M Y h:i:s');
-               })
+            //         ->addColumn('tanggal', function($row){
+            //             if ($row->tgl_pendampingan) {
+            //                 $carbonDate = Carbon::createFromFormat('Y-m-d H:i:s', $row->tgl_pendampingan);
+            //                 return $carbonDate->format('d M Y H:i:s');
+            //             } else {
+            //                 return '-';
+            //             }
+            //    })
                ->addColumn('nama_kategori', function($row){
                    return $row->kategoriprogram->nama;
                })
@@ -159,6 +161,15 @@ class PelaporanController extends Controller
         $data = RencanaKerjaT::findOrFail($id); // Gantilah YourModel dengan model yang sesuai
         
         return response()->json($data);
+    }
+
+    public function simpansubkategory(Request $request){
+        $subkategory = new SubKategory();
+        $subkategory->id_kategory = $request->id_kategory;
+        $subkategory->nama = $request->judul;
+        $subkategory->save();
+
+        return redirect()->route('pengawas.pelaporan')->with('success', 'sub kategori berhasil disimpan!');
     }
 
 
