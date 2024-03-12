@@ -1,12 +1,8 @@
 @extends('layouts.pengawas.home')
 @section('title','Login')
-@section('css')
-<link rel="stylesheet" href="{{ asset('theme/assets/vendor/libs/quill/editor.css') }}" />
-@endsection
 @section('content')
 <div class="content-wrapper">
     <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
       @if(Session::has('success'))
       <div class="alert alert-success">
@@ -22,7 +18,7 @@
               <h5 class="m-0 me-2">Tabel Pelaporan</h5>
               <small class="text-muted">Pengawas : {{ Auth::user()->name}}</small>
             </div>
-
+            <a  class="btn btn-sm bg-primary text-white " data-bs-toggle="modal" data-bs-target="#editUser"><i class="fas fa-plus" aria-hidden="true"></i> Tambah </a>
           
           </div>
           <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">

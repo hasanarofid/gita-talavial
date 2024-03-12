@@ -23,8 +23,8 @@ class PelaporanController extends Controller
      public function index(){
         $kegiatan = TugaskerjaT::with('tugas')
         ->where('id_pengawas',Auth::user()->id)->get();
-        $kategory = Kategory::get();
-        $subkategory = SubKategory::get();
+        $kategory = Kategory::where('type','pelaporan')->get();
+        $subkategory = [];
         $binaan = SekolahbinaanT::with('sekolah')
         ->where('id_pengawas',Auth::user()->id)->get();
         // dd($binaan);
@@ -36,7 +36,7 @@ class PelaporanController extends Controller
 
     // save pelaporan
     public function save(Request $request){
-        
+        // dd($request->post());die;
         if ($request->hasFile('lampiran')) {
             $lampiran = $request->file('lampiran');
 
@@ -49,61 +49,141 @@ class PelaporanController extends Controller
         }
                 // $pelaporan->foto = $imageName;
 
-        $pelaporan = RencanaKerjaT::findOrFail($request->post('id'));
-        $pelaporan->kategoriprogram_id = $request->post('kategoriprogram_id');
+        $pelaporan = new Pelaporan();
+        $pelaporan->kategori = $request->post('kategoriprogram_id');
         $pelaporan->sub_kategori = $request->post('sub_kategori');
         $pelaporan->sasaran = $request->post('sasaran');
-        // $pelaporan->object_sasaran = $request->post('object_sasaran');
+        $pelaporan->object = $request->post('object_sasaran');
         $pelaporan->tgl_pendampingan = $request->post('tgl_pendampingan');
         $pelaporan->judul = $request->post('judul');
-        $pelaporan->deskripsi_permasalahan = $request->post('deskripsi_permasalahan');
-        $pelaporan->target_capaian = $request->post('target_capaian');
+        // $pelaporan->deskripsi_permasalahan = $request->post('deskripsi_permasalahan');
+        // $pelaporan->target_capaian = $request->post('target_capaian');
         $pelaporan->catatan_evaluasi = $request->post('catatan_evaluasi');
         $pelaporan->saran_rekomendasi = $request->post('saran_rekomendasi');
         $pelaporan->lampiran = $lampiranName;
+        $pelaporan->id_pengawas = Auth::user()->id;
         $pelaporan->save();
 
-        // $this->buildUmpanBalik($pelaporan->id);
-        $this->buildUmpanBalik(1);
+        $this->buildUmpanBalik($pelaporan->id);
+        // $this->buildUmpanBalik(1);
             
         return redirect()->route('pengawas.pelaporan')->with('success', 'Pelaporan berhasil disimpan!');
     }
 
     // build buildUmpanBalik
     public static function buildUmpanBalik($id){
-        $pelaporan = RencanaKerjaT::find($id);
-        $user = GuruM::where('sekolah_id',$pelaporan->id_sekolah)
-                    ->where('jabatan','Kepala Sekolah')->first();
-                    // dd($user);
+        $pelaporan = Pelaporan::find($id);
+        if($pelaporan->sasaran = 'Guru' ){
+            $user = GuruM::find($pelaporan->object);
+
+                        // dd($user);
         $uniqueUrl = Str::uuid()->getHex();
         $umpanBalik = new UmpanbalikT();
         $umpanBalik->id_pelaporan = $id;
-        // $umpanBalik->id_user = $user->id;
+        $umpanBalik->id_user = $user->id;
         $umpanBalik->id_user = 1;
         $umpanBalik->id_pengawas = $pelaporan->id_pengawas;
         $umpanBalik->generate_url = $uniqueUrl;
         $umpanBalik->save();
         //  kirim wa
-        // $token = env('WABLAS_TOKEN');
-        // // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
-        // $phone = $user->no_telp; 
-        // $fullUrl = url('umpan-balik/' . $uniqueUrl);
-        // $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
-        // Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
-        // Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
-        // '.$fullUrl.'.
-        // Terimakasih
-        // Salam, 
-        // Admin Delman Super';
+        $token = env('WABLAS_TOKEN');
+        // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
+        $phone = $user->no_telp; 
+        $fullUrl = url('umpan-balik/' . $uniqueUrl);
+        $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
+        Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
+        Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
+        '.$fullUrl.'.
+        Terimakasih
+        Salam, 
+        Admin Delman Super';
 
-        // // dd($decodedPesan);
-        // $response = Http::get("https://jogja.wablas.com/api/send-message", [
-        //     'phone' => $phone,
-        //     'message' => $pesan,
-        //     'token' => $token,
-        // ]);
+        // dd($decodedPesan);
+        $response = Http::get("https://jogja.wablas.com/api/send-message", [
+            'phone' => $phone,
+            'message' => $pesan,
+            'token' => $token,
+        ]);
 
-        // $result = $response->body();
+        $result = $response->body();
+
+        }else if($pelaporan->sasaran = 'Kepala Sekolah'  ){
+            $user = GuruM::find($pelaporan->object);
+
+                        // dd($user);
+            $uniqueUrl = Str::uuid()->getHex();
+            $umpanBalik = new UmpanbalikT();
+            $umpanBalik->id_pelaporan = $id;
+            $umpanBalik->id_user = $user->id;
+            $umpanBalik->id_user = 1;
+            $umpanBalik->id_pengawas = $pelaporan->id_pengawas;
+            $umpanBalik->generate_url = $uniqueUrl;
+            $umpanBalik->save();
+            //  kirim wa
+            $token = env('WABLAS_TOKEN');
+            // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
+            $phone = $user->no_telp; 
+            $fullUrl = url('umpan-balik/' . $uniqueUrl);
+            $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
+            Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
+            Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
+            '.$fullUrl.'.
+            Terimakasih
+            Salam, 
+            Admin Delman Super';
+
+            // dd($decodedPesan);
+            $response = Http::get("https://jogja.wablas.com/api/send-message", [
+                'phone' => $phone,
+                'message' => $pesan,
+                'token' => $token,
+            ]);
+
+            $result = $response->body();
+
+        }else{
+            //sekolah
+            $sekolah = SekolahM::with('gurukepalaSekolah')->find($pelaporan->object);
+
+            // Access the related GuruM records
+            foreach ($sekolah->gurukepalaSekolah as $user) {
+                $uniqueUrl = Str::uuid()->getHex();
+                $umpanBalik = new UmpanbalikT();
+                $umpanBalik->id_pelaporan = $id;
+                $umpanBalik->id_user = $user->id;
+                $umpanBalik->id_pengawas = $pelaporan->id_pengawas;
+                $umpanBalik->generate_url = $uniqueUrl;
+                $umpanBalik->save();
+                // dd($user);
+            
+                //  kirim wa
+                $token = env('WABLAS_TOKEN');
+                // $phone = '62881026697527'; // Ganti dengan nomor telepon tujuan
+                $phone = $user->no_telp; 
+                $fullUrl = url('umpan-balik/' . $uniqueUrl);
+                $pesan = 'Yth Bapak / Ibu '.$user->nama.' , 
+                Pengawas Pembina '.Auth::user()->name.' baru saja menyelesaikan kunjungan ke sekolah Bapak/Ibu. 
+                Mohon berkenan meluangkan Waktu untuk memberikan umpan balik terhadap kunjungan beliau melalui link berikut : 
+                '.$fullUrl.'.
+                Terimakasih
+                Salam, 
+                Admin Delman Super';
+
+                // dd($decodedPesan);
+                $response = Http::get("https://jogja.wablas.com/api/send-message", [
+                    'phone' => $phone,
+                    'message' => $pesan,
+                    'token' => $token,
+                ]);
+
+                $result = $response->body();
+            }
+
+        
+
+        }
+       
+        
 
        return true;
     }
@@ -113,7 +193,7 @@ class PelaporanController extends Controller
         if ($request->ajax()) {
 
     
-            $post = RencanaKerjaT::with('kategoriprogram')
+            $post = Pelaporan::with('kategoriprogram')
             ->where('id_pengawas',Auth::user()->id)->latest()->get();
        
                return Datatables::of($post)
@@ -158,7 +238,7 @@ class PelaporanController extends Controller
     public function edit($id)
     {
         // Ambil data dari model berdasarkan ID atau yang lain sesuai kebutuhan
-        $data = RencanaKerjaT::findOrFail($id); // Gantilah YourModel dengan model yang sesuai
+        $data = Pelaporan::findOrFail($id); // Gantilah YourModel dengan model yang sesuai
         
         return response()->json($data);
     }
@@ -171,6 +251,72 @@ class PelaporanController extends Controller
 
         return redirect()->route('pengawas.pelaporan')->with('success', 'sub kategori berhasil disimpan!');
     }
+
+    public function getSubcategories(Request $request) {
+        $kategoriId = $request->input('kategori_id');
+        $kategori = Kategory::find($kategoriId);
+        $explode = explode(" ",$kategori->nama);
+        $sub = "Program ".$explode['1'];
+        $kategorikerja = Kategory::where('nama',$sub)->first();
+        $rencana = RencanaKerjaT::where('id_pengawas',Auth::user()->id)
+                    ->where("kategoriprogram_id",$kategorikerja->id)->get();
+
+                    
+
+        $subcategories = [];
+        foreach ($rencana as $key => $value) {
+            $subcategories[$value->id] = $value->nama_program_kerja;
+        }
+        // $subcategories = SubKategory::where('id_kategory', $kategoriId)->get();
+        // dd($subcategories);
+        return response()->json(['subcategories' => $subcategories]);
+    }
+
+    public function getProgramKerja(Request $request){
+        $id = $request->input('id');
+        $rencana = RencanaKerjaT::find($id);
+        return response()->json(['rencana' => $rencana]);
+    }
+
+    public function getProgramKerjaSasaran(Request $request){
+        $id = $request->input('program');
+        $sasaran = $request->input('sasaran');
+        $rencana = RencanaKerjaT::find($id);
+        $sekolahIds = explode(',', $rencana->sekolah_id);
+      
+     
+
+        
+        $objek = [];
+
+        if($sasaran == 'Sekolah'){
+            $sekolahs = SekolahM::whereIn('id', $sekolahIds)->get();
+           
+            foreach ($sekolahs as $value) {
+                $objek[$value->id] = $value->nama_sekolah;
+            }
+        }else if($sasaran == 'Guru'){
+            $guru = SekolahM::with('guru')->whereIn('id', $sekolahIds)->get();
+            foreach ($guru as $value) {
+                foreach ($value->guru as $guruItem) {
+                    // Accessing the id of each GuruM related to the current SekolahM
+                    $objek[$guruItem->id] = $guruItem->nama.' - '.$value->nama_sekolah;
+                }
+            }
+        }else{
+            $kepala = SekolahM::with('kepalaSekolah')->whereIn('id', $sekolahIds)->get();
+            foreach ($kepala as $value) {
+                foreach ($value->kepalaSekolah as $kepalaSekolahItem) {
+                    // Accessing the id of each GuruM related to the current SekolahM
+                    $objek[$kepalaSekolahItem->id] = $kepalaSekolahItem->nama.' - '.$value->nama_sekolah;
+                }
+            }
+        }
+        // dd($objek);
+        return response()->json(['objek' => $objek]);
+
+    }
+    
 
 
 }

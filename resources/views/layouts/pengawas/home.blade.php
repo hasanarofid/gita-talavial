@@ -323,7 +323,7 @@ lang="{{ str_replace('_', '-', app()->getLocale()) }}"
     <script src="{{ asset('theme/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{ asset('theme/assets/js/main.js') }}"></script>
+    {{-- <script src="{{ asset('theme/assets/js/main.js') }}"></script> --}}
 
     <!-- Page JS -->
     <script src="{{ asset('theme/assets/js/tables-datatables-basic.js') }}"></script>

@@ -14,15 +14,33 @@ class KategorySeeder extends Seeder
         DB::table('kategory')->insert([
             [
                 'id'=>1,
-                'nama'=>'Laporan Reguler'
+                'nama'=>'Program Reguler',
+                'type'=>'perencanaan',
             ],
             [
                 'id'=>2,
-                'nama'=>'Laporan Tematik'
+                'nama'=>'Program Tematik',
+                'type'=>'perencanaan',
             ],
             [
                 'id'=>3,
-                'nama'=>'Laporan Dengan Kondisi Khusus'
+                'nama'=>'Program Dengan Kondisi Khusus',
+                'type'=>'perencanaan',
+            ],
+            [
+                'id'=>4,
+                'nama'=>'Laporan Reguler',
+                'type'=>'pelaporan',
+            ],
+            [
+                'id'=>5,
+                'nama'=>'Laporan Tematik',
+                'type'=>'pelaporan',
+            ],
+            [
+                'id'=>6,
+                'nama'=>'Laporan Dengan Kondisi Khusus',
+                'type'=>'pelaporan',
             ],
         ]);
     }

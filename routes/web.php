@@ -219,6 +219,10 @@ Route::middleware(['web', 'pengawas'])->group(function () {
         Route::get('/get-pelaporan', 'PelaporanController@getdata')->name('pengawas.pelaporan.getdata');
         Route::get('/edit-pelaporan/{id}', 'PelaporanController@edit')->name('pengawas.pelaporan.edit');
         Route::get('/hapus-pelaporan/{id}', 'PelaporanController@hapus')->name('pengawas.pelaporan.hapus');
+        Route::get('/get-subcategories', 'PelaporanController@getSubcategories')->name('pengawas.pelaporan.getSubKategori');
+        Route::get('/get-programKerja', 'PelaporanController@getProgramKerja')->name('pengawas.pelaporan.getProgramKerja');
+        Route::get('/get-getProgramKerjaSasaran', 'PelaporanController@getProgramKerjaSasaran')->name('pengawas.pelaporan.getProgramKerjaSasaran');
+        
     });
     // end route panel menu pengawas pelaporan
 

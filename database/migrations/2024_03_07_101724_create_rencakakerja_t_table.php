@@ -21,18 +21,18 @@ class CreateRencakakerjaTTable extends Migration
             $table->integer('kategoriprogram_id');
             $table->string('sekolah_id')->nullable();
             
-            $table->string('sub_kategori')->nullable();
-            $table->string('sasaran')->nullable();
-            $table->string('object_sasaran')->nullable();
-            $table->date('tgl_pendampingan')->nullable();
-            $table->string('judul')->nullable();
+            // $table->string('sub_kategori')->nullable();
+            // $table->string('sasaran')->nullable();
+            // $table->string('object_sasaran')->nullable();
+            // $table->date('tgl_pendampingan')->nullable();
+            // $table->string('judul')->nullable();
 
             $table->text('deskripsi_permasalahan')->nullable();
             $table->text('target_capaian')->nullable();
             
-            $table->text('catatan_evaluasi')->nullable();
-            $table->text('saran_rekomendasi')->nullable();
-            $table->string('lampiran')->nullable();
+            // $table->text('catatan_evaluasi')->nullable();
+            // $table->text('saran_rekomendasi')->nullable();
+            // $table->string('lampiran')->nullable();
 
             $table->string('tenggat_waktu')->nullable();
             $table->timestamps();

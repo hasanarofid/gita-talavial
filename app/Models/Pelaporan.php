@@ -18,4 +18,9 @@ class Pelaporan extends Model
         return $this->hasOne(User::class, 'id', 'id_pengawas');
 
     }
+
+    public function kategoriprogram()
+    {
+        return $this->hasOne(Kategory::class, 'id', 'kategori');
+    }
 }

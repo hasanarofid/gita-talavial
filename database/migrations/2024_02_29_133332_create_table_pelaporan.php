@@ -15,9 +15,7 @@ class CreateTablePelaporan extends Migration
     {
         Schema::create('pelaporan', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_tugas');
-            $table->integer('id_pegawas');
-            $table->integer('id_sekolah');
+            $table->integer('id_pengawas');
             $table->string('kategori');
             $table->string('sub_kategori')->nullable();
             $table->text('judul');
@@ -30,6 +28,7 @@ class CreateTablePelaporan extends Migration
             $table->text('saran_rekomendasi')->nullable();
             $table->text('akses')->nullable();
             $table->date('disposisi')->nullable();
+            $table->string('lampiran')->nullable();
             $table->timestamps();
         });
     }

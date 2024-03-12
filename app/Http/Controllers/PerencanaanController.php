@@ -17,7 +17,7 @@ class PerencanaanController extends Controller
     public function index(){
         $kegiatan = TugaskerjaT::with('tugas')
         ->where('id_pengawas',Auth::user()->id)->get();
-        $kategory = Kategory::get();
+        $kategory = Kategory::where('type','perencanaan')->get();
         $subkategory = [];
         $binaan = SekolahbinaanT::with('sekolah')
         ->where('id_pengawas',Auth::user()->id)->get();
