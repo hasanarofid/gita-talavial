@@ -21,7 +21,7 @@ class UmpanbalikController extends Controller
     public function umpan($generate){
         $model = UmpanbalikT::where('generate_url',$generate)->first();
         $pengawas = User::find($model->id_pengawas);
-        $pelaporan = RencanaKerjaT::find($model->id_pelaporan);
+        $pelaporan = Pelaporan::find($model->id_pelaporan);
         // dd($pengawas);
         $umpanBalikM = UmpanbalikM::where('aspek','pendampingan')->orderBy('urutan')->get();
         $umpanBalikM2 = UmpanbalikM::where('aspek','kompetensi')->orderBy('urutan')->get();
@@ -71,7 +71,7 @@ class UmpanbalikController extends Controller
                         return $row->created_at->format('d M Y h:i:s');
                     })
                     ->addColumn('sasaran', function($row){
-                        $rencana = RencanaKerjaT::find($row->id_pelaporan);
+                        $rencana = Pelaporan::find($row->id_pelaporan);
                         return $rencana->sasaran;
                     })
    
@@ -90,7 +90,7 @@ class UmpanbalikController extends Controller
     public function umpanview($generate){
         $model = UmpanbalikT::where('generate_url',$generate)->first();
         $pengawas = User::find($model->id_pengawas);
-        $pelaporan = RencanaKerjaT::find($model->id_pelaporan);
+        $pelaporan = Pelaporan::find($model->id_pelaporan);
         // dd($pengawas);
         $umpanBalikM = UmpanbalikM::where('aspek','pendampingan')->orderBy('urutan')->get();
         $umpanBalikM2 = UmpanbalikM::where('aspek','kompetensi')->orderBy('urutan')->get();

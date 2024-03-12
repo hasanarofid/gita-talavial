@@ -46,7 +46,7 @@
                                     <img
                                       src="{{ $foto }}"
                                       alt="user image"
-                                      class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
+                                      class="d-block ms-0 ms-sm-4 rounded user-profile-img" style="height: 100px !important" />
                                   </div>
 
                             </div>                               
