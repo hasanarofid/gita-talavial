@@ -88,7 +88,7 @@
         @if (Auth::user()->role == 'Admin')
         
           <li class="nav-item">
-            <a class="nav-link {{ (request()->is('admin/pengawas*')) ? 'active' : '' }}" href="{{ route('pengawas.index') }}">
+            <a class="nav-link {{ (request()->is('admin/masterpengawas*')) ? 'active' : '' }}" href="{{ route('masterpengawas.index') }}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
             </div>
@@ -222,7 +222,7 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('pengawas.getdata') }}",
+        ajax: "{{ route('masterpengawas.getdata') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'title', name: 'title'},

@@ -94,21 +94,25 @@ Route::prefix('superadmin')->middleware(['auth', 'superadmin'])->group(function 
 // route penel dashboard for admin
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     // route menu pengawas 
-    Route::prefix('pengawas')->group(function () {
+    Route::prefix('masterpengawas')->group(function () {
         // route panel menu pengawas
-        Route::get('/', 'PegawasMController@index')->name('pengawas.index');
-        Route::get('/get-pengawas', 'PegawasMController@getdata')->name('pengawas.getdata');
-        Route::get('/add-pengawas', 'PegawasMController@add')->name('pengawas.add');
-        Route::get('/edit-pengawas/{id}', 'PegawasMController@edit')->name('pengawas.edit');
-        Route::post('/update-pengawas', 'PegawasMController@update')->name('pengawas.update');
-        Route::get('/import-pengawas', 'PegawasMController@import')->name('pengawas.import');
-        Route::post('/importfile-pengawas', 'PegawasMController@importfile')->name('pengawas.importfile');
-        Route::post('/store-pengawas', 'PegawasMController@store')->name('pengawas.store');
-        Route::get('/hapus-pengawas/{id}', 'PegawasMController@hapus')->name('pengawas.hapus');
-        Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('pengawas.excelcontoh');
-        Route::get('/getpangkat', 'PegawasMController@getpangkat')->name('pengawas.getpangkat');
-        Route::get('/getRuang', 'PegawasMController@getRuang')->name('pengawas.getRuang');
-        Route::get('/tesWa', 'PegawasMController@tesWa')->name('pengawas.tesWa');
+        Route::get('/', 'PegawasMController@index')->name('masterpengawas.index');
+        Route::get('/get-pengawas', 'PegawasMController@getdata')->name('masterpengawas.getdata');
+        Route::get('/add-pengawas', 'PegawasMController@add')->name('masterpengawas.add');
+        Route::get('/edit-pengawas/{id}', 'PegawasMController@edit')->name('masterpengawas.edit');
+        Route::post('/update-pengawas', 'PegawasMController@update')->name('masterpengawas.update');
+        Route::get('/import-pengawas', 'PegawasMController@import')->name('masterpengawas.import');
+        Route::post('/importfile-pengawas', 'PegawasMController@importfile')->name('masterpengawas.importfile');
+        Route::post('/store-pengawas', 'PegawasMController@store')->name('masterpengawas.store');
+        Route::post('/store_sekolah', 'PegawasMController@store_sekolah')->name('masterpengawas.store_sekolah');
+        Route::get('/hapus-pengawas/{id}', 'PegawasMController@hapus')->name('masterpengawas.hapus');
+        Route::get('/excelcontoh-pengawas', 'PegawasMController@excelcontoh')->name('masterpengawas.excelcontoh');
+        Route::get('/getpangkat', 'PegawasMController@getpangkat')->name('masterpengawas.getpangkat');
+        Route::get('/getRuang', 'PegawasMController@getRuang')->name('masterpengawas.getRuang');
+        Route::get('/tesWa', 'PegawasMController@tesWa')->name('masterpengawas.tesWa');
+        Route::get('/setSekolahBinaan/{id}', 'PegawasMController@setSekolahBinaan')->name('masterpengawas.setSekolahBinaan');
+        
+        
 
        
         // end route panel menu pengawas

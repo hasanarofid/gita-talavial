@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\SekolahbinaanT;
 use App\User;
 use App\Profile;
 use App\GuruM;
@@ -67,9 +68,21 @@ class PegawasMController extends Controller
      */
     public function index(Request $request)
     {
-        
-        return view('pengawas.index');
+        $sekolah = SekolahM::where('kabupaten_id',Auth::user()->kabupaten_id)->get();
+        // dd($sekolah);
+        return view('pengawas.index',compact('sekolah'));
     }
+
+    public function setSekolahBinaan($id){
+        $models = User::where('id',$id)->first();
+        $sekolah = SekolahM::where('kabupaten_id',Auth::user()->kabupaten_id)->get();
+        $binaan = SekolahbinaanT::with('sekolah')->where('id_pengawas',Auth::user()->kabupaten_id)->get();
+                       
+        // dd($sekolah);
+        return view('pengawas.add_sekolahbinaan',compact('models','sekolah','binaan'));
+    }
+
+
 
     public function getdata(Request $request){
         if ($request->ajax()) {
@@ -106,14 +119,28 @@ class PegawasMController extends Controller
                       ->addColumn('kabupaten', function($row){
                         return !empty($row->kabupaten->nama_kabupaten) ? $row->kabupaten->nama_kabupaten: '-';
                     })
+                    ->addColumn('binaan', function($row){
+                        $binaan = SekolahbinaanT::with('sekolah')->where('id_pengawas',$row->id)->get();
+                        $bin = '';
+                        foreach ($binaan as $key => $value) {
+                            
+                            $bin .= '<span class="badge badge-info">'.$value->sekolah->nama_sekolah.'</span>';
+                        }
+                        return $bin; 
+
+                    })
+                    
+
+
                     ->addColumn('action', function($row){
    
-                           $btn = '<a href="'.route('stakeholder.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
-                           $btn = $btn.' <a href="'.route('stakeholder.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
+                           $btn = '<a href="'.route('masterpengawas.edit',$row->id).'" data-toggle="tooltip"  class="edit btn btn-primary btn-sm editPost">Edit</a>';
+                           $btn = $btn.' <a href="'.route('masterpengawas.hapus',$row->id).'" data-toggle="tooltip" data-toggle="modal" data-target="#confirmDeleteModal"    data-original-title="Delete" class="btn btn-danger btn-sm deletePost">Delete</a>';
+                           $btn = $btn.' <a href="'.route('masterpengawas.setSekolahBinaan',$row->id).'"  class="btn btn-info btn-sm deletePost">Add Sekolah Binaan</a>';
     
                             return $btn;
                     })
-                    ->rawColumns(['no_telp','alamat','action','foto','kabupaten'])
+                    ->rawColumns(['no_telp','alamat','action','foto','kabupaten','binaan'])
                     ->make(true);
         }
         return view('pengawas.index');
@@ -152,6 +179,26 @@ class PegawasMController extends Controller
         return view('pengawas.import');
     }
 
+    public function store_sekolah(Request $request){
+        // dd($request);
+        $sekolahIds = $request->input('sekolah_id');
+
+        // Loop through each sekolah_id
+        foreach ($sekolahIds as $sekolahId) {
+            // Retrieve data based on the current sekolah_id
+            // $sekolah = Sekolah::find($sekolahId);
+            $skolahbinaan = new SekolahbinaanT();
+            $skolahbinaan->id_pengawas = $request->input('id_pengawas');
+            $skolahbinaan->id_sekolah = $sekolahId;
+            $skolahbinaan->save();
+        }
+
+
+            return redirect()->route('masterpengawas.index')->with('success', 'add sekolah binaan pengawas created successfully');
+
+
+    }
+
     /** save data pengawas */
     public function store(Request $request){
         // dd($request->post());die;belum
@@ -179,7 +226,7 @@ class PegawasMController extends Controller
             $user->kabupaten_id = $request->kabupaten_id;
             $user->save();
 
-            return redirect()->route('pengawas.index')->with('success', 'pengawas created successfully');
+            return redirect()->route('masterpengawas.index')->with('success', 'pengawas created successfully');
     }
 
     public function edit($id){
@@ -209,7 +256,7 @@ class PegawasMController extends Controller
             $user->update();
         }
 
-        return redirect()->route('pengawas.index',$request->id)->with('success', 'pengawas update successfully');
+        return redirect()->route('masterpengawas.index',$request->id)->with('success', 'pengawas update successfully');
     }
 
 

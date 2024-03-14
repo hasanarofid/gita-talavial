@@ -43,7 +43,7 @@
 @endif
 
 
-                     <form action="{{ route('pengawas.importfile') }}"
+                     <form action="{{ route('masterpengawas.importfile') }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf

@@ -51,7 +51,7 @@
     </div>
 @endif
 
-                     <form action="{{ route('pengawas.store') }}"
+                     <form action="{{ route('masterpengawas.store') }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf
@@ -159,7 +159,7 @@
     // Initialize the 'pangkat' select2 element with AJAX
     jQuery('#pangkat').select2({
         ajax: {
-            url: "{{ route('pengawas.getpangkat') }}",
+            url: "{{ route('masterpengawas.getpangkat') }}",
             dataType: 'json',
             processResults: function(data) {
                 return {
@@ -172,7 +172,7 @@
     // Initialize the 'gol_ruang' select2 element with AJAX
     jQuery('#gol_ruang').select2({
         ajax: {
-            url: "{{ route('pengawas.getRuang') }}",
+            url: "{{ route('masterpengawas.getRuang') }}",
             dataType: 'json',
             processResults: function(data) {
                 return {

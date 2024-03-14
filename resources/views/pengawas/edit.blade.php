@@ -48,7 +48,7 @@
     </div>
 @endif
 
-                     <form action="{{ route('pengawas.update',array('id'=>$models->id)) }}"
+                     <form action="{{ route('masterpengawas.update',array('id'=>$models->id)) }}"
                         method="POST"
                         enctype="multipart/form-data">
                      @csrf

@@ -35,9 +35,9 @@
      
 
                   <div class="btn-group" role="group" aria-label="Basic example">
-                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('pengawas.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
-                      <a  class="btn btn-sm bg-info text-white" href="{{  route('pengawas.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
-                      <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('pengawas.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
+                      <a  class="btn btn-sm bg-primary text-white " href="{{  route('masterpengawas.add')  }}"><i class="fas fa-plus" aria-hidden="true"></i> Add </a>
+                      <a  class="btn btn-sm bg-info text-white" href="{{  route('masterpengawas.import')  }}" >  <i class="fa fa-file-excel-o" aria-hidden="true"></i> Import</a>
+                      <a class="btn btn-sm  bg-success text-white " target="_blank" href="{{  route('masterpengawas.excelcontoh')  }}"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Contoh</a>
                    </div>
                    
 
@@ -69,6 +69,7 @@
                       <th class="text-sm font-weight mb-1 ">Gol. Ruang</th>
                       <th class="text-sm font-weight mb-1">No Whatsapp</th>
                       <th class="text-sm font-weight mb-1">Alamat</th>
+                      <th class="text-sm font-weight mb-1">Sekolah Binaan</th>
                       <th class="text-sm font-weight mb-1">Action</th>
 
                     </tr>
@@ -83,17 +84,17 @@
         </div>
       </div>
  </div>
+ @include('pengawas.modal')
 @endsection
        @section('js')
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+
        <script >
  // resources/js/app.js
-
-jQuery(document).ready(function () {
-  jQuery('#myModal').on('show.bs.modal', function (event) {
-    // Additional actions to perform when the modal is shown
-    alert(1);
-  });
-});
+function setSekolahBinaan(id){
+  // alert(id);
+  jQuery('#exampleModal').modal('show');
+}
 
    jQuery(function () {
     
@@ -108,7 +109,7 @@ jQuery(document).ready(function () {
      
         processing: true,
         serverSide: true,
-        ajax: "{{ route('pengawas.getdata') }}",
+        ajax: "{{ route('masterpengawas.getdata') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'foto', name: 'foto'},
@@ -121,9 +122,34 @@ jQuery(document).ready(function () {
             {data: 'gol_ruang', name: 'gol_ruang'},
             {data: 'no_telp', name: 'no_telp'},
             {data: 'alamat', name: 'alamat'},
+            {data: 'binaan', name: 'binaan'},
 
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
+    });
+  });
+
+  jQuery(document).ready(function() {
+    jQuery('.select2').select2();
+    let rowCount = 0;
+
+    // Function to add a new row to the table
+    function addRow() {
+      rowCount++;
+      // jQuery('#tableBody').append(`<tr><td>${rowCount}</td><td>New Row ${rowCount}</td><td><button type="button" class="btn btn-danger btn-sm delete-row">Delete</button></td></tr>`);
+    }
+
+    // Initial row
+    addRow();
+
+    // Add row button click event
+    jQuery('#addRowBtn').click(function() {
+      addRow();
+    });
+
+    // Delete row button click event (event delegation for dynamically added buttons)
+    jQuery('#tableBody').on('click', '.delete-row', function() {
+      jQuery(this).closest('tr').remove();
     });
   });
   </script>
