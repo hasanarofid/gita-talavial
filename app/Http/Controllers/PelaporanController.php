@@ -104,7 +104,7 @@ class PelaporanController extends Controller
             'message' => $pesan,
             'token' => $token,
         ]);
-
+        
         $result = $response->body();
 
         }else if($pelaporan->sasaran = 'Kepala Sekolah'  ){
